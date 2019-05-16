@@ -1,0 +1,29 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title></title>
+  <style>
+    input{
+      display:none;
+    }
+    input + label {
+
+      margin: auto;
+      margin-top: calc(25vw - 100px);
+      width:100px;
+      height:100px;
+      display:block;
+      background-image: url(https://abs.twimg.com/a/1557861269/img/animations/web_heart_animation_edge.png);
+    }
+    input:checked + label{
+      background-position: -2800px 0;
+      transition: background-position .7s steps(28);
+    }
+  </style>
+</head>
+<body>
+  <input type="checkbox" id="aaa">
+  <label for="aaa"></label>
+</body>
+</html>

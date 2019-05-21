@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    
+    ul {
+      padding: 0;
+      list-style: none;
+      position: absolute;
+    }
+
+    ul.menu > li{
+      float: left;
+    }
+
+    ul.menu > li > ul {
+      top: 100%;
+      left: 0;
+    }
+
+    ul li {
+      position: relative;
+      white-space: nowrap; /*属性值！！！*/
+      padding-left: 20px;
+      border: 1px solid red;
+    }
+    li:hover{
+      background-color: blue;
+    } 
+
+    li:hover > ul > li {
+      display: block;
+    }
+
+    ul ul::before{
+      content: '>';
+      position: absolute;
+    }
+    
+    ul ul li {
+      display: none;
+      border: 1px solid red;
+    }
+
+    ul ul {
+      position: absolute;
+      top: 0;
+      left: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="menu">
+    <li>第一级
+      <ul>
+        <li>第二级
+          <ul>
+            <li>第三级
+              <ul>
+                <li>第四级</li>
+              </ul>
+            </li>
+            <li>第三级</li>
+          </ul>
+        </li>
+        <li>第二级</li>
+        <li>第二级</li>
+      </ul>
+    </li>
+    <li>第一级</li>
+    <li>第一级</li>
+    <li>第一级</li>
+  </ul>
+</body>
+</html>

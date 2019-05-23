@@ -1,0 +1,115 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>bich</title>
+  <style>
+    table {
+      border-collapse:collapse;
+      height: 200px;
+      width: 200px;
+      text-align:center;
+      box-sizing: border-box;
+      border:10px solid blue;
+    }
+    tr,col {
+      border:10px solid blue;
+    }
+    /**/
+    td:hover{
+      border:10px solid red;
+    }
+    /**/
+    .float {
+      width: 170px; 
+      display: flow-root;
+      padding-bottom: 5px;
+      margin-top: 100px;
+    }
+    .float span {
+      float: left;
+      height: 50px;
+      width: 50px;
+      border: 5px solid blue;
+      margin: 0 -5px -5px 0;
+      position: relative;
+    }
+    .float span:hover{
+      border-color: red;
+      z-index: 999999999999999;
+    }
+
+    .inline {
+      width: 170px;
+      font-size: 0;
+      margin-top:100px;
+      margin-bottom: 100px;
+    }
+    .inline * {
+      font-size: 16px;
+    }
+    .inline span {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      margin: 0 -5px -5px 0;
+      border:5px solid blue;
+      position: relative;
+    }
+
+    .inline span:hover{
+      border-color: red;
+      z-index: 999;
+    }
+
+  </style>
+</head>
+<body>
+  <table class="table">
+    <colgroup>
+      <col>
+      <col>
+      <col>
+    </colgroup>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="float">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+    <span>5</span>
+    <span>6</span>
+    <span>7</span>
+    <span>8</span>
+    <span>9</span>
+  </div>
+  <div class="inline">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+    <span>5</span>
+    <span>6</span>
+    <span>7</span>
+    <span>8</span>
+    <span>9</span>
+  </div>
+</body>
+</html>

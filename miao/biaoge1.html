@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>table</title>
+  <style>
+    .table{
+      display: block;
+      overflow-x: auto;
+      table-layout: fixed;
+      border-collapse:collapse;
+      width:80%;
+      text-align: left;
+      
+    }
+    #c1{
+      width: 15%;
+    }
+    tr > th:nth-child(2) {
+      width: 20%;
+    }
+    tr > th:nth-child(3) , tr > th:nth-child(4){
+      width: 30%;
+    }
+    tr {
+      border-top:1px solid rgb(222,226,230);
+    }
+    td , th {
+      padding: 5px;
+    }
+    
+     .table-dark{
+      background-color: rgb(33,37,41);
+      color: white;
+    }
+    .thead-dark{
+      background-color: rgb(33,37,41);
+      color: white;
+    }
+    .thead-light{
+      background-color: rgba(0,0,0,0.05);
+    }
+    .table-striped  tbody > tr:nth-child(2n - 1) {
+      background-color: rgba(233,236,236,0.06);
+      box-shadow: 0 0 999px inset;
+    }
+    .table-bordered td,.table-bordered th{
+      border: 1px solid rgb(222,226,230);
+    } 
+    .table-hover tr:hover{
+      background-color: rgb(236,236,236);
+    }
+    .table-hover.table-dark tr:hover{
+      background-color: rgb(50,53,57);
+    }
+    .table-sm td ,.table-sm  th {
+      padding: 0.5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <table class="table xtable-bordered xtable-hover xtable-sm">
+      <colgroup>
+        <col id="c1">
+        <col id="c2">
+        <col id="c3">
+        <col id="c4">
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="col">#</th>
+          <th class="col">First</th>
+          <th class="col">last</th>
+          <th class="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th class="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+
+        </tr>
+        <tr>
+          <th class="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+
+        </tr>
+        <tr>
+          <th class="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

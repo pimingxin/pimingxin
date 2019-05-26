@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="img/1.png" type="image/x-icon">
+  <title>小米商城</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      xbackground-color:  rgba(0,0,0,0.08);
+    }
+    html,body{
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    div.nav-top{
+      height: 40px;
+      width: 100%;
+      background-color: #333;
+      display: flex;
+      xposition: absolute;
+    }
+    div.nav-top-left > ul > li{
+      float: left;
+      list-style-type: none;
+      margin-top:10px;
+      font-size: 12px;
+      color: gray;
+      position: relative;
+    }
+    div.nav-top-left > ul > li a:hover{
+      color: white;
+    }
+    
+    div.nav-top-left > ul > li span{
+      margin: 0 6px;
+    }
+    div.nav-top-left{
+      min-width: 900px;
+      padding-left: 160px;
+    }
+    div.nav-top-right{
+      min-width: 300px;
+      padding-left: 90px;
+    }
+    a{
+      text-decoration: none;
+      color: gray;
+    }
+    div.nav-top-right > ul > li{
+      float: left;
+      list-style-type: none;
+      margin-top:10px;
+      font-size: 12px;
+      color: gray;
+    }
+    div.nav-top-right > ul > li span{
+      margin: 0 6px;
+    }
+    div.nav-top-right > ul > li a:hover{
+      color: white;
+    }
+    div.nav-top-right > div{
+      position: absolute;
+      top: 8px;
+      background-color: grey;
+      display: inline;
+      min-width: 130px;
+      
+    }
+    div.nav-top-right > div > a{
+      height: 100%;
+      color: black;
+    }
+    div.nav-top-right > div > a:hover{
+      background-color: white;
+      color: orange;
+      top:50px;
+      width: 400px;
+      height: 100px;
+
+    }
+    header{
+      display: flex;
+      width: 80%;
+      margin: auto;
+      xheight: 140px;
+    }
+    header > a {
+      margin-top:25px;
+    }
+    header > ul{
+      margin-left: 150px;
+      min-width: 700px;
+    }
+    header > ul li{
+      float: left;
+      margin-top:35px;
+      list-style-type: none;
+      color: black;
+      font-size: 18px;
+      padding:0;
+    }
+
+    header > ul ul {
+      display: none;
+      position:absolute;
+    }
+    header > ul > li {
+      white-space: nowrap;
+      position: relative;
+      float: left;
+    }
+    header > ul > li:hover ul {
+      display: block;
+      
+    }
+
+    header > ul > li:hover > a {
+      color: orange;
+    }
+
+    header > input{
+      height: 60px;
+      margin-top:25px;
+    }
+    #search{
+      margin-left: 35px;
+      min-width: 255px;
+    }
+    #search-1{
+      width: 60px;
+      height: 60px;
+      background: url(img/3.png);
+    }
+
+    #search:focus{
+      border:2px solid orange;
+    }
+    #search-1:hover{
+      background: url(img/4.png);
+    }
+    #search-1:focus{
+      border:2px solid orange;
+    }
+
+    main{
+      width: 1226px;
+      margin: auto;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="nav-top">
+    <div class="nav-top-left">
+      <ul>
+        <li><a href="#">小米商城</a><span>|</span></li>
+        <li><a href="#" target="_blank">MIUI</a><span>|</span></li>
+        <li><a href="#">IoT</a><span>|</span></li>
+        <li><a href="#" target="_blank">云服务</a><span>|</span></li>
+        <li><a href="#" target="_blank">金融</a><span>|</span></li>
+        <li><a href="#" target="_blank">有品</a><span>|</span></li>
+        <li><a href="#" target="_blank">小爱开放平台</a><span>|</span></li>
+        <li><a href="#" target="_blank">企业团购</a><span>|</span></li>
+        <li><a href="#" target="_blank">资质证照</a><span>|</span></li>
+        <li><a href="#" target="_blank">协议规则</a><span>|</span></li>
+        <li><a href="#" target="_blank">下载app</a><span>|</span></li>
+        <li><a href="#">Select Region</a></li>
+      </ul>
+    </div>
+    <div class="nav-top-right">
+      <ul>
+        <li><a href="#">登录</a><span>|</span></li>
+        <li><a href="#">注册</a><span>|</span></li>
+        <li><a href="#">消息通知</a><span>   </span></li>
+      </ul>
+      <div><a href="#">购物车（9999）</a></div>
+    </div>
+  </div>
+  <header>
+    <a href="mi.com"><img src="img/2.png" alt="11" title="小米官网"></a>
+    <ul>
+      <li><a href="#">小米手机&nbsp;&nbsp;</a>
+        <ul>
+          <li><a href="#"><img src="" alt="">小米9</a></li>
+          <li><a href="#"><img src="" alt="">小米9 SE</a></li>
+          <li><a href="#"><img src="" alt="">小米8青春版</a></li>
+          <li><a href="#"><img src="" alt="">小米MIX 3</a></li>
+          <li><a href="#"><img src="" alt="">小米8</a></li>
+          <li><a href="#"><img src="" alt="">小米play</a></li>
+        </ul>
+      </li>
+      <li><a href="#">&nbsp;红米&nbsp;</a>
+        <ul>
+          <li><a href="#">Redmi Note 7 Pro</a></li>
+          <li><a href="#">Redmi Note 7</a></li>
+          <li><a href="#">Redmi 7</a></li>
+          <li><a href="#">红米6</a></li>
+          <li><a href="#">红米6A</a></li>
+        </ul>
+      </li>
+      <li><a href="#">&nbsp;电视&nbsp;</a>
+        <ul>
+          <li><a href="">小米壁画电视 65英寸</a></li>
+          <li><a href="">小米全面屏电视E55A</a></li>
+          <li><a href="">电脑电视4A 32英寸</a></li>
+          <li><a href="">小米电视4A 55英寸</a></li>
+          <li><a href="">小米电视4A 65英寸</a></li>
+          <li><a href="">查看全部<br>小米电视</a></li>
+        </ul>
+      </li>
+      <li><a href="#">&nbsp;笔记本&nbsp;</a>
+        <ul>
+          <li><a href="">小米笔记本 Air 12.5"</a></li>
+          <li><a href="">小米笔记本 Air 13.3"</a></li>
+          <li><a href="">小米笔记本 15.6"</a></li>
+          <li><a href="">小米笔记本 pro 15.6"  </a></li>
+          <li><a href="">小米游戏本</a></li>
+          <li><a href="">小米平板</a></li>
+        </ul>
+      </li>
+      <li><a href="#">&nbsp;家电&nbsp;</a>
+        <ul>
+          <li><a href="">米家互联网立式空调C1</a></li>
+          <li><a href="">米家互联网洗烘一体机</a></li>
+          <li><a href="">Redmi全自动波轮洗衣机</a></li>
+          <li><a href="">小米净水器</a></li>
+          <li><a href="">米家扫地机器人</a></li>
+          <li><a href="">新风机</a></li>
+        </ul>
+      </li>
+      <li><a href="#">&nbsp;新品&nbsp;</a>
+        <ul>
+          <li><a href="">Redmi Note 7 Pro</a></li>
+          <li><a href="">小米9</a></li>
+          <li><a href="">小米9 SE</a></li>
+          <li><a href="">红米Note 7</a></li>
+          <li><a href="">小米无线充电宝 10000mAh</a></li>
+          <li><a href="">小米无线车充</a></li>
+        </ul>
+      </li>
+      <li><a href="#">&nbsp;路由器&nbsp;</a>
+        <ul>
+          <li><a href="">小米路由器 Mesh</a></li>
+          <li><a href="">小米路由器4A 千兆版</a></li>
+          <li><a href="">小米路由器 4C</a></li>
+          <li><a href="">小米路由器 4A</a></li>
+          <li><a href="">小米路由器 HD/Pro</a></li>
+          <li><a href="">查看全部小米路由器</a></li>
+        </ul>
+      </li>
+      <li><a href="#">&nbsp;智能硬件&nbsp;</a>
+        <ul>
+          <li><a href="">小米米家只能摄像机云台版</a></li>
+          <li><a href="">米家自动洗手机套装</a></li>
+          <li><a href="">小米蓝牙耳机AirDots青春版</a></li>
+          <li><a href="">小米小爱触屏音箱</a></li>
+          <li><a href="">米家电动剃须刀</a></li>
+          <li><a href="">查看全部<br>智能硬件</a></li>
+        </ul>
+      </li>
+      <li><a href="#">&nbsp;服务&nbsp;</a></li>
+      <li><a href="#">&nbsp;社区&nbsp;</a></li>
+    </ul>
+      <input type="text" id="search">
+      <input type="text" id="search-1">
+  </header>
+  <main>
+    <a href="#"><img src="img/one.png" alt=""></a>
+  </main>
+</body>
+</html>

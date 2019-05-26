@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .input-group {
+      display: table;
+      width: 100%;
+      border-collapse: separate;
+    }
+    .input-group > * {
+      display: table-cell; /*让.input-group变成表单*/
+      border: 2px solid;
+    }
+    .input-group span {
+      width: 1%;
+      white-space: nowrap;
+    }
+    .input-group input {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="input-group">
+    <span>Search</span>
+    <input type="text">
+  </div>
+</body>
+</html>

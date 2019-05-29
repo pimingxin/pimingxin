@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Daniel</title>
+  <style>
+    div {
+      position: absolute;
+    }
+    div > img{
+      width: 33vw;
+      height: 49.5vw;
+      position: absolute
+    }
+    
+    div > img:nth-child(1) {
+      left:16.875vw;
+      top: 5vw;
+      
+    }
+    div > img:nth-child(2) {
+      left:calc(16.875vw + 16.5vw);
+      top: 29.75vw;
+      z-index: 2;
+      opacity: 0.8;
+      transition:width 2s, height 2s, background-color 2s, transform 2s;
+      
+    }
+    div > img:nth-child(3) {
+      left:calc(16.875vw + 33vw);
+      top: 54.5vw;
+    }
+    div > img:nth-child(1):hover {
+      z-index: 3;
+    }
+    div > img:nth-child(2):hover{
+      transform:rotate(360deg);
+    }
+    div > img:nth-child(3):hover {
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <img src="https://daneden.imgix.net/2018/10/portrait.jpg?auto=format&fit=crop&ixlib=react-8.6.1&w=688" alt="">
+    <img src="https://daneden.imgix.net/2018/10/GenArt.png?auto=format&fit=crop&ixlib=react-8.6.1&w=688" alt="">
+    <img src="https://daneden.imgix.net/2019/04/home.jpeg?auto=format&fit=crop&ixlib=react-8.6.1&w=688" alt="">
+  </div>
+</body>
+</html>

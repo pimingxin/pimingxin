@@ -1,85 +1,234 @@
 1. ls cd pwd touch rf mv help
 2. html实体是字符实体 有&lt; &gt; &nbsp;
+  实体是html用来表达特殊符号的html语法
+  <>="
+  语法为&xxxx;
+  其中xxxx为符号的编码(十进制或十六进制)或名称
+
 3. 二进制状态简单 可靠稳定性强 在电路中容易表示 2.5V以下表示为0 3.2V以上表示为1
+使用模拟信号是有误差的
+而如果使用表达为二进制的数字信号。误差就会消除
+二进制的数字电路一块表达复杂逻辑
+为什么是二进制不是三进制或其他进制？
+二进制足够用了
+二进制会使电路设计更简单
+二进制对应的布尔逻辑在几个世纪以前已经被研究清楚了
+
+一进制
+结绳计数
+
 4. 万国码 字符编码 统一了各个国家二进制和字符之间的关系 UTF-8
+Unicode是一套标准，它将全世界的所有符号进行了统一编号
+具体的表现就是每个符号都有一个唯一的编码且不重复
+最主要的作用就是统一编码，让不同语言的文集可以同时出现
+（曾经同一个编号在不同的编码方式下，可能对应不同的符号）
+UTF-8
+实现了变长编码 即编号较小的符号存储在计算机内部时占用的字节数量也较少
 5. 用户图形界面 命令行界面 端口/人机交互界面 电脑
+Graphic User Interface 图形化 （普通）用户 界面
+Command Line Interface 命令行界面
+现实中的例子：键盘 燃气灶等等等等
+现实中的例子：人与人之间的对话
+
 6. 自闭合标签不需要闭合
+
 7. 一些情况下 浏览器会自动补上结束标签
 8. 任意一点移动到目标中心位置所需时间与该点到目标的距离和大小有关 距离越大时间越长 目标越大 时间越短 例如鼠标移动点击按钮
+是交互设计的一个常见原则：
+目标的可达程度与距离成反比，与目标大小成正比
+合理使用能够让软件的易用性更好
+
+装一些利用费茨定律的软件来提升操作效率
+
 9. 编程语言大多使用英文
+大部分（面向开发者的）软件文档都是英文的
+几乎所有的编程软件的调试工具以及报错信息也都是英文的
+优秀的技术文章也是英文的
+
 10. 18
 11. 11259375
-12. 110110100
-13. class id 
+12. 110110011 1B3
+13. class id
+global attributes
+id class style title lang 
 14. 从根目录开始到目标文件的路径 分绝对路径于相对路径 索引到每个文件和文件夹 确定自己所在的路径创建或删除文件夹
+路径其实是一个文件夹完整路径鞋标 里面按顺序存储了多个文件夹的路径
+当我们在运行窗口 windows 或命令行界面输入命令时 实际上会在路径列表的文件夹中查找对应的文件来执行
+用户也可以利用这个特性来创建常用程序的命令以快速启动
+把自己创建的一个文件夹加入到路径列表 然后在该文件夹中放自己常用程序的快捷方式或其他内容，然后在运行命令里直接输入名称 无需扩展名
+
 15. 文本文件可以通过Unicode解码 让人能够读写的文件 二进制文件由电脑解读 明显的区别是人能读懂和不能读懂
+所有内容可用常见的解码方式被解码为字符方式
+文件的内容可用键盘编辑
+用记事本打开没有乱码
+一般来讲 二进制文件用记事本打开会有很多乱码
+用特定的编码方式（非文本编码方式）保存特定的内容
+
+本质上两者没有区别
+
 16. html和数学公式一样都是可以分解 和树状图
+因为他们都是树状结构
+
 17. png占用空间小 适合传输 jpg gif动图 较为模糊 bmp原图 占用空间大 
+jpg
+  有损压缩
+  适合存储颜色大量渐变的图片 即现实照片 不支持透明
+png
+  无损压缩
+  适合存储大片连续纯色区域的图片 即屏幕截图 支持256及透明
+gif
+  无损压缩gif
+  支持动画
+  有色卡，色卡只能存储256种颜色，即每张gif最多有256种颜色
+bmp
+  不压缩 所有体积巨大
+  具体取决于存储格式 每个像素占用1-24位不等
+
+  n位位图 对应 2**色位图
+webp
+  有损压缩
+  全面优于jpg且支持透明
 18. 一类自定义数据属性，它赋予我们在所有 HTML 元素上嵌入自定义数据属性的能力，并可以通过脚本(一般指JavaScript) 与 HTML 之间进行专有数据的交换。
+用来存放于当前标签相关的额外信息的
+如标签的内容用来表达一本书， 那么可以用daya-isbn来表达这本书的条码
+标签的内容是一个产品 可以用data-id来表达产品id
+
 19. 将input和label关联 
+用一个label标签与之关联
+如果不是checkbox 由可以用伪元素变大并覆盖该元素
+
 20. 媒体类型（通常称为 Multipurpose Internet Mail Extensions 或 MIME 类型 
-21. a ifream from  a img 
+多用途英特网邮件扩展
+用一个特定的表格来表达文件的格式
+tpye/subtype
+如jpg为image/jpeg
+html为test/html 
+txt text/plain 
+css text/css 
+js application/javascript 
+
+21. a ifream from  a 
+target 
+  a form base 
+
+href 
+  a base img link
 22. BOM（Byte Order Mark），字节顺序标记，出现在文本文件头部，Unicode编码标准中用于标识文件是采用哪种格式的编码。
+ 占两个字节 目前很多编辑器软件默认都不添加BOM头 但记事本会添加
 23. col row span td tt tl tr 
+hgroup
+  <h1></h1>
+  <h2></h2>
+colgroup
+
+optgroup
+
+filedset 
+
+
 24. Search Engine Optimization 搜索引擎优化 
+让网址能在搜索结果中更靠前
+  用https
+  增加keyword的meta标签
+    mata  name="" content=""
+  使html标签更有语义
+  让网址速度更快
+  
 25. Trident IE  webkit Chrome and Safari  Gecko Firefox
+
 26. ul ol li dl dt dd ul>li ol>li dl>dt+dd 
+需要注意的问题
+  li只能直接放入ol与ul 不能直接其他标签
+  ol ul 里也只能直接放li
+
+  一个列表项由至少两个标签组成：
+  dt dd
+  一个dt 也可以对应多dd 
+
 27. 不是最新的内容 英翻有问题
+有错误 不全
+
 28. 区分不同的标签
+  script
+  camvas
+原因：
+  正常使用时内部需要放内容的标签 就是把fallback放在该标签的外面
+  正常使用时内容是空白的标签 就是把fallback放在该标签的里面
+  
 29. meta charset <link rel="stylesheet" href="style.css"> <link rel="icon" href="" tpye="img/icon">
 30. 尽量让更多的人使用web 为此设置了媒体类型 读屏器
+可访问性
+  网址在不同设备上能否使用/易用
+  网址/软件对不同人群能否使用
+
+  aria(标注出了各个标签当前是什么样的ui元素及其状态)
+
+  td与th通过headers属性关联
+
 31. 65 97 48 13 10 32 160
+
 32.
 geek 极客
 nerd 令人厌烦的人
 hacker 黑客
 edge 边缘 尖端
-bleeding/cutting edge 前沿/尖端/可能存在风险的技术
-HyperText Marckup Language
+bleeding/cutting edge 前沿/尖端/可能存在风险的技术 
+HyperText Marckup Language entity
 coordinate 坐标
 polygon 多边形
 bit 比特
 byte 字节
 alternative 代替
-Attributes 属性
+Attributes 属性 property
 obsolate 过时的
 Binary 二进制
 Decimal 十进制
 Hexadecimal 十六进制
 octal 八进制
-deprecate 藐视
+deprecate  不推荐使用的
 loop 循环
 行 Row
 列 Col
-horizontal 横
+horizontal 水平的
 Semanticization 语义化
 Accessibility 可访问性
 33.
 div和h1
 div class 里面的id为abc的属性
 div在hover的情况下 ul下的li里的子元素div
-body在被点击的时候
-div在hover的时候时候
+body里面的所有 在被点击的时候
+div在hover的时候的after伪元素
+被鼠标选中的文字 只能设置前景色和背景色
+选中id的值为地址栏中#后内容的元素
+:target 
+input后面的ul后面的p后面的所有同级
 
 
-
-0030
-0012
-0001
+0000
 0002
-0320
+0011
+0003
+0240
+
 1em = 一个字体默认的fontsize
-1px = 一个像素点
+1px = 一个css像素点 在设置正确的情况下代表一个物理像素
+      在网页不放大的情况下 代表一个操作系统像素
 1rem = 相对根元素的默认fontsize
 vw = 视宽
 vh = 视高
-36.
+
+36. 
 html小三 section 160px p小二 span 30px  .sucks小三
 /* */
+300
+24
+24 36 54 36
+200
+
 ```
     p,h1,{h1后面的逗号
     background-color: rgba:(abc)  rgba后面没有冒号 后面少一个数值
-    font-varient; abc;    varient后面的分号应该是冒号
+    font-varie（a）nt; abc;    varient后面的分号应该是冒号
     colr: #ff048;  colr不是属性 应该是color #少了一个数值 应该是六位或三位
     font: "serif" 25px; 25px在serif的前面 serif里面没有引号
 
@@ -87,22 +236,70 @@ html小三 section 160px p小二 span 30px  .sucks小三
 祖先 section 
 子 ul 
 父 main
-兄弟 h2
+兄弟 h2 aside
 
-iframe video img 替换元素一般需要绝对路径或相对路径
+iframe video img input 替换元素一般需要绝对路径或相对路径
+最大的区别是没有后代元素
+css方面 替换元素往往有内在宽高
+
 link style 内部style 
 @media print
+
 44.
+
+
 li:nth-child(n+8):nth-last-child(n+5)
-[id|="damiao-"]
+
+li:nth-child(n+8):nth-last-child(-n+4)
+[class|="damiao-"] ^,*{  }
 [rel~="nofollow"]
 link visited focus hover active 因为如果顺序不是这样的话 会有属性失效
 第三个
 margin border padding content
+每个元素都会生成一个或多个盒子
+      行内元素在框时会生成多个盒子
+盒子有内容 内边距 边框 外边距
+
+width 内边距和边框不能为负
+
+边框及以内是可见及可交互的
+
+外边距是透明的 透过它看到下方的内容
+
+width属性设置的是内容区域的宽度
+可以通过box-sizing来改变width设定的盒子
+每个盒子的名字：
+      content-box
+      padding-box
+      border-box
+      margin-box
+
 在父元素没有高度无效 在父元素有高度的时候有效 有效时按照父元素的高度为基准
-italic有语义 obsolute没有语义
+包含块的高度未明确指定（即auto时）且包含块的高度由其内容撑大的时候（内容在常规流里） 内容元素的高度写百分比就无效
+
+包含块的高度指定了 或者包含块的高度不由其内容撑大的时候（内容定位了） 内容元素的百分比高度有效
+
+italic
+  使用一个专门设计过的斜体字
+oblique
+  使用正体倾斜得到的斜体字
+
+
 模拟信号是用连续变化的数值来表示要说明的信息
 数字信号是用有限个0 和 1的代码来表示信息中某一个字符 当很多字符组合起来的时候 才能表达完整的信息
+
+模拟信号
+  指直接使用线路中的物理量 这些物理量即为模拟信号
+      收音机 传统电视机 
+
+  数字信号 
+  将设备中物理量理解为0和1 这些表达0和1的信号即为数字信号
+
+模拟信号抗干扰性更好
+数字信号精确度更高
+
+编译 compile
+
 <h2>四季变换</h2>
 <p>一年有四季，四季有其对应的节气</p>
 <ul>
@@ -142,24 +339,52 @@ italic有语义 obsolute没有语义
 <a href="http://baike.baidu.com/item/%E6%98%A5/6983693">春</a>
 <img src="https://www.google.com.hk/images/nav_logo242_hr.png" alt="春">
 _blank baidu.com
-button 按钮 checkbox选择框 color date datetime-local
-email file hidden image number password radio
-submit tel text 
+button 按钮 checkbox color date datetime-local
+email file accept hidden image number password radio range max min
+submit tel text  
+
 autofocus="autofocus"
-input::placeholder
+
+input  placeholder=""
+
+
 加上title属性
+
+
 转义
+
 disabled="disabled"
+
+<fieldset disabled>
+  <legend></legend>
+  <input type="text">
+  <input type="text">
+  <input type="text">
+</fieldset>
 HyperText Marckup Language  Division  paragraph
 anchor emphasis   table row  table header cell
 table data cell  column  Unordered List  Ordered List
 List Item  Definition List  Definition Term  Definition Description
-Preformatted   Preformatted  navigation  
+Preformatted    navigation  
+
+coord coordinate
+rect rectangle
+poly polygon
+src source  
 
 coordination  rectangle  Polygon  Hypertext Reference  source
 命令行程序可以更深入的理解计算机 更好的控制计算机 和GUI的区别是 GUI图形界面 命令行没有图形界面
 p, meta, h1, fieldset, option, input, area
 63
-paddingbox borderbox contentbox 
+
+
+inherit borderbox contentbox 
+width height属性设置哪个盒子的宽高
+
 IE6主要是通过与XP操作系统捆绑安装来实现市场占有率，现如今虽然流行WIN7等新操作系统，但XP操作系统仍然有很高的安装率和使用率。特别是中国庞大的盗版用户群（中小企业公司办公用户、网吧业主、普通家庭用户），基本都在大量使用老版本的XP操作系统，而且这部分轻度用户对网页浏览软件的新技术不敏感、注重价格、要求单一、能上网就行。
 这些原因使IE6浏览器，在几年前中国盗版软件市场最为兴盛的时期，积累了极其庞大的用户群，即使面对新软件的冲击，也能保持很大的市场占有率。
+
+ie7市场份额比ie6低的原因
+ie6只能装在xp系统
+ie7也只能装在vista之前的系统里
+xp自带ie6 且用xp的

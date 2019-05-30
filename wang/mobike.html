@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>bike</title>
+  <style>
+    html,body {
+      width: 100%;
+      height: 100%;
+      margin:0;
+      padding: 0;
+    }
+    div{
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: space-between;
+    }
+    div > img {
+      width: 24.9%;
+      height: 260px;
+    }
+    @media (max-width: 1080px){
+      div > img {
+        width: 49.9%;
+        height: 260px;
+        justify-content: space-between;
+        margin-top: 2px;
+      }
+      div {
+        flex-wrap: wrap;
+        align-content:flex-start;
+      }
+    }
+    @media (max-width: 640px){
+      div > img {
+        width: 100%;
+        xheight: 260px;
+        xjustify-content: space-between;
+        margin-top: 2px
+      }
+      div {
+        flex-wrap: wrap;
+        align-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <img src="https://mobike.com/cn/assets/themes/moby/img/promo-01.jpg" alt="">
+    <img src="https://mobike.com/cn/assets/themes/moby/img/promo-02.jpg" alt="">
+    <img src="https://mobike.com/cn/assets/themes/moby/img/promo-03.jpg" alt="">
+    <img src="https://mobike.com/cn/assets/themes/moby/img/promo-04.jpg" alt="">
+</div>
+</body>
+</html>

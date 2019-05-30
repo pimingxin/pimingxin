@@ -16,9 +16,10 @@
     }
     main{
       background-image: url(https://mobike.com/cn/assets/themes/moby/img/landing/hero-bg-4.jpg);
+      background-position: 50% 50%;
       height: 100%;
       width: 100%;
-      background-size: 100%;
+      background-size: cover;
     }
     body{
       margin:0;
@@ -38,6 +39,48 @@
       margin-top:2px;
       object-fit: cover;
     }
+    main > a {
+      float: left;
+      margin-left: 10%;
+      margin-top:50px;
+      text-align: center;
+    }
+    main > ul {
+      margin:0;
+      margin-left: 45%;
+    }
+    main > ul li {
+      list-style: none;
+      float: left;
+      margin-top:50px;
+      width: 150px;
+      color: white;
+    }
+    main > ul li a ,main a{
+      text-decoration: none;
+      color: white;
+    }
+    ul ul {
+      display: none;
+    }
+    .middle{
+      float: left;
+      text-align: center;
+      color: white;
+      margin-top: 25%;
+      xmargin-right: 70%;
+      padding-left: 100px;
+      padding-bottom: 20px;
+    }
+    .middle a {
+      box-sizing: border-box;
+      box-shadow: rgba(106, 73, 76, 0.6) 0px 6px 30px 0px inset;
+      font-size: 22px;
+      border: 20px solid rgba(0,0,0,0.5);
+      border-radius: 8px;
+      
+    }
+
     @media (max-width:1080px){
       main{
         width: 100%;
@@ -47,6 +90,16 @@
         height: 260px;
         width: 50%;
       }
+      main > ul{
+        display: none;
+      }
+    }
+    @media (max-width:770px){
+      main{
+        max-width: 100%;
+        width: auto;
+      }
+      
     }
     @media (max-width:640px){
       main{
@@ -58,11 +111,30 @@
         width: 100%;
       }
     }
+
   </style>
 </head>
 <body>
   <main>
+    <a href="#"><span>MOBike<br>摩 拜 单 车</span></a>
+    <ul>
+      <li>产品
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      </li>
+      <li><a href="#">摩拜科技</a></li>
+      <li><a href="#">关于</a></li>
+      <li><a href="#">广告合作</a></li>
+    </ul>
+    <div class="middle">
+      <h1>让自行车回归城市</h1>
+      <a href="#">立即开始使用Mobike</a>
+    </div>
   </main>
+  
   <div>
     <img src="https://mobike.com/cn/assets/themes/moby/img/promo-01.jpg" alt="">
     <img src="https://mobike.com/cn/assets/themes/moby/img/promo-02.jpg" alt="">

@@ -18,28 +18,34 @@
     div > img:nth-child(1) {
       left:16.875vw;
       top: 5vw;
-      
+      opacity: 0.1;
+      transition: opacity 2s
     }
     div > img:nth-child(2) {
       left:calc(16.875vw + 16.5vw);
       top: 29.75vw;
       z-index: 2;
       opacity: 0.8;
-      transition:width 2s, height 2s, background-color 2s, transform 2s;
+      transition: transform 2s, opacity 2s;
       
     }
     div > img:nth-child(3) {
       left:calc(16.875vw + 33vw);
       top: 54.5vw;
+      opacity: 0.1;
+      transition: opacity 2s
     }
     div > img:nth-child(1):hover {
       z-index: 3;
+      opacity: 1;
     }
     div > img:nth-child(2):hover{
       transform:rotate(360deg);
+      opacity: 0.1;
     }
     div > img:nth-child(3):hover {
       z-index: 3;
+      opacity: 1;
     }
   </style>
 </head>

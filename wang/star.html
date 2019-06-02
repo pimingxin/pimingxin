@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>font-text</title>
+  <link rel="stylesheet" href="font/css/font-awesome.css">
+  <style>
+    div {
+      text-align: center; /*让星星居中*/
+      direction: rtl;/*颠倒顺序 从右边开始*/
+    }
+    div > span {
+      display: inline-block;
+      position: relative;
+    }
+    div > span:hover,div > span:hover ~ span {
+      xcolor:transparent;/*把hover和hover前面的星星隐藏起来*/
+    }
+    div > span:hover::after, div > span:hover ~ span::after{
+      content: "\2605";/*黄色的星星*/
+      position: absolute;/*让伪元素与元素重叠*/
+      color: gold;/*变腮*/
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+    <span>☆</span>
+  </div>
+</body>
+</html>

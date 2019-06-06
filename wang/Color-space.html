@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Color-space</title>
+  <style>
+    td {
+      width: 1px;
+      height: 1px;
+    }
+    tr:nth-child(1) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(1) > td:nth-child(2) {
+      background-color: #000001;
+    }
+    tr:nth-child(1) > td:nth-child(3) {
+      background-color: #000002;
+    }
+    tr:nth-child(1) > td:nth-child(4) {
+      background-color: #000003;
+    }
+    tr:nth-child(1) > td:nth-child(5) {
+      background-color: #000004;
+    }
+    tr:nth-child(1) > td:nth-child(6) {
+      background-color: #000005;
+    }
+    tr:nth-child(1) > td:nth-child(7) {
+      background-color: #000006;
+    }
+    tr:nth-child(1) > td:nth-child(8) {
+      background-color: #000007;
+    }
+    tr:nth-child(1) > td:nth-child(9) {
+      background-color: #000008;
+    }
+    tr:nth-child(1) > td:nth-child(10) {
+      background-color: #000009;
+    }
+    tr:nth-child(1) > td:nth-child(11) {
+      background-color: #00000a;
+    }
+    tr:nth-child(1) > td:nth-child(12) {
+      background-color: #00000b;
+    }
+    tr:nth-child(1) > td:nth-child(13) {
+      background-color: #00000c;
+    }
+    tr:nth-child(1) > td:nth-child(14) {
+      background-color: #00000d;
+    }
+    tr:nth-child(1) > td:nth-child(15) {
+      background-color: #00000e;
+    }
+    tr:nth-child(1) > td:nth-child(16) {
+      background-color: #00000f;
+    }
+    tr:nth-child(2) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(2) > td:nth-child(2) {
+      background-color: #000010;
+    }
+    tr:nth-child(2) > td:nth-child(3) {
+      background-color: #000020;
+    }
+    tr:nth-child(2) > td:nth-child(4) {
+      background-color: #000030;
+    }
+    tr:nth-child(2) > td:nth-child(5) {
+      background-color: #000040;
+    }
+    tr:nth-child(2) > td:nth-child(6) {
+      background-color: #000050;
+    }
+    tr:nth-child(2) > td:nth-child(7) {
+      background-color: #000060;
+    }
+    tr:nth-child(2) > td:nth-child(8) {
+      background-color: #000070;
+    }
+    tr:nth-child(2) > td:nth-child(9) {
+      background-color: #000080;
+    }
+    tr:nth-child(2) > td:nth-child(10) {
+      background-color: #000090;
+    }
+    tr:nth-child(2) > td:nth-child(11) {
+      background-color: #0000a0;
+    }
+    tr:nth-child(2) > td:nth-child(12) {
+      background-color: #0000b0;
+    }
+    tr:nth-child(2) > td:nth-child(13) {
+      background-color: #0000c0;
+    }
+    tr:nth-child(2) > td:nth-child(14) {
+      background-color: #0000d0;
+    }
+    tr:nth-child(2) > td:nth-child(15) {
+      background-color: #0000e0;
+    }
+    tr:nth-child(2) > td:nth-child(16) {
+      background-color: #0000f0;
+    }
+    tr:nth-child(3) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(3) > td:nth-child(2) {
+      background-color: #000100;
+    }
+    tr:nth-child(3) > td:nth-child(3) {
+      background-color: #000200;
+    }
+    tr:nth-child(3) > td:nth-child(4) {
+      background-color: #000300;
+    }
+    tr:nth-child(3) > td:nth-child(5) {
+      background-color: #000400;
+    }
+    tr:nth-child(3) > td:nth-child(6) {
+      background-color: #000500;
+    }
+    tr:nth-child(3) > td:nth-child(7) {
+      background-color: #000600;
+    }
+    tr:nth-child(3) > td:nth-child(8) {
+      background-color: #000700;
+    }
+    tr:nth-child(3) > td:nth-child(9) {
+      background-color: #000800;
+    }
+    tr:nth-child(3) > td:nth-child(10) {
+      background-color: #000900;
+    }
+    tr:nth-child(3) > td:nth-child(11) {
+      background-color: #000a00;
+    }
+    tr:nth-child(3) > td:nth-child(12) {
+      background-color: #000b00;
+    }
+    tr:nth-child(3) > td:nth-child(13) {
+      background-color: #000c00;
+    }
+    tr:nth-child(3) > td:nth-child(14) {
+      background-color: #000d00;
+    }
+    tr:nth-child(3) > td:nth-child(15) {
+      background-color: #000e00;
+    }
+    tr:nth-child(3) > td:nth-child(16) {
+      background-color: #000f00;
+    }
+    tr:nth-child(4) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(4) > td:nth-child(2) {
+      background-color: #001000;
+    }
+    tr:nth-child(4) > td:nth-child(3) {
+      background-color: #002000;
+    }
+    tr:nth-child(4) > td:nth-child(4) {
+      background-color: #003000;
+    }
+    tr:nth-child(4) > td:nth-child(5) {
+      background-color: #004000;
+    }
+    tr:nth-child(4) > td:nth-child(6) {
+      background-color: #005000;
+    }
+    tr:nth-child(4) > td:nth-child(7) {
+      background-color: #006000;
+    }
+    tr:nth-child(4) > td:nth-child(8) {
+      background-color: #007000;
+    }
+    tr:nth-child(4) > td:nth-child(9) {
+      background-color: #008000;
+    }
+    tr:nth-child(4) > td:nth-child(10) {
+      background-color: #009000;
+    }
+    tr:nth-child(4) > td:nth-child(11) {
+      background-color: #00a000;
+    }
+    tr:nth-child(4) > td:nth-child(12) {
+      background-color: #00b000;
+    }
+    tr:nth-child(4) > td:nth-child(13) {
+      background-color: #00c000;
+    }
+    tr:nth-child(4) > td:nth-child(14) {
+      background-color: #00d000;
+    }
+    tr:nth-child(4) > td:nth-child(15) {
+      background-color: #00e000;
+    }
+    tr:nth-child(4) > td:nth-child(16) {
+      background-color: #00f000;
+    }
+    tr:nth-child(5) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(5) > td:nth-child(2) {
+      background-color: #010000;
+    }
+    tr:nth-child(5) > td:nth-child(3) {
+      background-color: #020000;
+    }
+    tr:nth-child(5) > td:nth-child(4) {
+      background-color: #030000;
+    }
+    tr:nth-child(5) > td:nth-child(5) {
+      background-color: #040000;
+    }
+    tr:nth-child(5) > td:nth-child(6) {
+      background-color: #050000;
+    }
+    tr:nth-child(5) > td:nth-child(7) {
+      background-color: #060000;
+    }
+    tr:nth-child(5) > td:nth-child(8) {
+      background-color: #070000;
+    }
+    tr:nth-child(5) > td:nth-child(9) {
+      background-color: #080000;
+    }
+    tr:nth-child(5) > td:nth-child(10) {
+      background-color: #090000;
+    }
+    tr:nth-child(5) > td:nth-child(11) {
+      background-color: #0a0000;
+    }
+    tr:nth-child(5) > td:nth-child(12) {
+      background-color: #0b0000;
+    }
+    tr:nth-child(5) > td:nth-child(13) {
+      background-color: #0c0000;
+    }
+    tr:nth-child(5) > td:nth-child(14) {
+      background-color: #0d0000;
+    }
+    tr:nth-child(5) > td:nth-child(15) {
+      background-color: #0e0000;
+    }
+    tr:nth-child(5) > td:nth-child(16) {
+      background-color: #0f0000;
+    }
+    tr:nth-child(6) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(6) > td:nth-child(2) {
+      background-color: #100000;
+    }
+    tr:nth-child(6) > td:nth-child(3) {
+      background-color: #200000;
+    }
+    tr:nth-child(6) > td:nth-child(4) {
+      background-color: #300000;
+    }
+    tr:nth-child(6) > td:nth-child(5) {
+      background-color: #400000;
+    }
+    tr:nth-child(6) > td:nth-child(6) {
+      background-color: #500000;
+    }
+    tr:nth-child(6) > td:nth-child(7) {
+      background-color: #600000;
+    }
+    tr:nth-child(6) > td:nth-child(8) {
+      background-color: #700000;
+    }
+    tr:nth-child(6) > td:nth-child(9) {
+      background-color: #800000;
+    }
+    tr:nth-child(6) > td:nth-child(10) {
+      background-color: #900000;
+    }
+    tr:nth-child(6) > td:nth-child(11) {
+      background-color: #a00000;
+    }
+    tr:nth-child(6) > td:nth-child(12) {
+      background-color: #b00000;
+    }
+    tr:nth-child(6) > td:nth-child(13) {
+      background-color: #c00000;
+    }
+    tr:nth-child(6) > td:nth-child(14) {
+      background-color: #d00000;
+    }
+    tr:nth-child(6) > td:nth-child(15) {
+      background-color: #e00000;
+    }
+    tr:nth-child(6) > td:nth-child(16) {
+      background-color: #f00000;
+    }
+    tr:nth-child(7) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(7) > td:nth-child(2) {
+      background-color: #110000;
+    }
+    tr:nth-child(7) > td:nth-child(3) {
+      background-color: #220000;
+    }
+    tr:nth-child(7) > td:nth-child(4) {
+      background-color: #330000;
+    }
+    tr:nth-child(7) > td:nth-child(5) {
+      background-color: #440000;
+    }
+    tr:nth-child(7) > td:nth-child(6) {
+      background-color: #550000;
+    }
+    tr:nth-child(7) > td:nth-child(7) {
+      background-color: #660000;
+    }
+    tr:nth-child(7) > td:nth-child(8) {
+      background-color: #770000;
+    }
+    tr:nth-child(7) > td:nth-child(9) {
+      background-color: #880000;
+    }
+    tr:nth-child(7) > td:nth-child(10) {
+      background-color: #990000;
+    }
+    tr:nth-child(7) > td:nth-child(11) {
+      background-color: #aa0000;
+    }
+    tr:nth-child(7) > td:nth-child(12) {
+      background-color: #bb0000;
+    }
+    tr:nth-child(7) > td:nth-child(13) {
+      background-color: #cc0000;
+    }
+    tr:nth-child(7) > td:nth-child(14) {
+      background-color: #dd0000;
+    }
+    tr:nth-child(7) > td:nth-child(15) {
+      background-color: #ee0000;
+    }
+    tr:nth-child(7) > td:nth-child(16) {
+      background-color: #ff0000;
+    }
+    tr:nth-child(8) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(8) > td:nth-child(2) {
+      background-color: #110001;
+    }
+    tr:nth-child(8) > td:nth-child(3) {
+      background-color: #220002;
+    }
+    tr:nth-child(8) > td:nth-child(4) {
+      background-color: #330003;
+    }
+    tr:nth-child(8) > td:nth-child(5) {
+      background-color: #440004;
+    }
+    tr:nth-child(8) > td:nth-child(6) {
+      background-color: #550005;
+    }
+    tr:nth-child(8) > td:nth-child(7) {
+      background-color: #660006;
+    }
+    tr:nth-child(8) > td:nth-child(8) {
+      background-color: #770007;
+    }
+    tr:nth-child(8) > td:nth-child(9) {
+      background-color: #880008;
+    }
+    tr:nth-child(8) > td:nth-child(10) {
+      background-color: #990009;
+    }
+    tr:nth-child(8) > td:nth-child(11) {
+      background-color: #aa000a;
+    }
+    tr:nth-child(8) > td:nth-child(12) {
+      background-color: #bb000b;
+    }
+    tr:nth-child(8) > td:nth-child(13) {
+      background-color: #cc000c;
+    }
+    tr:nth-child(8) > td:nth-child(14) {
+      background-color: #dd000d;
+    }
+    tr:nth-child(8) > td:nth-child(15) {
+      background-color: #ee000e;
+    }
+    tr:nth-child(8) > td:nth-child(16) {
+      background-color: #ff000f;
+    }
+    tr:nth-child(9) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(9) > td:nth-child(2) {
+      background-color: #110011;
+    }
+    tr:nth-child(9) > td:nth-child(3) {
+      background-color: #220022;
+    }
+    tr:nth-child(9) > td:nth-child(4) {
+      background-color: #330033;
+    }
+    tr:nth-child(9) > td:nth-child(5) {
+      background-color: #440044;
+    }
+    tr:nth-child(9) > td:nth-child(6) {
+      background-color: #550055;
+    }
+    tr:nth-child(9) > td:nth-child(7) {
+      background-color: #660066;
+    }
+    tr:nth-child(9) > td:nth-child(8) {
+      background-color: #770077;
+    }
+    tr:nth-child(9) > td:nth-child(9) {
+      background-color: #880088;
+    }
+    tr:nth-child(9) > td:nth-child(10) {
+      background-color: #990099;
+    }
+    tr:nth-child(9) > td:nth-child(11) {
+      background-color: #aa00aa;
+    }
+    tr:nth-child(9) > td:nth-child(12) {
+      background-color: #bb00bb;
+    }
+    tr:nth-child(9) > td:nth-child(13) {
+      background-color: #cc00cc;
+    }
+    tr:nth-child(9) > td:nth-child(14) {
+      background-color: #dd00dd;
+    }
+    tr:nth-child(9) > td:nth-child(15) {
+      background-color: #ee00ee;
+    }
+    tr:nth-child(9) > td:nth-child(16) {
+      background-color: #ff00ff;
+    }
+    tr:nth-child(10) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(10) > td:nth-child(2) {
+      background-color: #110111;
+    }
+    tr:nth-child(10) > td:nth-child(3) {
+      background-color: #220222;
+    }
+    tr:nth-child(10) > td:nth-child(4) {
+      background-color: #330333;
+    }
+    tr:nth-child(10) > td:nth-child(5) {
+      background-color: #440444;
+    }
+    tr:nth-child(10) > td:nth-child(6) {
+      background-color: #550555;
+    }
+    tr:nth-child(10) > td:nth-child(7) {
+      background-color: #660666;
+    }
+    tr:nth-child(10) > td:nth-child(8) {
+      background-color: #770777;
+    }
+    tr:nth-child(10) > td:nth-child(9) {
+      background-color: #880888;
+    }
+    tr:nth-child(10) > td:nth-child(10) {
+      background-color: #990999;
+    }
+    tr:nth-child(10) > td:nth-child(11) {
+      background-color: #aa0aaa;
+    }
+    tr:nth-child(10) > td:nth-child(12) {
+      background-color: #bb0bbb;
+    }
+    tr:nth-child(10) > td:nth-child(13) {
+      background-color: #cc0ccc;
+    }
+    tr:nth-child(10) > td:nth-child(14) {
+      background-color: #dd0ddd;
+    }
+    tr:nth-child(10) > td:nth-child(15) {
+      background-color: #ee0eee;
+    }
+    tr:nth-child(10) > td:nth-child(16) {
+      background-color: #ff0fff;
+    }
+    tr:nth-child(11) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(11) > td:nth-child(2) {
+      background-color: #111111;
+    }
+    tr:nth-child(11) > td:nth-child(3) {
+      background-color: #222222;
+    }
+    tr:nth-child(11) > td:nth-child(4) {
+      background-color: #333333;
+    }
+    tr:nth-child(11) > td:nth-child(5) {
+      background-color: #444444;
+    }
+    tr:nth-child(11) > td:nth-child(6) {
+      background-color: #555555;
+    }
+    tr:nth-child(11) > td:nth-child(7) {
+      background-color: #666666;
+    }
+    tr:nth-child(11) > td:nth-child(8) {
+      background-color: #777777;
+    }
+    tr:nth-child(11) > td:nth-child(9) {
+      background-color: #888888;
+    }
+    tr:nth-child(11) > td:nth-child(10) {
+      background-color: #999999;
+    }
+    tr:nth-child(11) > td:nth-child(11) {
+      background-color: #aaaaaa;
+    }
+    tr:nth-child(11) > td:nth-child(12) {
+      background-color: #bbbbbb;
+    }
+    tr:nth-child(11) > td:nth-child(13) {
+      background-color: #cccccc;
+    }
+    tr:nth-child(11) > td:nth-child(14) {
+      background-color: #dddddd;
+    }
+    tr:nth-child(11) > td:nth-child(15) {
+      background-color: #eeeeee;
+    }
+    tr:nth-child(11) > td:nth-child(16) {
+      background-color: #ffffff;
+    }
+    tr:nth-child(12) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(12) > td:nth-child(2) {
+      background-color: #111110;
+    }
+    tr:nth-child(12) > td:nth-child(3) {
+      background-color: #222220;
+    }
+    tr:nth-child(12) > td:nth-child(4) {
+      background-color: #333330;
+    }
+    tr:nth-child(12) > td:nth-child(5) {
+      background-color: #444440;
+    }
+    tr:nth-child(12) > td:nth-child(6) {
+      background-color: #555550;
+    }
+    tr:nth-child(12) > td:nth-child(7) {
+      background-color: #666660;
+    }
+    tr:nth-child(12) > td:nth-child(8) {
+      background-color: #777770;
+    }
+    tr:nth-child(12) > td:nth-child(9) {
+      background-color: #888880;
+    }
+    tr:nth-child(12) > td:nth-child(10) {
+      background-color: #999990;
+    }
+    tr:nth-child(12) > td:nth-child(11) {
+      background-color: #aaaaa0;
+    }
+    tr:nth-child(12) > td:nth-child(12) {
+      background-color: #bbbbb0;
+    }
+    tr:nth-child(12) > td:nth-child(13) {
+      background-color: #ccccc0;
+    }
+    tr:nth-child(12) > td:nth-child(14) {
+      background-color: #ddddd0;
+    }
+    tr:nth-child(12) > td:nth-child(15) {
+      background-color: #eeeee0;
+    }
+    tr:nth-child(12) > td:nth-child(16) {
+      background-color: #fffff0;
+    }
+    tr:nth-child(13) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(13) > td:nth-child(2) {
+      background-color: #111100;
+    }
+    tr:nth-child(13) > td:nth-child(3) {
+      background-color: #222200;
+    }
+    tr:nth-child(13) > td:nth-child(4) {
+      background-color: #333300;
+    }
+    tr:nth-child(13) > td:nth-child(5) {
+      background-color: #444400;
+    }
+    tr:nth-child(13) > td:nth-child(6) {
+      background-color: #555500;
+    }
+    tr:nth-child(13) > td:nth-child(7) {
+      background-color: #666600;
+    }
+    tr:nth-child(13) > td:nth-child(8) {
+      background-color: #777700;
+    }
+    tr:nth-child(13) > td:nth-child(9) {
+      background-color: #888800;
+    }
+    tr:nth-child(13) > td:nth-child(10) {
+      background-color: #999900;
+    }
+    tr:nth-child(13) > td:nth-child(11) {
+      background-color: #aaaa00;
+    }
+    tr:nth-child(13) > td:nth-child(12) {
+      background-color: #bbbb00;
+    }
+    tr:nth-child(13) > td:nth-child(13) {
+      background-color: #cccc00;
+    }
+    tr:nth-child(13) > td:nth-child(14) {
+      background-color: #dddd00;
+    }
+    tr:nth-child(13) > td:nth-child(15) {
+      background-color: #eeee00;
+    }
+    tr:nth-child(13) > td:nth-child(16) {
+      background-color: #ffff00;
+    }
+    tr:nth-child(14) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(14) > td:nth-child(2) {
+      background-color: #111000;
+    }
+    tr:nth-child(14) > td:nth-child(3) {
+      background-color: #222000;
+    }
+    tr:nth-child(14) > td:nth-child(4) {
+      background-color: #333000;
+    }
+    tr:nth-child(14) > td:nth-child(5) {
+      background-color: #444000;
+    }
+    tr:nth-child(14) > td:nth-child(6) {
+      background-color: #555000;
+    }
+    tr:nth-child(14) > td:nth-child(7) {
+      background-color: #666000;
+    }
+    tr:nth-child(14) > td:nth-child(8) {
+      background-color: #777000;
+    }
+    tr:nth-child(14) > td:nth-child(9) {
+      background-color: #888000;
+    }
+    tr:nth-child(14) > td:nth-child(10) {
+      background-color: #999000;
+    }
+    tr:nth-child(14) > td:nth-child(11) {
+      background-color: #aaa000;
+    }
+    tr:nth-child(14) > td:nth-child(12) {
+      background-color: #bbb000;
+    }
+    tr:nth-child(14) > td:nth-child(13) {
+      background-color: #ccc000;
+    }
+    tr:nth-child(14) > td:nth-child(14) {
+      background-color: #ddd000;
+    }
+    tr:nth-child(14) > td:nth-child(15) {
+      background-color: #eee000;
+    }
+    tr:nth-child(14) > td:nth-child(16) {
+      background-color: #fff000;
+    }
+    tr:nth-child(15) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(15) > td:nth-child(2) {
+      background-color: #110000;
+    }
+    tr:nth-child(15) > td:nth-child(3) {
+      background-color: #220000;
+    }
+    tr:nth-child(15) > td:nth-child(4) {
+      background-color: #330000;
+    }
+    tr:nth-child(15) > td:nth-child(5) {
+      background-color: #440000;
+    }
+    tr:nth-child(15) > td:nth-child(6) {
+      background-color: #550000;
+    }
+    tr:nth-child(15) > td:nth-child(7) {
+      background-color: #660000;
+    }
+    tr:nth-child(15) > td:nth-child(8) {
+      background-color: #770000;
+    }
+    tr:nth-child(15) > td:nth-child(9) {
+      background-color: #880000;
+    }
+    tr:nth-child(15) > td:nth-child(10) {
+      background-color: #990000;
+    }
+    tr:nth-child(15) > td:nth-child(11) {
+      background-color: #aa0000;
+    }
+    tr:nth-child(15) > td:nth-child(12) {
+      background-color: #bb0000;
+    }
+    tr:nth-child(15) > td:nth-child(13) {
+      background-color: #cc0000;
+    }
+    tr:nth-child(15) > td:nth-child(14) {
+      background-color: #dd0000;
+    }
+    tr:nth-child(15) > td:nth-child(15) {
+      background-color: #ee0000;
+    }
+    tr:nth-child(15) > td:nth-child(16) {
+      background-color: #ff0000;
+    }
+    tr:nth-child(16) > td:nth-child(1) {
+      background-color: #000000;
+    }
+    tr:nth-child(16) > td:nth-child(2) {
+      background-color: #100000;
+    }
+    tr:nth-child(16) > td:nth-child(3) {
+      background-color: #200000;
+    }
+    tr:nth-child(16) > td:nth-child(4) {
+      background-color: #300000;
+    }
+    tr:nth-child(16) > td:nth-child(5) {
+      background-color: #400000;
+    }
+    tr:nth-child(16) > td:nth-child(6) {
+      background-color: #500000;
+    }
+    tr:nth-child(16) > td:nth-child(7) {
+      background-color: #600000;
+    }
+    tr:nth-child(16) > td:nth-child(8) {
+      background-color: #700000;
+    }
+    tr:nth-child(16) > td:nth-child(9) {
+      background-color: #800000;
+    }
+    tr:nth-child(16) > td:nth-child(10) {
+      background-color: #900000;
+    }
+    tr:nth-child(16) > td:nth-child(11) {
+      background-color: #a00000;
+    }
+    tr:nth-child(16) > td:nth-child(12) {
+      background-color: #b00000;
+    }
+    tr:nth-child(16) > td:nth-child(13) {
+      background-color: #c00000;
+    }
+    tr:nth-child(16) > td:nth-child(14) {
+      background-color: #d00000;
+    }
+    tr:nth-child(16) > td:nth-child(15) {
+      background-color: #e00000;
+    }
+    tr:nth-child(16) > td:nth-child(16) {
+      background-color: #f00000;
+    }
+
+  </style>
+</head>
+<body>
+  <table>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>quadrilateral</title>
+  <style>
+    html,body{
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    #qr{
+      transform-style: preserve-3d;
+      margin-top: 200px;
+      margin-left: 400px;
+      xtransform: rotateX(0deg) rotateY(45deg);
+    }
+    #qr div {
+      width: 0px;
+      height: 0px;
+      margin: 0 auto;
+      border-left: 80px solid transparent;
+      border-right: 80px solid transparent;
+      border-bottom: 138.56px solid #A962CE;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+    #q1{
+      transform: rotateX(270deg) translateZ(93px);
+      border-bottom-color: red !important;
+    }
+    #q2{
+      transform: translateZ(-38px) rotateX(-19.68deg) translateY(30px);
+      border-bottom-color: blue !important;
+    }
+    #q4{
+      transform: rotateY(-60deg) translateX(-21px) rotateX(19.68deg) translateY(31px) ;
+      border-bottom-color: black !important;
+    }
+    #q3{
+      transform: rotateY(60deg) translateX(21px) rotateX(19.68deg) translateY(31px) ;
+      border-bottom-color: tan !important;
+    }
+    #qr:hover{
+      transition: all 10s linear;
+      transform: rotate3d(1,1,0.5,360deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="qr">
+    <div id="q1"></div>
+    <div id="q2"></div>
+    <div id="q3"></div>
+    <div id="q4"></div>
+  </div>
+</body>
+
+</html>

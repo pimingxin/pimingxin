@@ -11,7 +11,7 @@
     * {
       padding: 0;
       margin: 0;
-      background-color: rgba(0, 0, 0, 0.08);
+      xbackground-color: rgba(0, 0, 0, 0.08);
     }
 
     html,
@@ -99,6 +99,7 @@
       top: 50px;
       width: 400px;
       height: 100px;
+      box-shadow: 0 0 5px;
 
     }
 
@@ -109,16 +110,17 @@
       height: 120px;
     }
 
-    header>a {
+    header > a {
       margin-top: 25px;
+      margin-left: 13px;
     }
 
-    header>ul {
+    header > ul {
       margin-left: 150px;
       min-width: 700px;
     }
 
-    header>ul li {
+    header > ul li {
       float: left;
       margin-top: 35px;
       list-style-type: none;
@@ -127,40 +129,39 @@
       padding: 0;
     }
 
-    header>ul ul {
+    header > ul ul {
       display: none;
       position: absolute;
     }
 
-    header>ul>li {
+    header > ul > li {
       white-space: nowrap;
       position: relative;
       float: left;
     }
 
-    header>ul>li:hover ul {
+    header > ul > li:hover ul {
       display: block;
       z-index: 5;
     }
 
 
-    header>ul>li:hover>a {
+    header > ul > li:hover>a {
       color: orange;
       width: 100%;
       height: 50px;
     }
 
-    header>ul>li a {
+    header > ul > li a {
       xposition: absolute;
     }
 
-    header>input {
+    header > input {
       height: 60px;
       margin-top: 25px;
     }
 
     #search {
-      margin-left: 35px;
       min-width: 255px;
     }
 
@@ -174,14 +175,15 @@
       border: 2px solid orange;
     }
 
+    #search:focus + #search-1{
+      border: 2px solid orange;
+    }
+
     #search-1:hover {
       background: url(img/4.png);
     }
 
-    #search-1:focus {
-      border: 2px solid orange;
-    }
-
+    
     main {
       width: 1190px;
       margin: auto;
@@ -283,6 +285,96 @@
       border-right: 2px solid rgba(0, 0, 0, 0.08);
       border-bottom: 2px solid rgba(0, 0, 0, 0.08);
     }
+    div.nav-bottom{
+      display: flex;
+      width: 1226px;
+      margin-left: 165px;
+      margin-top:14px;
+      margin-bottom: 15px;
+    }
+
+    div.nav-bottom > ul{
+      display: flex;
+      list-style: none;
+      width: 20%;
+      flex-wrap: wrap;
+      align-content:space-between;
+    }
+    div.nav-bottom > ul > li{
+      width: 76px;
+      height: 82px;
+      display: flex;
+      justify-content: center; /* 水平居中 */
+      align-items: center; /* 垂直居中 */
+      padding:0 2.5px;
+    }
+    div.nav-bottom > ul > li > a {
+      color: grey;
+    }
+    div.nav-bottom > ul > li > a:hover{
+      color: white;
+    }
+    section{
+      box-sizing: border-box;
+      width: 80%;
+    }
+    section > a > img{
+      display: flex;
+      width: 33%;
+      float: left;
+      border-left: 3px solid transparent;
+    }
+    div.last-nav-bottom{
+      width: 1226px;
+      margin: auto;
+      margin-left: 165px;
+      margin-bottom: 30px;
+    }
+
+    div.last-nav-bottom > a > img{
+      width: 100%;
+    }
+
+    div.never-buy-mi{
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.08);
+      display: flex;
+      justify-content: center;
+    }
+
+    div.never-buy-mi > ul {
+      xdisplay: flex;
+      width: 1226px;
+      list-style: none;
+      margin-left: 33px;
+    }
+    div.never-buy-mi > ul  li {
+      list-style: none;
+    }
+    div.never-buy-mi > ul > li > ul{
+      display: flex;
+      width: 1226px;
+      height: 100vh;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-content:center;
+    }
+    div.never-buy-mi > ul > li > h2{
+      line-height: 50px;
+    }
+    div.never-buy-mi  ul  li  ul  li{
+      display: flex;
+      width: 20%;
+      height: 300px;
+      flex-wrap: wrap;
+    }
+    div.never-buy-mi > ul > li > ul.frist > li:first-child > a > img{
+      width: 234px;
+      height: 585px;
+
+    }
+    
   </style>
 </head>
 
@@ -399,7 +491,7 @@
       <li><a href="#">&nbsp;社区&nbsp;</a></li>
     </ul>
     <input type="text" id="search">
-    <input type="text" id="search-1">
+    <input type="text" id="search-1" disabled="disabled">
   </header>
   <main>
     <div class="labelone">
@@ -526,6 +618,183 @@
       </ul>
     </div>
   </main>
+  <div class="nav-bottom">
+    <ul>
+      <li><a href="#">选购手机</a></li>
+      <li><a href="#">企业团购</a></li>
+      <li><a href="#">F码通道</a></li>
+      <li><a href="#">米粉卡</a></li>
+      <li><a href="#">以旧换新</a></li>
+      <li><a href="#">话费充值</a></li>
+    </ul>
+    <section>
+      <a href="#"><img src="img/nav-bottom-one.png" alt=""></a>
+      <a href="#"><img src="img/nav-bottom-two.png" alt=""></a>
+      <a href="#"><img src="img/nav-bottom-three.png" alt=""></a>
+    </section>
+  </div>
+  <div class="last-nav-bottom">
+      <a href="#"><img src="img/last-nav-bottom-one.png" alt=""></a>
+  </div>
+  <div class="never-buy-mi">
+    <ul>
+      <li>
+        <h2>手机</h2>
+        <div></div>
+        <ul class="frist">
+          <li><a href="#"><img src="img/areyouokbig.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h2>家电</h2>
+        <div></div>
+        <ul>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h2>智能</h2>
+        <div></div>
+        <ul>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h2>搭配</h2>
+        <div></div>
+        <ul>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h2>配件</h2>
+        <div></div>
+        <ul>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h2>周边</h2>
+        <div></div>
+        <ul>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h2>为你推荐</h2>
+        <div></div>
+        <ul>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h2>热评产品</h2>
+        <div></div>
+        <ul>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h2>内容</h2>
+        <div></div>
+        <ul>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h2>视频</h2>
+        <div></div>
+        <ul>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+          <li><a href="#"><img src="img/areyouoksmall.png" alt=""></a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </body>
 
 </html>

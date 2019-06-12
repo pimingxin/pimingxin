@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>zhuan</title>
+  <style>
+    div{
+      width: 400px;
+      height: 400px;
+      margin:auto;
+      animation: rotate-clockwise 6s infinite linear;
+    }
+    section{
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      animation: rotate-conuterclockwise 6s infinite linear;
+    }
+    @keyframes rotate-clockwise{ /*顺时针*/
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes rotate-conuterclockwise{ /*逆时针*/
+      to {
+        transform: rotate(0deg);
+      }
+      from {
+        transform: rotate(360deg);
+      }
+      
+    } 
+  </style>
+</head>
+<body>
+  <div>
+    <section>smlie
+    </section>
+  </div>
+</body>
+</html>

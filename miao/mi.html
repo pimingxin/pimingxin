@@ -10,7 +10,7 @@
   <style>
     * {
       margin: 0;
-      xbackground-color: rgba(0, 0, 0, 0.08);
+      background-color: rgba(0, 0, 0, 0.08);
       box-sizing: border-box;
     }
     html{
@@ -76,6 +76,7 @@
       top: 165px;
       left: 522px;
       color: black;
+      z-index: 99999999999999999999999999999999999
 
     }
 
@@ -91,6 +92,7 @@
       padding-bottom: 40px;
       box-shadow: 0 0 5px;
       background-color: white;
+      z-index: 99999999999999999999999999999999999
     }
 
 
@@ -102,6 +104,7 @@
       position: absolute;
       top: 25px;
       left: 565px;
+      z-index: 99999999999999999999999999999999999;
     }
 
     div.nav-right>ul {
@@ -164,6 +167,7 @@
       xdisplay: none;
       position: absolute;
       min-height: 0px;
+      max-height: 0px;
       width: 317px;
       left: -197px;
       top: 40px;
@@ -171,16 +175,15 @@
       text-align: center;
       font-size: 12px;
       line-height: 8em;
-      transition: .6s;
+      transition: 2s;
       overflow-y: scroll;
     }
     #sp span {
       display: none;
     }
     div.nav-right>#icon:hover #sp {
-      min-height: 525px;
-      box-shadow: 0 0 5px;
-      border: 1px solid;
+      min-height: 100px;
+      max-height: 100px;
     }
     div.nav-right>#icon:hover #sp span {
       display: inline-block;
@@ -210,6 +213,7 @@
     div.two-nav ul li a {
       text-decoration: none;
       color: black;
+      padding:26px 10px 44px 10px;
     }
     div.two-nav ul ul{
       display: none;
@@ -221,17 +225,64 @@
       margin-left: 0px;
       top: 0;
       margin-top: 140px;
+      padding-left: calc(50% - 613px);
+      padding-right: calc(50% - 613px);
     }
     div.two-nav ul li:hover ul {
       display: inline-block;
+      z-index: 4;
     }
-    div.two-nav ul ul li{
+
+
+    main {
+      width: 100%;
+      height: 100%;
+    }
+    .silder {
+      width: 1226px;
       margin: auto;
-      float: left;
-      xwidth: 1226px;
+      position: relative;
     }
-    div.two-nav ul ul li > a{
-      float: left;
+
+    main img {
+      position: absolute;
+      height: 460px;
+      left: 0;
+    }
+
+    main input {
+      display: none;
+    }
+
+    .labelone {
+      position: absolute;
+      z-index: 6;
+      top:0;
+      right: 0;
+    }
+
+    .labelone label {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border: 8px solid grey;
+      border-radius: 99999px;
+      position: relative;
+      top: 430px;
+      right: 30px;
+    }
+    .labelone label:hover{
+      cursor: pointer;
+      border-color: #808080;
+      opacity: 0.5;
+    }
+
+    .inputone input+a {
+      display: none;
+    }
+
+    .inputone input:checked+a {
+      display: block;
     }
   </style>
 </head>
@@ -273,7 +324,7 @@
     <div class="two-nav">
       <a href="#"><img src="img/2.png" alt=""></a>
       <ul>
-        <li><a href="#">小米手机&nbsp;&nbsp;&nbsp;</a>
+        <li><a href="#">小米手机</a>
           <ul>
             <li><a href="#"><img src="" alt="">小米9</a></li>
             <li><a href="#"><img src="" alt="">小米9 SE</a></li>
@@ -283,7 +334,7 @@
             <li><a href="#"><img src="" alt="">小米play</a></li>
           </ul>
         </li>
-        <li><a href="#">&nbsp;红米&nbsp;&nbsp;&nbsp;</a>
+        <li><a href="#">红米</a>
           <ul>
             <li><a href="#">Redmi Note 7 Pro</a></li>
             <li><a href="#">Redmi Note 7</a></li>
@@ -292,7 +343,7 @@
             <li><a href="#">红米6A</a></li>
           </ul>
         </li>
-        <li><a href="#">&nbsp;电视&nbsp;&nbsp;&nbsp;</a>
+        <li><a href="#">电视</a>
           <ul>
             <li><a href="">小米壁画电视 65英寸</a></li>
             <li><a href="">小米全面屏电视E55A</a></li>
@@ -302,7 +353,7 @@
             <li><a href="">查看全部<br>小米电视</a></li>
           </ul>
         </li>
-        <li><a href="#">&nbsp;笔记本&nbsp;&nbsp;&nbsp;</a>
+        <li><a href="#">笔记本</a>
           <ul>
             <li><a href="">小米笔记本 Air 12.5"</a></li>
             <li><a href="">小米笔记本 Air 13.3"</a></li>
@@ -312,7 +363,7 @@
             <li><a href="">小米平板</a></li>
           </ul>
         </li>
-        <li><a href="#">&nbsp;家电&nbsp;&nbsp;&nbsp;</a>
+        <li><a href="#">家电</a>
           <ul>
             <li><a href="">米家互联网立式空调C1</a></li>
             <li><a href="">米家互联网洗烘一体机</a></li>
@@ -322,7 +373,7 @@
             <li><a href="">新风机</a></li>
           </ul>
         </li>
-        <li><a href="#">&nbsp;新品&nbsp;&nbsp;&nbsp;</a>
+        <li><a href="#">新品</a>
           <ul>
             <li><a href="">Redmi Note 7 Pro</a></li>
             <li><a href="">小米9</a></li>
@@ -332,7 +383,7 @@
             <li><a href="">小米无线车充</a></li>
           </ul>
         </li>
-        <li><a href="#">&nbsp;路由器&nbsp;&nbsp;&nbsp;</a>
+        <li><a href="#">路由器</a>
           <ul>
             <li><a href="">小米路由器 Mesh</a></li>
             <li><a href="">小米路由器4A 千兆版</a></li>
@@ -342,7 +393,7 @@
             <li><a href="">查看全部小米路由器</a></li>
           </ul>
         </li>
-        <li><a href="#">&nbsp;智能硬件&nbsp;&nbsp;&nbsp;</a>
+        <li><a href="#">智能硬件</a>
           <ul>
             <li><a href="">小米米家只能摄像机云台版</a></li>
             <li><a href="">米家自动洗手机套装</a></li>
@@ -352,11 +403,38 @@
             <li><a href="">查看全部<br>智能硬件</a></li>
           </ul>
         </li>
-        <li><a href="#">&nbsp;服务&nbsp;&nbsp;</a></li>
-        <li><a href="#">&nbsp;社区&nbsp;&nbsp;</a></li>
+        <li><a href="#">服务</a></li>
+        <li><a href="#">社区</a></li>
       </ul>
     </div>
   </div>
+  <main>
+    <div class="silder">
+      <div class="labelone">
+          <label for="i1"></label>
+          <label for="i2"></label>
+          <label for="i3"></label>
+          <label for="i4"></label>
+          <label for="i5"></label>
+        </div>
+        <div class="inputone">
+          <input type="radio" id="i1" name="imgone" checked>
+          <a href="#"><img src="img/one.png" alt=""></a>
+          <input type="radio" id="i2" name="imgone">
+          <a href="#"><img src="img/two.png" alt=""></a>
+          <input type="radio" id="i3" name="imgone">
+          <a href="#"><img src="img/three.png" alt=""></a>
+          <input type="radio" id="i4" name="imgone">
+          <a href="#"><img src="img/four.png" alt=""></a>
+          <input type="radio" id="i5" name="imgone">
+          <a href="#"><img src="img/five.png" alt=""></a>
+        </div>
+      </div>
+  </main>
 </body>
-
 </html>
+
+
+
+
+

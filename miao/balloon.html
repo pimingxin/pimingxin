@@ -6,17 +6,191 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>balloon</title>
   <style>
+
+    [data-balloon] {
+      position: relative;
+    }
+    [data-balloon]::before {
+      content: attr(data-balloon);
+      position: absolute;
+      background-color: black;
+      padding: 0.3em 0.6em;
+      border-radius: 0.3em;
+      transition: .8s;
+      opacity: 0;
+      box-sizing: border-box;
+    }
+
+    [data-balloon]::after{
+      transition: .8s;
+      opacity: 0;
+    }
+    [data-balloon]:hover::before{
+      opacity: 1;
+    }
+    [data-balloon]:hover::after{
+      opacity: 1;
+    }
+
+    [data-balloon-pos="up"]::before{
+      left: 50%;/*无法使用margin auto的做法 因为伪元素与字体本身大小不相同*/
+      transform: translateX(-50%) translateY(8px);
+      bottom: 100%;
+    }
+
+    [data-balloon-pos="down"]::before{
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      top: 100%;
+    }
+
+
+
+
+
+    [data-balloon-pos="left"]::before{
+      top: 50%;
+      transform: translatey(-50%) translatex(8px);
+      right: 100%;
+    }
+    [data-balloon-pos="right"]::before{
+      top: 50%;
+      transform: translatey(-50%) translatex(-8px);
+      left: 100%;
+    } 
+
+    [data-balloon]::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 4px solid black;
+    }
+    [data-balloon-pos="up"]::after{
+      border-color: black transparent transparent;
+      left: 50%;
+      bottom: 100%;
+      transform: translateX(-50%) translateY(16px);;
+    }
+    [data-balloon-pos="down"]::after{
+      border-color:  transparent transparent black;
+      left: 50%;
+      top:100%;
+      transform: translateX(-50%) translateY(-16px);
+    }
+    [data-balloon-pos="left"]::after{
+      border-color:  transparent transparent transparent black;
+      top: 50%;
+      transform: translatey(-50%) translatex(16px);
+      left: -8px;
+
+    }
+    [data-balloon-pos="right"]::after{
+      border-color: transparent black transparent transparent;
+      top: 50%;
+      transform: translatey(-50%) translatex(-16px);
+      right: -8px;
+    }
+
+
+    [data-balloon-pos="up"]:hover::before{
+      transform: translateX(-50%) translateY(-8px);
+    }
+    [data-balloon-pos="up"]:hover::after{
+      transform: translateX(-50%) translateY(0);
+    }
     
+
+    [data-balloon-pos="down"]:hover::before{
+      transform: translateX(-50%) translateY(8px);
+    }
+    [data-balloon-pos="down"]:hover::after{
+      transform: translateX(-50%) translateY(-0);
+    }
+    
+
+    [data-balloon-pos="left"]:hover::before{
+      transform: translatey(-50%) translatex(-8px);
+    }
+    [data-balloon-pos="left"]:hover::after{
+      transform: translatey(-50%) translatex(0);
+    }
+
+    [data-balloon-pos="right"]:hover::before{
+      transform: translatey(-50%) translatex(8px);
+    }
+    [data-balloon-pos="right"]:hover::after{
+      transform: translatey(-50%) translatex(-0);
+    }
+    
+
+
+    [data-balloon-size="small"]::before{
+      width: 80px;
+    }
+    [data-balloon-size="medium"]::before{
+      width: 160px;
+    }
+    [data-balloon-size="large"]::before{
+      width: 240px;
+    }
+    [data-balloon-size="xlarge"]::before{
+      width: 380px;
+    }
+    [data-balloon-size="fit"]::before{
+      width: 100%;
+    }
+
+    /*size*/
+    [data-balloon]:not([data-balloon-pos])::before{
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      bottom: 100%;
+    }
+    [data-balloon]:not([data-balloon-pos]):hover::before{
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      bottom: 100%;
+    }
+    [data-balloon]:not([data-balloon-pos])::after{
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      top: -8px;
+      border-color:black transparent transparent  ;
+    }
+    [data-balloon]:not([data-balloon-pos]):hover::after{
+      transform: translateX(-50%) translateY(0);
+    }
+    /*size end*/
+
+
+
+
+
+
+    body{
+      border: 2px solid;
+    }
+    button{
+      display: block;
+      margin:100px auto;
+      background-color: red;
+      color: white;
+      height: 50px;
+      width: 160px;
+      border: none;
+    }
   </style>
 </head>
 <body>
-  <button></button>
-  <button></button>
-  <button></button>
-  <button></button>
-  <button></button>
-  <button></button>
-  <button></button>
-  <button></button>
+  <button data-balloon="what's up" data-balloon-pos="up">hello world</button>
+  <button data-balloon="what's up" data-balloon-pos="down">hello world</button>
+  <button data-balloon="what's up" data-balloon-pos="left">hello world</button>
+  <button data-balloon="what's up" data-balloon-pos="right">hello world</button>
+  <button data-balloon="what's up" data-balloon-size="small">hello world</button>
+  <button data-balloon="what's up" data-balloon-size="medium">hello world</button>
+  <button data-balloon="what's up" data-balloon-size="large">hello world</button>
+  <button data-balloon="what's up" data-balloon-size="xlarge">hello world</button>
+  <button data-balloon="what's up" data-balloon-size="fit">hello world</button>
 </body>
 </html>

@@ -1,56 +1,56 @@
 <script id="ch0103/01">
-  var a = +prompt("Please input the value of A:");
-  var b = +prompt("Please input the value of B:");
+  var a = +prompt("Please input A:");
+  var b = +prompt("Please input B:");
   console.log(a + b);
   </script>
 <script id="ch0103/02">
-  var a = +prompt("a")
-  var b = +prompt("b")
-  var c = +prompt("c")
+  var a = prompt("a")
+  var b = prompt("b")
+  var c = prompt("c")
   console.log((a + b) * c)
 </script>
 <script id="ch0103/03">
-  var a = +prompt("a")
-  var b = +prompt("b")
-  var c = +prompt("c")
-  console.log((a + b) / c)
+  var a = Number(prompt("a"))
+  var b = Number(prompt("b"))
+  var c = Number(prompt("c"))
+  console.log(parseInt((a + b) / c))
 </script>
 <script id="ch0103/04">
-  var a = +prompt("a")
-  var b = +prompt("b")
+  var a = prompt("a")
+  var b = prompt("b")
   var int = (a / b)|0
   var mod = (a % b)
   console.log(int)
   console.log(mod)
 </script>
 <script id="ch0103/05">
-  var a = +prompt("a")
-  var b = +prompt("b")
+  var a = prompt("a")
+  var b = prompt("b")
   var c = (a / b)
   console.log(c)
 </script>
 <script id="ch0103/06">
-  var a = +prompt("how many")
-  var b = +prompt("diediedie")
+  var a = prompt("how many")
+  var b = prompt("diediedie")
   var c = b / a * 100
   console.log(c + '%')
 </script>
 <script id="ch0103/07">
-  var x = +prompt("x")
-  var a = +prompt("a")
-  var b = +prompt("b")
-  var c = +prompt("c")
-  var d = +prompt("d")
+  var x = prompt("x")
+  var a = prompt("a")
+  var b = prompt("b")
+  var c = prompt("c")
+  var d = prompt("d")
   var y = ((a * Math.pow(x,3)) + (b * (x * x)) + (c * x) + (d * 1))
   console.log(y)
 </script>
 <script id="ch0103/08">
-  var y = +prompt("华氏度")
+  var y = prompt("华氏度")
   var c = (5 * (y - 32) / 9)
   console.log(c.toFixed(5))
 </script>
 <script id="ch0103/09">
-  var r = +prompt("半径")
+  var r = prompt("半径")
   var pi = 3.14159
   var d = (2 * r)
   var round = (2 * pi * r)
@@ -58,56 +58,56 @@
   console.log(d,round,s)
 </script>
 <script id="ch0103/10">
-  var r1 = +prompt("r1")
-  var r2 = +prompt("r2")
+  var r1 = prompt("r1")
+  var r2 = prompt("r2")
   var R = (1/((1/r1) + (1/r2)))
   console.log(R)
 </script>
 <script id="ch0103/11">
-  var a = +prompt("a")
-  var b = +prompt("b")
+  var a = prompt("a")
+  var b = prompt("b")
   var k = Math.floor(a / b)
   var y = (a / b - k)
   console.log(y)
 </script>
 <script id="ch0103/12">
-  var r = +prompt("r")
+  var r = prompt("r")
   var pi = 3.14
   var V = (4 / 3 * pi * Math.pow(r,3))
   console.log(V)
 </script>
 <script id="ch0103/13">
-  var renumber = +prompt("number")
+  var renumber = prompt("number")
   var a = parseInt(renumber % 10); /*取模10 个位*/
   var b = parseInt((renumber % 100) / 10);/*取模100再除10 十位*/
   var c = parseInt((renumber % 1000) / 100);/*取模1000再除100 百位*/
   console.log("" + a + b + c)
 </script>
 <script id="ch0103/14">
-  var h = +prompt("深")
-  var r = +prompt("半径")
+  var h = prompt("深")
+  var r = prompt("半径")
   var pi = 3.14159
   var R = (pi * r * r * h)
   var drink = (20*1000)
   console.log(Math.ceil(drink / R))
 </script>
 <script id="ch0103/15">
-  var apply = +prompt("阿婆")
-  var x = +prompt("多少小时吃一个呀！")
-  var y = +prompt("恰了多久啊！")
+  var apply = prompt("阿婆")
+  var x = prompt("多少小时吃一个呀！")
+  var y = prompt("恰了多久啊！")
   var ohno = (apply - Math.ceil(y / x))
   console.log(ohno)
 </script>
 <script id="ch0103/16">
-   var x1 = +prompt("x1") , x2 = +prompt("x2")
-   var y1 = +prompt("y1") , y2 = +prompt("y2")
+   var x1 = prompt("x1") , x2 = prompt("x2")
+   var y1 = prompt("y1") , y2 = prompt("y2")
    var a = Math.sqrt((Math.pow(x1 - y1 , 2)) + (Math.pow(x2 - y2 , 2)))
    console.log(a)
 </script>
 <script id="ch0103/17">
-  var x1 = +prompt("x1") , y1 = +prompt("y1")
-  var x2 = +prompt("x2") , y2 = +prompt("y2")
-  var x3 = +prompt("x3") , y3 = +prompt("y3")
+  var x1 = prompt("x1") , y1 = prompt("y1")
+  var x2 = prompt("x2") , y2 = prompt("y2")
+  var x3 = prompt("x3") , y3 = prompt("y3")
   var a1 = Math.sqrt((Math.pow(x1 - x3 , 2)) + (Math.pow(y1 - y3 , 2)))
   var a2 = Math.sqrt((Math.pow(x2 - x3 , 2)) + (Math.pow(y2 - y3 , 2)))
   var a3 = Math.sqrt((Math.pow(x1 - x2 , 2)) + (Math.pow(y1 - y2 , 2)))
@@ -116,24 +116,24 @@
   console.log(S)
 </script>
 <script id="ch0103/18">
-  var a1 = +prompt("a1")
-  var a2 = +prompt("a2")
-  var n = +prompt("n")
+  var a1 = prompt("a1")
+  var a2 = prompt("a2")
+  var n = prompt("n")
   var d = (a2 - a1)
   var S = (((n - 1) * d) + (a1 * 1))
   console.log(S)
 </script>
 <script id="ch0103/19">
-  var a = +prompt("a")
-  var b = +prompt("b")
+  var a = prompt("a")
+  var b = prompt("b")
   console.log(a * b)
 </script>
 <script id="ch0103/20">
-  var n = +prompt("mi")
+  var n = prompt("mi")
   console.log(Math.pow(2 , n))
 </script>
 <script id="ch0104/01">
-  var n = +prompt("number")
+  var n = prompt("number")
   if (n > 0){
     console.log("positive")
   } else if (n == 0){
@@ -143,7 +143,7 @@
   }
 </script>
 <script id="ch0104/02">
-  var n = +prompt("number")
+  var n = prompt("number")
   if (n > 0){
     console.log(n)
   } else{
@@ -151,7 +151,7 @@
   }
 </script>
 <script id="ch0104/03">
-  var n = +prompt("number")
+  var n = prompt("number")
   if (n % 2 === 0) {
     console.log("even")
   } else{
@@ -159,7 +159,7 @@
   }
 </script>
 <script id="ch0104/04">
-  var n = +prompt("ascii")
+  var n = prompt("ascii")
   var str = n.charCodeAt()
   if (str % 2 === 0) {
     console.log("NO")
@@ -168,7 +168,7 @@
   }
 </script>
 <script id="ch0104/05">
-  var x = +prompt("x") , y = +prompt("y")
+  var x = prompt("x") , y = prompt("y")
   if (x > y) {
     console.log(">")
   }else if (x == y){
@@ -178,10 +178,64 @@
   }
 </script>
 <script id="ch0104/06">
-  var n = +prompt("two")
-  if (10 <= n <= 99){
+  var n = prompt("two")
+  if (10 <= n && n <= 99){
     console.log("1")
   }else {
     console.log("0")
+  }
+</script>
+<script id="ch0104/07">
+  var x = prompt("lucky")
+  var y = prompt("干巴爹")
+  if (x < 10 || y < 20){
+    console.log("0")
+  } else {
+    console.log("1")
+  }
+</script>
+<script id="ch0104/08">
+  var n = Number(prompt("n"))
+  if (n % 3 == 0 && n % 5 == 0){
+    console.log("YES")
+  }else{
+    console.log("NO")
+  }
+</script>
+<script id="ch0104/09">
+  var n = Number(prompt("n"))
+  if (n % 3 == 0 && n % 5 == 0 && n % 7 ==0){
+    console.log("3 5 7")
+  } else if (n % 3 == 0 && n % 5 == 0){
+    console.log("3 5")
+  } else if (n % 3 == 0 && n % 7 == 0){
+    console.log("3 7")
+  } else if (n % 5 == 0 && n % 7 == 0){
+    console.log("5 7")
+  } else if (n % 3 == 0 ){
+    console.log("3")
+  } else if (n % 5 == 0 ){
+    console.log("5")
+  } else if (n % 7 == 0 ){
+    console.log("7")
+  } else {
+    console.log("n")
+  }
+</script>
+<script id="ch0104/10">
+  var x = Number(prompt("x"))
+  var y = Number(prompt("y"))
+  if (x < 60 || y < 60){
+    console.log(0)
+  } else{
+    console.log(1)
+  }
+</script>
+<script id="ch0104/11">
+  var x = Number(prompt("x"))
+  if (x % 2 === 0){
+    console.log("YES")
+  }else {
+    console.log("NO")
   }
 </script>

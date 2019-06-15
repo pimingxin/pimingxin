@@ -4,9 +4,9 @@
   console.log(a + b);
   </script>
 <script id="ch0103/02">
-  var a = prompt("a")
-  var b = prompt("b")
-  var c = prompt("c")
+  var a = +prompt("a")
+  var b = +prompt("b")
+  var c = +prompt("c")
   console.log((a + b) * c)
 </script>
 <script id="ch0103/03">
@@ -24,10 +24,10 @@
   console.log(mod)
 </script>
 <script id="ch0103/05">
-  var a = prompt("a")
-  var b = prompt("b")
+  var a = +prompt("a")
+  var b = +prompt("b")
   var c = (a / b)
-  console.log(c)
+  console.log(c.toFixed(9))
 </script>
 <script id="ch0103/06">
   var a = prompt("how many")
@@ -124,8 +124,7 @@
   console.log(S)
 </script>
 <script id="ch0103/19">
-  var a = prompt("a")
-  var b = prompt("b")
+  var a = prompt("a") , b = prompt("b")
   console.log(a * b)
 </script>
 <script id="ch0103/20">
@@ -238,4 +237,119 @@
   }else {
     console.log("NO")
   }
+</script>
+<script id="ch0104/12">
+  var m = Number(prompt("mi"))
+  if (((27 + 23) + m / 3) < (m / 1.2)){
+    console.log("Bike")
+  } else if (((27 + 23) + m / 3) > (m / 1.2)){
+    console.log("Walk")
+  } else{
+    console.log("All")
+  }
+</script>
+<script id="ch0104/13">
+  var n = Number(prompt("n"))
+  if (0 <= n && n < 5){
+    console.log((-n + 2.5).toFixed(3))
+  } else if (5 <= n && n < 10){
+    console.log((2 - 1.5 * (n - 3) * (n - 3)).toFixed(3))
+  } else if (10 <= n && n < 20){
+    console.log((n / 2 - 1.5).toFixed(3))
+  }
+</script>
+<script id="ch0104/14">
+  var k = Number(prompt("k")) , q = prompt("y or n ?")
+  if (q = y){
+    var m = Number(5)
+  } else {
+    var m = Number(0)
+  }
+  if (k <= 1000){
+    console.log(Number(8) + Number(m))
+  } else if((k - 1000) <= 500){
+    console.log(8 + 4 + m)
+  } else {
+    console.log(8 + Math.ceil(((k - 1000)) / 500)*4 + m)
+  }
+</script>
+<script id="ch0104/15">
+  var x = Number(prompt("x")) , y = Number(prompt("y")) , z = Number(prompt("z"))
+  if ((x > y) && (x > z)) {
+    console.log(x)
+  } else if (y > x && y > z){
+    console.log(y)
+  } else {
+    console.log(z)
+  }
+</script>
+<script id="ch0104/16">
+  var a = Number(prompt("a"))
+  var b = Number(prompt("b"))
+  var c = Number(prompt("c"))
+  if ((a + b > c) && ((a + c) > b) && ((b + c) > a)){
+    console.log("yes")
+  } else{
+    console.log("no")
+  }
+</script>
+<script id="ch0104/17">
+  var year = Number(prompt("year"))
+  if (year % 3200 == 0){
+    console.log("N")
+  } else if (year % 4 == 0 && (year % 400 == 0 || year % 100 == 1) || ((year % 3200) !== 0)) {
+    console.log("Y")
+  } else{
+    console.log("N")
+  }
+</script>
+<script id="ch0104/18">
+  var x = Number(prompt("x")) , y = Number(prompt("y"))
+  if ((Math.abs(x) <= 1) && ((Math.abs(y) <= 1))){
+    console.log("yes")
+  } else{
+    console.log("no")
+  }
+</script>
+<script id="ch0104/19">
+  var x = Number(prompt("x"))
+  var y = Number(prompt("y"))
+  var c = (prompt("c"))
+  if  (c === '+'){
+    console.log(x + y)
+  } else if (c === '-' ){
+    console.log(x - y)
+  } else if (c === '*' ){
+    console.log(x * y)
+  } else if (c === '/' && y === 0 ){
+    console.log("Divided by zero!")
+  } else if (c === '/'){
+    console.log(x / y)
+  } else {
+    console.log("Invalid operator!")
+  }
+</script>
+<script id="ch0104/20">
+  var a = Number(prompt("a")) ,b = Number(prompt("b")) , c = Number(prompt("c"))
+  var delta = (b * b - 4 * a * c)/*算出b平方加4ac的值*/
+  if (delta == 0) {
+    var x = Number((-b / 2 / a)).toFixed(5)
+    console.log('x1=x2= ' + x)
+  } else if (delta > 0 ){
+    var s_delta = Math.sqrt(delta)
+    var x1 = Number((-b + s_delta) / 2 / a).toFixed(5)
+    var x2 = Number((-b - s_delta) / 2 / a).toFixed(5)
+    console.log('x1=' + x1 + ';' + 'x2=' + x2)
+  } else{
+    var s_delta = Math.sqrt(-delta)
+    var x1 = (Number((-b) / (2 * a)).toFixed(5) + '+' + Number(s_delta / (2 * a)).toFixed(5) + 'i')
+    var x2 = (Number((-b) / (2 * a)).toFixed(5) + '-' + Number(s_delta / (2 * a)).toFixed(5) + 'i')
+    console.log('x1=' + x1 + ';' + 'x2=' + x2)
+  }
+</script>
+<script id="ch0104/21">
+  var n = Number(prompt("n"))
+  var x = Number(prompt("x"))
+  var y = Number(prompt("y"))
+  console.log(n - Math.ceil(y/x))
 </script>

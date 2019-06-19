@@ -1,0 +1,28 @@
+<script type="">/*a的n次方运算*/
+  var a = +prompt("a")
+  var n = +prompt("n")
+  if (n%2 == 0){
+    var f = Math.pow((Math.pow(a,n/2)),2)
+    console.log(f)
+  }else {
+    var f = (Math.pow((Math.pow(a, (n - 1)/2)),2)) * a
+    console.log(f)
+  }
+</script>
+<script type="">
+  var a = 883
+  var b = 255
+  a = a + b
+  b = a - b
+  a = a - b
+  //TODO
+  console.log(a,b)
+</script>
+<script type="">
+var n = +prompt("")
+for ( i = 0 ; n < 500; i++) {
+    var a1 = n % 5
+    var a2 = (n - a1) / 5 % 5
+    var a3 = ((n - a1) / 5  - a2) / 5 % 5
+}
+</script>

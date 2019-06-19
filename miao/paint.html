@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>画图</title>
+  <style>
+    canvas {
+      border: 2px solid #f0f;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="400" height="300"></canvas>
+</body>
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.style.imageRendering = 'pixelated'
+  var ctx = canvas.getContext('2d')
+
+  function dot(x, y, color = 'black') {
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 1, 1)
+  }
+  /**
+   * YOUR TASK
+画图的题：
+画一条实线 V
+画一条一个实点一个空点的虚线 V
+画一条两个实点两个空点的虚线 V
+画一条三个实点两个空点的虚线 V
+画一条45度的斜线 V
+画一条跨越画布左上角和右下角的对角线 V
+画一个空心矩形 V
+画一个实心矩形 V
+画一个rgb色彩空间的某一面 X
+画一个空心的圆 V
+画一个实心的圆 V
+画一个大小合适的sin(x)的图像 V
+   */
+</script>
+<script>
+  // YOUR CODE GOES BELOW
+  //实线
+  for (var i = 0 ; i < 404 ; i++){
+    dot(i,50,'black')
+  }
+  //虚线
+  for (var i = 0 ; i < 404 ; i++){
+    dot( i - i%2 , 100 , 'red')
+  }
+
+  //二实二虚
+  for (var i = 0; i < 404 ; i+=4){
+    dot(i ,150 , 'black')
+    for (var j = i + 1 ; j < 404 ; j+=4){
+      dot( j  , 150 , 'black')
+    }
+  }
+  //三实二虚
+  for (var i = 0; i < 404 ; i+=5){
+    dot(i , 250 , 'black')
+    for (var j = i + 1 ; j < 404 ; j+=5){
+      dot( j , 250 , 'black')
+      for (var f = j + 1 ; f < 404; f+=5)
+      dot(f,250,'black')
+    }
+  }
+  //45°
+  for (var i = 0 ; i < 404 ; i++){
+    dot( i , i , 'red')
+  }
+  
+  //对角
+  for (var i = 0 ; i < 404 ; i++){
+    dot( i ,(3/4)* i , 'red')
+  }
+  
+  //矩形
+  for (var i = 100 ; i < 200 ; i++){
+    dot(i/2,200,'black')
+  }
+  for (var i = 100 ; i < 200 ; i++){
+    dot(100,i,'red')
+  }
+  for (var i = 100 ; i < 200 ; i++){
+    dot(i/2,100,'blue')
+  }
+  for (var i = 100 ; i < 200 ; i++){
+    dot(50,i,'tan')
+  }
+  //实心矩形
+  for (var i = 150 ; i < 200 ; i++){
+    for (var j = 100 ; j < 150 ; j++){
+      dot(i,j,'red')
+    } 
+  }
+  //rgb色彩空间
+  var a = ""
+  /*for (var i = 200 ; i < 400 ; i++){
+    for (var j = 200 ; j < 400 ; j++){
+      dot(i,j,'rgba(255,255,255,)')
+    }
+  }*/
+  //空心圆
+  for (var i = 0 ; i < 360 ; i++){
+    dot((50*Math.cos(i*Math.PI/180))+180,(50*Math.sin(i*Math.PI/180))+180,'black')
+  }
+  //实心圆
+  for (var i = 0 ; i < 360 ; i++){
+    dot((40*Math.cos(i*Math.PI/180))+150,(40*Math.sin(i*Math.PI/180))+150,'black')
+    for (var j = 0 ; j < 40 ; j++)
+    dot((j*Math.cos(i*Math.PI/180))+150,(j*Math.sin(i*Math.PI/180))+150,'black')
+  }
+  //sin
+  for (var i = 0 ; i < 720 ; i++){
+    dot(i/3,100-Math.sin(i*Math.PI/180)*50)
+  }
+  
+</script>
+</html>

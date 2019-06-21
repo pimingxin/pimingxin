@@ -1,0 +1,114 @@
+01. 垂直居中
+02. 基线 x的最下方的两个点的延长连接线
+03. static 页面默认 如不设置其他值 就为static 
+    absolute 绝对定位 脱离常规流
+    reletive 相对它上一个定位了的父元素定位 如果没有的话就相对于视口定位
+    sticky 粘性定位 一直相对于视口定位
+    inherit 从父元素继承
+04. 是离其最近的定位父元素或定位祖先元素
+05. ul li ul li ;;;;; ul里的ul 隐藏 hover 的时候 显示出来
+06. 
+  <div>
+  `<before></before>` 
+  <h1>The article</h1>
+  <p>the quick brown fox</p>
+  `<after></after>`
+  </div>
+07. 利用unicode的转义字符"\000A" content:"\000A"
+08. ease ease-in ease-out ease-in-out
+    linear cubic-bezier(x,y,z,x)
+    step-start step-end steps(4,end)
+    inherit 
+09. 画不出来
+10. 可渐变的一般都是存在的 透明度 而不可渐变的属性都是 从不存在到突然存在
+11. cursor: not-allowed;
+12. 如果不添加的话 会以怪异模式对页面进行渲染
+13. aria role  提升页面可读性
+14. omit 删除
+    multiople 复合 倍数
+    驼峰式  camel case 
+    中划线式 line-through
+    layout 布局
+    typo 错误
+    code review 代码可读性
+    半径 radius
+    config 设置
+    集合 assembly
+    矩形 rect
+    binaryx 二进制
+    decimal 十进制
+    十六进制 heximal
+    八进制 oct
+    SEO 搜索引擎优化
+    HTML实体 HTML entity
+    语义化 Semanticization
+    兼容性 compatibility
+    quirk 怪异
+    reference 参考
+    大小写敏感 Case Sensitive
+    别名 another name
+15.
+16.
+17. + - * / % >> ! ` ^ & $ | || && 
+18. true为真值 1 '' 是为空 !!''为false是因为经过了布尔值取反再取反
+19. 
+20. 清除浮动 就是clear  闭合浮动就是触发BFC 他们的联系是都是清除浮动产生的副作用
+    其副作用就是高度坍塌 触发BFC比clear好
+21. 
+22. 是CSS图片合成技术 因为在渲染网页的时候 不使用Sprite会导致网页多次加载图片 、
+    优点：请求文件少、提升性能；   缺点：调用困难、维护不方便； 
+23. 行内块元素 对于外部元素来说是行内元素 对于其后代元素来说是块级元素 ////
+24. 单纯的使用color是改变其字体颜色 如果想改变背景色或者其他 需要在color前面增加对应的关键字
+25. 
+26. display table-cell text-algin:center  vertical-align middle
+    display inline-flex justify-content:center; align-items: center;
+    position absolute left 50% top 50% margin -(width/2)px  0 0 -(width/2)px 要有父元素
+    position absolute left 0 top 0 margin auto 要有父元素
+    top: 50%; left: 50%; transform: translate(-50%, -50%);  CSS3
+27. 改变vertical-algin的值 可以改变baseline的位置 最高点是super 最低点是sub
+28. 
+29. ```
+<style>
+  div::after：hover {
+    opacity: 85%；
+    transition: opactiy .3s step(5,end);
+  }
+  a:visited {
+    font-size: 28px;
+  }
+</style>
+<div>
+  <a href="jd.com”京东商场<a>
+  <a href="mi.com”>小米网<a>
+</div>
+```
+    after后面的冒号是全角的冒号 opacity: 85% 后面的;是全角的 
+    transition 如果要使用step的话 要写成transition-timing-function: steps(5, end)
+    :visited 由于隐私问题 不能设置字体大小
+    jd.com和mi.com后面的双引号是全角的 a的结束标签没有/
+
+30.
+31. vertical-align sub super text-top text-bottom middle
+32. 
+33. overflow : hidden display : inline-block position : absolute
+34. 
+35. 
+36. 常规流 元素按自身的display进行流动 包含块 一般由content border padding 构成
+37. Twitter的每张小的图的速度0.4666 linear 如果不用线性移动的话 会导致图片错位
+38. type 是选择类型 last type从后面开始数 最后一个这种类型的 first-of-type 第一个类型的 last-of-type 最后一个类型的
+39. background-color background-image 
+40. box-shadow:1px 0px 0px blue;
+41. visibility:hidden 保留位置 
+    display: none 不保留位置 元素脱离常规流
+    opacity: 0 保留位置 元素不脱离常规流
+42. 
+43. 元素末尾没有换行符
+44. none inherit inline block table-cell flex inline-block inline-block inline-flex 
+45.
+
+46. 
+47.
+48. 
+49. https://www.test.example.com/path/c.css
+50. 
+51. 

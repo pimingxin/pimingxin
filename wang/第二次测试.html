@@ -1,72 +1,172 @@
 01. 垂直居中
+
+行内布局：
+  元素的行内框的垂直中点与匿名文本的x字符的中点对齐
+表格：
+  当用在表单元格上时表单元格的内容垂直居中
+
 02. 基线 x的最下方的两个点的延长连接线
+为了方便讨论 有时也会为一些元素指定基线 
+行内元素 
+文本内容的基线 
+行内块元素
+  有内容 
+行内替换元素 margin-box的下边缘
+
 03. static 页面默认 如不设置其他值 就为static 
+元素处于常规流 不定位
     absolute 绝对定位 脱离常规流
+元素脱离常规流 相对于最近的定位祖先
+如无法找到定位祖先 则相对于第一屏定位 /页面定位 会随着滚动条滚动
     reletive 相对它上一个定位了的父元素定位 如果没有的话就相对于视口定位
+元素处于常规流 相对于自身原来的位置定位
     sticky 粘性定位 一直相对于视口定位
+元素在视口内时 不定位 
+元素的某一方向从视口的对应方向离开时 fixed定位 
+包含块的某一方向将从视口完全离开时 元素该方向为absolute定位
+
+    fixed
+元素脱离常规流 相对于视口定位 
     inherit 从父元素继承
 04. 是离其最近的定位父元素或定位祖先元素
+是其布局盒子 margin-box
 05. ul li ul li ;;;;; ul里的ul 隐藏 hover 的时候 显示出来
+
+级联菜单的形式 实际上是树状结构
+同时又有同类项
+列表嵌套
+子菜单通过定位定到父菜单项的相应位置
+
 06. 
-  <div>
-  `<before></before>` 
+  <div>`<before></before>` 
   <h1>The article</h1>
   <p>the quick brown fox</p>
-  `<after></after>`
-  </div>
+  `<after></after>`</div>
 07. 利用unicode的转义字符"\000A" content:"\000A"
 08. ease ease-in ease-out ease-in-out
     linear cubic-bezier(x,y,z,x)
     step-start step-end steps(4,end)
     inherit 
+
+
+    缓动函数指元素在渐变时的 时间-进度 曲线
+    定义了如下关系progress = f(time )
+
+    通过一条贝塞尔曲线来确定
 09. 画不出来
 10. 可渐变的一般都是存在的 透明度 而不可渐变的属性都是 从不存在到突然存在
+
+一般情况下 可渐变属性的值都为数值可以连续变化
+离散变化的关键字属性一般不能渐变
+但也有例外 如z-indexvisibility
+background-size contain cover
+
+
+
 11. cursor: not-allowed;
+    pointer-events:none;
+    user-select:none;
 12. 如果不添加的话 会以怪异模式对页面进行渲染
+元素的盒模型默认为border-box
 13. aria role  提升页面可读性
-14. omit 删除
-    multiople 复合 倍数
+
+让浏览器告诉读屏软件该元素当前是什么交互元素及状态
+
+
+14. omit 删除  忽略
+    multiople 复合 倍数 多个
     驼峰式  camel case 
-    中划线式 line-through
+    中划线式 line-through kabab case 
     layout 布局
-    typo 错误
-    code review 代码可读性
+    typo 拼写错误
+    code review 代码可读性 代码审查
     半径 radius
-    config 设置
-    集合 assembly
-    矩形 rect
+    config 设置 配置
+    集合 assembly set collection
+    矩形 rectangle
     binaryx 二进制
     decimal 十进制
-    十六进制 heximal
-    八进制 oct
-    SEO 搜索引擎优化
+    十六进制 hexdecimal
+    八进制 octect
+    SEO 搜索引擎优化 
     HTML实体 HTML entity
     语义化 Semanticization
     兼容性 compatibility
     quirk 怪异
-    reference 参考
+    reference 参考 引用 
     大小写敏感 Case Sensitive
-    别名 another name
-15.
+    别名 another name  alias 
+15. 80 160 
 16.
-17. + - * / % >> ! ` ^ & $ | || && 
+17. + - * / % >> ! ` ^ & $ | || && ?: typeof 
 18. true为真值 1 '' 是为空 !!''为false是因为经过了布尔值取反再取反
+
+真假性判断 相等性判断
 19. 
 20. 清除浮动 就是clear  闭合浮动就是触发BFC 他们的联系是都是清除浮动产生的副作用
     其副作用就是高度坍塌 触发BFC比clear好
-21. 
-22. 是CSS图片合成技术 因为在渲染网页的时候 不使用Sprite会导致网页多次加载图片 、
+
+
+    清除浮动 
+      元素下移直到某一边或两边没有浮动元素 不与浮动元素重叠 不考虑负margin
+    闭合浮动
+      元素高度扩张 以包裹其所有的浮动子元素
+
+    联系 
+    有些闭合浮动的办法会用到清除浮动来实现
+21. li因为感知不到浮动元素 
+    所以高度并不是浮动元素的高度而是由列表项标号撑起
+    每个浮动元素要尽量高 但不能高过自己的包含块的内容区的最高点
+    所以每个浮动元素垂直方向的开始位置即在每个li的内容区开始位置
+    又因为每个浮动元素比li高会渲染到下一个li的区域影响到下一个li里的浮动元素 让其无法出现在最左的位置
+22. 是CSS图片合成技术 因为在渲染网页的时候 不使用Sprite会导致网页多次加载图片 
     优点：请求文件少、提升性能；   缺点：调用困难、维护不方便； 
 23. 行内块元素 对于外部元素来说是行内元素 对于其后代元素来说是块级元素 ////
+
+从外面看它是一个行内元素 
+从里面看它是一个块元素
+考虑元素自身位置时 当成行内元素
+考虑元素的子元素时 相当于子元素
+
+
 24. 单纯的使用color是改变其字体颜色 如果想改变背景色或者其他 需要在color前面增加对应的关键字
-25. 
+
+
+不少属性在不指定颜色时 都会取color属性为其颜色 如边框 阴影
+
+css3中的currentcolor 可以如何其他属性中区color的值
+默认是继承的
+25. em框 
+      文字框 高度由字号确定
+
+    内容区
+      多个em框组成
+    行内框
+      inline元素 line height框
+      inline-block margin-box
+      行内替换元素 margin-box
+
+    行框 
+      包含该行所有行内框的最小框
 26. display table-cell text-algin:center  vertical-align middle
     display inline-flex justify-content:center; align-items: center;
     position absolute left 50% top 50% margin -(width/2)px  0 0 -(width/2)px 要有父元素
     position absolute left 0 top 0 margin auto 要有父元素
     top: 50%; left: 50%; transform: translate(-50%, -50%);  CSS3
 27. 改变vertical-algin的值 可以改变baseline的位置 最高点是super 最低点是sub
+
+
+对于行内元素
+垂直方向的margin padding border都对布局元素最多只有视觉效果
+最高点和最低点分别就是line-height框最高点和最低点
+baseline由文字确定
+
+
+块元素 
+上下margin可能影响行内框的高度
+baseline由最后一行的内容的baseline确定没有高度的话以margin-box的下边缘确定
 28. 
+单元格 行 行组 列 列组 表 
 29. ```
 <style>
   div::after：hover {
@@ -81,34 +181,296 @@
   <a href="jd.com”京东商场<a>
   <a href="mi.com”>小米网<a>
 </div>
-```
+``` 
+    伪元素不能hover
     after后面的冒号是全角的冒号 opacity: 85% 后面的;是全角的 
-    transition 如果要使用step的话 要写成transition-timing-function: steps(5, end)
+    opacity不能为百分比
+    opacity拼错了
+    transition step 后面要加上s 
     :visited 由于隐私问题 不能设置字体大小
+    http://
     jd.com和mi.com后面的双引号是全角的 a的结束标签没有/
 
-30.
+30.     61
 31. vertical-align sub super text-top text-bottom middle
+
+
+
 32. 
-33. overflow : hidden display : inline-block position : absolute
+33. overflow : hidden display : inline-block 
+display : flow-root
+position : absolute
+float:left
+display:table 
 34. 
-35. 
+table-layout
+caption-side
+border-collapse
+border-space
+empty-cells
+35. 常规流 最近的块级祖先
+    定位元素
+      absolute 最近的定位祖先
+      fixed 视口
+      relative 常规流
+    浮动元素
+      同常规流
+    html元素
+      视口
 36. 常规流 元素按自身的display进行流动 包含块 一般由content border padding 构成
+
+
+常规流 
+  文档正常从上往下 从左往右的流向 后面的跟着前面的正常情况下不会产生重叠
+包含块
+  元素的布局上下文 元素的布局仅由其自身属性 包含块的位置和大小决定
 37. Twitter的每张小的图的速度0.4666 linear 如果不用线性移动的话 会导致图片错位
+动画正好有28张需要播放 即28帧 
+一般显示器刷新率是60帧 即0.016s一帧
+让图片以0.4666s且匀速运行 在浏览器准备绘制他的时候它正好移动到某一张的位置上 
 38. type 是选择类型 last type从后面开始数 最后一个这种类型的 first-of-type 第一个类型的 last-of-type 最后一个类型的
 39. background-color background-image 
+origin 
+clip 
 40. box-shadow:1px 0px 0px blue;
-41. visibility:hidden 保留位置 
-    display: none 不保留位置 元素脱离常规流
-    opacity: 0 保留位置 元素不脱离常规流
+使用负的扩散半径
+41. visibility:hidden 保留位置 元素消失 不可交互
+  后代如果设置了bisibility 是可以见到的
+    display: none 不保留位置 元素脱离常规流 不可交互
+    opacity: 0 保留位置 元素不脱离常规流 可交互
 42. 
+:checked
+:focus
+:required (必填项) :optional
+:valid :invalid
+:in-range :out-out-range
+:disabled :enabled
+:selected
 43. 元素末尾没有换行符
+方便下次编辑时光标定位
+文件拼接时不会把上一个文件的最后跟下一个文件拼成一整行
+
+更友好的git diff信息
+  回车是被算在前一行的末尾的
+  如果只是在最后一行继续加东西那么diff是不会显示旧的最后一行的变化
+  因为在diff看来 旧的最后一行的内容是没变的
 44. none inherit inline block table-cell flex inline-block inline-block inline-flex 
 45.
 
-46. 
-47.
-48. 
+46. div {
+  background-position:left 3px bottom 5px;
+  background-repeat:no-repeat;
+}
+47. headers规定表头与单元格的联系
+48. mkdir a 
+    cd a
+    touch a/readme.md
+    mkdir foo
+    mkdir foo/c
+    mkdir bar 
+    cd bar
+    touch a.txt
+    touch b.txt
+    mkdir y
+    youch y/a.js
+
 49. https://www.test.example.com/path/c.css
 50. 
 51. 
+52. hidden 一定没有边框
+    none 优先级最低
+    粗细
+    样式 double ridge solid dashed
+    来源 td tr tbody col colgroup table 
+53. linear 线性
+54. 它或者它的后代元素可以获得焦点 可被focus 去掉focus的虚框 outline:none
+tabindex='2'
+55. IE条件注释hack  浏览器引擎前缀 不同浏览器内核的浏览器在编译的时候 前缀不同很有可能不生效 条件注释只有在IE浏览器下才能执行，这个代码在非IE浏览下被当做注释视而不见。可以通过IE条件注释载入不同的CSS、JS、HTML和服务器代码等。 
+目的是为了与正常的属性区分
+56. 不使用固定长度单位 因为页面是多变的 固定了长度单位对响应式界面或者动态的页面不好
+因为并不精确
+因为要想让这些单位精确的显示在屏幕上
+浏览器需要知道操作系统分辨率和显示器的分辨率和显示其的物理尺寸
+而这些信息不一定能准确拿到
+
+显示器是基于像素的
+57. 
+sigma(0,无穷大,(mul(division(pow(-1,n),factorial(add(mul(2,n),1))),pow(x,add(mul(2,n),1))))
+
+
+58. CSS自定义字体 生成字体图标 缺点是因为兼容性的问题 不同的浏览器需要加载不同格式的字体，所以使用字体图标起码要加载4种字体
+优点 体积小 图标多 单文件
+     矢量图 放大不失真
+     颜色多变
+
+缺点 一个图标只能整体是一个颜色
+     无法支持动画图标
+59. 移动端开发 针对不同屏幕的大小来设置不同页面字体或页面的布局 
+
+指定页面在手机上渲染时 初始包含块的宽度是多少
+
+最终页面显示在手机上时 手机屏幕的宽度即为包含块
+跟手机屏幕的物理分辨率无关 
+
+严格按比例还原视觉稿布局
+5.0以下  html元素的字号设置100vw/视觉稿宽度 然后页面内容rem单位开发
+5.0以下不支持calc及vw所以用js
+计算并设置
+5.0以上 直接将 viewport上设置为视觉稿宽度
+页面使用px开发
+
+页面内容与屏幕大小呈正相关
+
+viewport设置为device-width
+页面使用px+流式布局开发
+
+
+60. FOUC无样式内容闪烁 使用link顺序加载 或者先用css预留位置
+不使用css的import指令
+如果是网速太慢造成的 把首页或首屏的css直接写在html代码里
+
+61. white-space:nowarp;
+    text-overflow:ellipsis;
+    overflow:hidden;
+62. resize: none;
+63.   <style>
+    div{
+      width: 100px;
+      height: 100px;
+      line-height:100px;
+      margin:100px;
+      background-color: red;
+      text-align:center;
+    }
+    .half-circle{
+      border-radius:100px 100px 0 0;
+      height:50px;
+    }
+    .border-half-circle{
+      border-radius:100px 100px 0 0;
+      height:50px;
+      background-color: rgba(0,0,0,0);
+      border:1px solid;
+    }
+  </style>
+<body>
+  <div class="half-circle">实心半圆</div>
+  <div class="border-half-circle">空心半圆</div>
+</body>
+64. 
+
+reflow relayout 回流
+浏览器会重新计算页面的布局
+特点 因为要计算布局 速度上相对较慢
+一些动画如果使用布局属性来完成的话 可能会比较卡顿 
+
+repaint 重绘
+浏览器会重新绘制页面
+特点 因为不需要重新计算布局 所以速度相对较快 
+能用重绘实现的动效 都用出重绘实现
+如果不能也尽量选择23d变换 
+因为23d变换 也仅涉及重绘 因为变换是将布局结果光栅化以后再执行像素表换 
+
+什么叫光栅化
+  即将元素绘制成为一个个像素点的过程即为光栅化
+
+
+
+65. 可能会造成所有元素都有缓动的效果
+
+可能会触发布局属性的渐变 继而在短时间内触发多次回流 造成页面卡顿
+66. 步进 一共走10步 从开头走到结尾
+将动画分为10次执行 在每次时间片结束时 执行十分之一进度突变
+67. 如果为负的时候 假设如果是负1秒 动画会在执行前先走一秒然后再开始
+也可以用在animation
+68. div{
+  column-count:2
+}
+h2{
+  column-span:all
+}
+73. :only-child 某个父元素的唯一一个子元素
+    :only-of-type 任意一个元素，这个元素没有其他相同类型的兄弟元素
+    :first-of-type 一组兄弟元素中其类型的第一个元素
+    :last-of-type 一组兄弟元素中其类型的最后一个元素
+    :nth-of-type 一组兄弟元素中其类型的指定 从头开始数起元素
+    :nth-last-of-type 一组兄弟元素中其类型的指定 从后开始数起元素
+    :not() 同组元素中 除了这个元素以外的其他元素
+    :checked 选中任何处于选中状态下的元素
+    :disabled 任何被禁用的元素。如果一个元素不能被激活（如选择、点击或接受文本输入）或获取焦点，则该元素处于被禁用状态。元素还有一个启用状态（enabled state），在启用状态下，元素可以被激活或获取焦点。
+    :enabled  任何启用的（enabled）元素。如果一个元素能够被激活（如选择、点击或接受文本输入）或获取焦点，则该元素是启用的。元素还有一个禁用的状态（disabled state），在被禁用时，元素不能被激活或获取焦点
+    :valid 内容验证正确的<input> 或其他 <form> 元素。这能简单地将校验字段展示为一种能让用户辨别出其输入数据的正确性的样式。 
+    :invalid 任意内容未通过验证的 <input> 或其他 <form> 元素 . 
+    ::selection 应用于文档中被用户高亮的部分（比如使用鼠标或其他选择设备选中的部分）
+74. var x 9后面的全角逗号应该是半角的反括号)
+    for里面要有两个分号 第二个分号是逗号
+    if 里面的大于等于应该是>= 不是=> else if 的也是这个问题 第二个else if 里面没有条件 最后一个else不能直接用 前面要有if语句 一个if 对应一个else 
+75. var isLeapYear = funcition(num){
+    if (num%4==0 && num%100!=0 && num%400==0 && num%3200!=00){
+      return: true
+    }
+    return:false
+  }
+  if (isLeapYear(2000)){
+    console.log("Yes!")
+  }
+76. 
+77. 520 NaN
+78. 在上一段是括号结尾的情况下要加
+79. 379
+80. 可以引入各种自定义字体 
+    字体变量
+81. 屏幕宽高
+    屏幕的比例
+    屏幕的像素比
+    屏幕的方向
+82. -88  56
+
+83. reset
+      重制一些元素的样式为开发者希望的
+    normalize
+      让不同浏览器显示页面时尽量相同 它内容主要是吧浏览器不同的地方
+84. 
+与或非
+异或 同或 与非 或非
+规律 
+  结合律
+  交换率
+  幂等率
+  摩根率
+85.
+
+
+
+
+86.h1::before{
+  content:'《'
+}
+
+h1::after{
+  content:'》'
+}
+
+87.不动点理论
+
+  在一个地区看这个地区的地图 地图上一定有一个点跟其所在此地区的世纪点是完全重合的 而且这个点
+
+  88.
+  89. 先定义大小合适
+
+  90. time datetime="2019-06-23"昨天time
+  91. 提供给运算符的值的类型不满足运算符的要求时
+
+
+
+  92. 不能 关键字不能作为变量名
+
+
+  93.for switch while do while 
+
+  94. 返回c的值之后把c自增1
+      ++c 先把c自增1再返回c的值
+  95. 
+
+
+  96. 

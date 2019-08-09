@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="http://xieranmaya.coding.me/other/lena.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .dot{
+      position: absolute;
+      height:3px;
+      width:3px;
+    }
+  </style>
+  
+</head>
+<body>
+  
+  <script>
+    lena.map((x,k) => {
+    x.map((e,j) => {
+        document.write("<div class='dot' style='transform:translate3d("+ 2*j + "px," + 2*k + "px,0px);background-color:rgb(" + e.join(',') + ")'></div>")
+    })
+})
+//style是一整个 符号的使用
+  </script>
+
+</body>
+</html>

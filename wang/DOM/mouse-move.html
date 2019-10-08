@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>mousemove</title>
+  <style>
+    body{
+      width: 1000px;
+      height: 1000px;
+    }
+    .a,.b,.c{
+      width: 50px;
+      height: 50px;
+      position: absolute;
+    }
+    .a{
+      background-color: pink;
+    }
+    .b{
+      background-color: red;
+    }
+    .c{
+      background-color: blue;
+    }
+  
+  
+  </style>
+</head>
+<body>
+  <div style="top: 0;left: 0;" class="a nmsl"></div>
+  <div style="top: 0;left: 0;" class="b nmsl"></div>
+  <div style="top: 0;left: 0;" class="c nmsl"></div>
+  <script>
+    var maxZ = 5 // 设置index
+
+    window.addEventListener('mousedown',e =>{
+      if (e.target.matches('.nmsl')){//触发事件的元素的类名为.nmsl的元素
+
+        var movinEl = e.target //获取到触发事件的元素
+
+        movinEl.style.zIndex = maxZ++ //触发事件的元素的zIndex属性为maxZ不断累加
+        
+        var mouseInitX = e.pageX // 获取鼠标在页面的位置 记录鼠标初始位置
+        var mouseInitY = e.pageY
+
+        var elInitX = parseInt(movinEl.style.left)//元素初始位置
+        var elInitY = parseInt(movinEl.style.top)
+
+        var move
+
+        window.addEventListener('mousemove', move = function move(e){//不设置匿名函数是因为后面需要取消绑定
+          if (e.buttons == 0) {//如果当前鼠标未点击
+            window.removeEventListener('mousemove',move) //取消绑定
+          }
+          event.preventDefault()
+          var diffX = e.pageX - mouseInitX //判断两次鼠标移动的差值 鼠标的偏移量减去鼠标初始的位置
+          var diffY = e.pageY - mouseInitY
+          
+          //元素的位置就等于元素的初始位置加上偏移的位置
+          var left = elInitX + diffX
+          var top = elInitY + diffY
+
+          if (left < 50){ //防止元素超出页面外
+            left = 0
+          }
+          
+          if (left > innerWidth - 50){//防止元素超出页面外 innerWidth页面的总宽度
+            left = innerWidth - 50
+          } 
+
+          if (top < 50) {
+            top = 0
+          }
+
+          if (top > innerHeight - 50){
+            top = innerHeight - 50
+          }
+
+          movinEl.style.left = left + 'px'//设置到style属性上
+          movinEl.style.top = top + 'px'
+        })
+
+        window.addEventListener('mouseup',()=>{
+          window.removeEventListener('mousemove',move)
+          })
+        }
+    })
+  
+  </script>
+</body>
+</html>

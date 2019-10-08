@@ -1,0 +1,301 @@
+是一个JS的运行环境 
+
+语言自带的标准库 不带输入输出
+
+mongoDB 可通过JS操作的数据库
+
+使用Chrome的V8引擎 性能高  Edge Chakala
+
+node作用
+高性web服务器
+前端构建/前端工程化
+转义 es6 - es5 less/sass - css
+压缩 混淆
+最主要的手段是通过改变形参的名字
+打包
+爬虫 命令行工具
+Electron(VS Code,Atom)
+
+VS Code就是Electron
+
+code ------read-----
+
+TCP线程
+
+同步异步 对应点餐系统的不同
+
+选中数据已经准备好了的人  select
+在若干个网络请求中 选中已经准备好了的请求
+
+没有异步的软件 及时显示需要显示的代码
+
+
+阻塞 非阻塞 多线程 异步 
+
+I/O 
+
+异步的底部是由多线程实现的
+
+node版本号
+
+node每年的 4 和 10 月份 发布一个大的版本号
+
+基数版本 维护周期短
+
+偶数版本 维护周期长 
+
+在上一个偶数版本被替代后 上一个偶数版本 LTS 
+
+大约维护2.5年左右
+
+
+
+.help
+.break 取消连续输入 
+.clear 别名 
+.save 保存到文件
+.editor 大批量代码 编辑 
+.load 将js文件加载到node
+在交互式命令行中运行 
+
+退出状态码
+
+process.exit(0)
+
+process.argv[2]
+
+全局window在node中为global
+
+调试
+node --inspect-brk xxxx.js process.argv[2]
+
+//-brk 暂停在第一行 
+
+-brk后面跟着=8899 会切换到8899端口
+
+-brk=0.0.0.0:9090监控所有网卡的9090端口
+
+ndb
+
+npm i -g ndb
+
+ndb node --inspect 
+
+exports require module 
+
+__filename文件的完整路径 __dirname文件夹的完整路径
+
+
+导出模块 
+
+module.exports = 
+
+改变exports
+exports = module.exports = xxx
+
+node_modules 文件夹
+package.json
+main.js
+
+or
+node_modules
+index.js
+
+如果有package.json 在里面找main的字段 
+然后查找index.js
+
+require
+
+找不到的话 会往爸爸上找
+
+
+fs 
+
+第一个参数 文件名 第二个 编码方式 第三个 回调
+
+在函数后面挂Sync
+
+
+stat
+isSocket 是否是网络连接
+isFile 
+isFIFO 是否先进先出
+isSymbolicLink 是否为快捷方式
+
+
+TLDR 
+
+ln .txt .txt
+link .txt .txt
+
+硬连接和软连接的区别 硬连接都连接在目标文件 软连接链式连接 删除的时候会有不同
+
+ls -l
+第一页第一个字符为文件类型 后面字符为每三个一组 r读w写-不可执行 
+第一组 当前操作 第二组 上一层 第三组 超级用户
+
+chmod 改变权限 
+
+chmod 667 x.js
+
+
+用户名 用户组 
+
+文件大小 创建时间 文件名 
+
+dropbox
+
+带f开头的
+
+fd file Descriptor 文件描述符
+
+fd是一个整数 由open返回
+
+fd = fs.openSync(.txt , 'r')
+
+b = Buffer.alloc(20)
+
+fs.read(fd,b,5,10,15,()=>{} )
+
+需要被关闭
+
+fs.close(fd,()=>{})
+
+async function 函数{
+	var a = await Promise
+	
+}
+
+forEach 是不能感知异步函数的
+
+path
+
+路径分割符（分割）
+
+linux echo $path
+
+windows echo %path%
+
+path.basename('//.xxx','.xxx')
+path
+
+path.delimiter('//.xxx','/xxx')
+.xxx
+
+path.extname('//.xxx')
+.xxx
+
+path.parse('//')
+{}
+序列化
+path.format('//')
+反序列化
+
+path.isAbsolute('//')
+true or false
+
+path.join('/'.'/')
+不能是数组
+
+path.normalize(path)
+化简为最简
+
+path.relative(from,to)
+
+
+path.resolve([...paths])
+
+
+path.sep()
+分隔符
+
+util
+
+util.format()
+
+util.getSystemErrorName()
+
+URL
+
+u = new URL
+
+query = 
+
+
+
+
+
+Buffer 模块 不需要require
+
+构造方法 与 实例方法
+
+创造buffer 
+
+b = Buffer.alloc(10)
+
+c = Buffer.allocUnsafe(10)
+
+d = Buffer.from('我')
+
+e = Buffer.from('FF3095','hex')
+
+Array.from(e)
+
+f = Buffer.from('5oiR','base64')
+
+Buffer.compare() 返回布尔
+
+Buffer.concat()返回新buffer
+
+Buffer.byteLength('5oiR','base64')
+
+uint 无符号整数
+
+int 带符号整数
+
+
+b = new ArrayBuffer(16)
+
+c = new Int16Array(b) 
+
+
+
+Child Processes
+
+cp = child_process.exec('md5sum.exe',(err,stdout) => {
+	console.log()
+})
+
+
+
+cp.stdin.write('hello')
+
+
+cp.stdin.end()
+
+
+cp = child_process.exec('tree',(err,stdout) => {
+	console.log()
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

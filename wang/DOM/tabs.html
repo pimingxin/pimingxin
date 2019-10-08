@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    button.active {
+      background-color: red;
+    }
+  
+  </style>
+</head>
+<body>
+  <div class="tabs">
+    <div data-tabname="foo">1</div>
+    <div data-tabname="bar">2</div>
+    <div data-tabname="baz">3</div>
+  </div>
+  <script>
+    function asTabs(node){
+      var tabs = Array.from(node.children)
+      var buttons = []
+      for (let i = tabs.length - 1 ; i >= 0 ; i--){
+        var tab = tabs[i]
+        tab.style.display = 'none'
+        var button = document.createElement('button')
+        buttons.unshift(button)
+        button.textContent = tab.dataset.tabname
+        button.className = 'btn'
+        node.prepend(button)
+      }
+      tabs[0].style.display = 'block'
+      buttons[0].classList.add('action')
+
+
+      node.addEventListener('click',e=>{
+        if (e.target.matches("div > button")){
+          var idx = buttons.indexOf(e.target)
+          buttons.forEach(it => it.classList.remove('active'))
+          tabs.forEach(it => it.style.display = 'none')
+          buttons[idx].classList.add('active')
+          tabs[idx].style.display = 'block'
+        }
+      })
+    }
+    asTabs(document.querySelector(".tabs"))
+  </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    一个网页表单在<form>标签中包含若干个输入域
+    允许一定数量的不同风格的输入域
+
+    很多域的类型都使用input标签type属性用来选择域的种类
+    text:文本
+    password :和text相同但隐藏了输入内容
+    checkbox : 复选框
+    radio:一个多选域中的单选框
+    file:允许用户从本机选择文件上传
+   -->
+
+  <p><input type="text" value="abc">(text)</p>
+  <p><input type="password" value="abc">(password)</p>
+  <p><input type="checkbox" checked>(checkbox)</p>
+  <p><input type="radio" value="A" name="choice">
+    <input type="radio" value="B" name="choice">
+    <input type="radio" value="C" name="choice">(radio)</p>
+  <p><input type="file" checked>(file)</p>
+  <!-- 
+      多行文本输入框有自己的标签 <textarea>
+    -->
+  <textarea name="" id="" cols="30" rows="10">
+      one
+      two
+      three
+    </textarea>
+  <!-- 
+      select标签用来创造一个可以让用户从一些提前设置好的选项中进行选择的域
+     -->
+  <select name="" id="">
+    <option value="">n</option>
+    <option value="">m</option>
+    <option value="">s</option>
+    <option value="">l</option>
+  </select>
+  <!-- 
+       当一个表单域中的内容更改时就会触发change事件
+      -->
+  <!-- 
+        聚焦  多种事件
+        document.activeElement中的值会关联到当前聚焦的元素
+       -->
+  <input type="text">
+  <script>
+    document.querySelector('input').focus()
+    console.log(document.activeElement.tagName)
+    console.log(document.activeElement)
+
+    document.querySelector('input').blur()
+    console.log(document.activeElement.tagName)
+    console.log(document.activeElement)
+
+  </script>
+  <!-- 
+        对于一些页面 用户希望立刻使用到一个表单域 autofocus
+        -->
+  <input type="text" autofocus>
+  <!-- 
+          浏览器也允许用户通过TAB键来切换焦点
+          通过tabindex也可以改变元素接收焦点的顺序 和使不可获得焦点的元素获得焦点
+         -->
+  <input type="text" tabindex="1">
+  <!-- 
+           禁用域
+           所有表单元素都可以通过其disable属性来禁用
+           disable
+          -->
+  <button></button>
+  <button disabled></button>
+<!-- 
+          当一个域被包含在form元素中时 其中DOM元素会有一个form属性指向form的DOM元素form元素则会有一个叫做element属性 包含一个类似数据的集合 其中包含全部的域
+          一个表单域的name属性会决定在form提交时其内容的辨别方式 同时获取在form的elements属性时 也可以作为一种属性也可以作为一种属性名 所以elements属性即可以像数组由编号来访问 也可以像映射一样访问
+ -->
+  <form action="example/submit.html">
+    Name: <input type="text" name="name"><br>
+    Password: <input type="password" name="password"></br>
+    <button type="submit">Log in</button>
+  </form>
+  <script>
+    var form = document.querySelector('form')
+    console.log(form.elements[1].type)
+    console.log(form.elements.password.type)
+    console.log(form.elements.name.form == form)
+  </script>
+  <!-- 
+          一个属性为submit的按钮在点击时 会提交表单 在一个form被聚焦时 点击enter也会有同样的效果
+
+          处理函数也可以通过调用事件对象preventDefault来禁止默认行为
+
+   -->
+   <form action="x">
+    Value:<input type="text" name="value">
+    <button type="submit">Save</button>
+  </form>
+  <script>
+    var form = document.querySelector("form")
+    form.addEventListener("submit",function(event){
+      console.log("Saving value",form.elements.value.value)
+      event.preventDefault()
+    })
+  </script>
+  <!-- 
+          文本域的selectionStart selectionEnd
+   -->
+   <textarea name="" id="nmsl" cols="30" rows="10"></textarea>
+   <script>
+     var textarea = document.querySelector('#nmsl')
+     textarea.addEventListener("keydown", e=>{
+       if (e.key == 'F2'){
+         replaceSelection(textarea,'nmsl')
+         console.log(e)
+         e.preventDefault()
+       }
+     })
+     function replaceSelection(field,word){
+       var form = field.selectionStart , to = field.selectionEnd
+       field.value = field.value.slice(0,from) + word + field.value.silce(to)
+       field.selectionStart = field.selectionEnd = from + word.length
+     }
+   </script>
+
+   <!-- 
+        Change事件不会在每次有输入的时候都被调用 而是在内容有改变并且失去焦点的时候触发
+        下面的例子展示一个文本域和一个展示当前输入文字的长度的计数器
+
+    -->
+    <input type="text"> length: <span id="length">0</span>
+    <script>
+      var text = document.querySelector('input')
+      var output = document.querySelector('#length')
+      text.addEventListener('input', () =>{
+        output.textContent = text.value.length
+      })
+    
+    </script>
+</body>
+
+</html>

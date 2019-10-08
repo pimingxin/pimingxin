@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <button>show cats</button>
+  <div>cats</div>
+  <script>
+    var btn = document.querySelector('button')
+    var div = document.querySelector('div')
+
+    function get(url, callback) {
+      var xhr = new XMLHttpRequest()
+      xhr.open('get', url)
+      xhr.addEventListener('load', () => {
+        callback(xhr.responseText)
+      })
+      xhr.send()
+    }
+
+    function getImage(url, callback) {
+      var img = document.createElement('img')
+      img.onload = function() {
+        callback(img)
+      }
+      img.src = url
+    }
+    
+    // btn.addEventListener('click', e => {
+    //   btn.textContent = 'loading...'
+    //   get('https://xieranmaya.github.io/images/cats/cats.json', (data) => {
+    //     btn.textContent = 'show cats'
+    //     var ary = JSON.parse(data)
+    //     for(var imgObj of ary) {
+    //       var img = document.createElement('img')
+    //       img.src = 'https://xieranmaya.github.io/images/cats/' + imgObj.url
+    //       div.append(img)
+    //     }
+    //   })
+
+    // })
+    class Queue {
+      constructor() {
+        this.tasks = []
+        this.hasRunning = false
+      }
+
+      add(f) {
+        var next
+        if (!this.hasRunning) {
+          this.hasRunning = true
+          f(next = () => {
+            if (this.tasks.length) {
+              var nextTask = this.tasks.shift()
+              nextTask(next)
+            } else {
+              this.hasRunning = false
+            }
+          })
+        } else {
+          this.tasks.push(f)
+        }
+        return this
+      }
+    }
+
+    class Queue2 {
+      constructor(maxParallel = 1) {
+        this.maxParallel = maxParallel
+        this.tasks = []
+        this.runningCount = 0
+      }
+
+      add(f) {
+        var next
+        if (this.runningCount < this.maxParallel) {
+          this.runningCount++
+          f(next = () => {
+            if (this.tasks.length) {
+              var nextTask = this.tasks.shift()
+              nextTask(next)
+            } else {
+              this.runningCount--
+            }
+          })
+        } else {
+          this.tasks.push(f)
+        }
+        return this
+      }
+    }
+
+
+    var base = 'https://xieranmaya.github.io/images/cats'
+    btn.addEventListener('click', e => {
+      get('https://xieranmaya.github.io/images/cats/cats.json', (data) => {
+        var ary = JSON.parse(data).slice(0, 40)
+
+        var i = 0
+        var q = new Queue2(3)
+
+        for(var j = 0; j < ary.length; j++) {
+          q.add(next => {
+            getImage(`${base}/${ary[i++].url}`, img => {
+              div.append(img)
+              next()
+            })
+          })
+        }
+
+
+        // ======3个任务同时并行
+        // downloadOne()
+        // downloadOne()
+        // downloadOne()
+
+        // function downloadOne() {
+        //   if (i < ary.length) {
+        //     getImage(`${base}/${ary[i++].url}`, (img) => {
+        //       div.appendChild(img)
+        //       downloadOne()
+        //     })
+        //   }
+        // }
+
+
+
+
+        // var i = 0
+        // f()
+        // function f() {
+        //   if (i < ary.length) {
+        //     getImage(`${base}/${ary[i++].url}`, (img) => {
+        //       div.append(img)
+        //       f()
+        //     })
+        //   }
+        // }
+
+
+
+
+
+        // for(var imgObj of ary) {
+        //   var xhr = new XMLHttpRequest()
+        //   var url = `${base}/${imgObj.url}`
+        //   xhr.open('get', url, false)
+        //   xhr.send()
+        //   var img = document.createElement('img')
+        //   img.src = url
+        //   div.appendChild(img)
+        // }
+      })
+
+    })
+  </script>
+</body>
+</html>

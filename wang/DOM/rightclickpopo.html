@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .copyright-tip {
+      position: absolute;
+      background-color: red;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="rightclick.jpg" alt="nmsl">
+  <script>
+    //因为是创建一个新节点span出来 每次点击只能有一个span元素在 所以需要删除
+    // window.addEventListener('click',e => {
+    //   if (e.target.matches('.copyright-tip')) {
+
+    //     var tips = document.querySelectorAll('.copyright-tip') //获取所有类名为tip的元素
+    //     for (var t of tips) {
+    //       t.parentElement.removeChild(t)
+    //     }
+    //   }
+    // })
+    
+
+
+    
+    var img = document.querySelector("img")
+
+    img.addEventListener('contextmenu', e => { // 右键菜单
+
+      var tips = document.querySelectorAll('.copyright-tip') //获取所有类名为tip的元素
+      for (var t of tips) {
+        t.parentElement.removeChild(t)
+      }
+
+      e.preventDefault() //阻止默认事件
+
+      var tip = document.createElement('span') // 创建一个span元素
+      tip.textContent = 'copyrigth' + 'username' //文本内容
+      tip.classList.add('copyright-tip') //加上类名
+
+
+      tip.style.left = e.pageX + 'px' //没加px的没有妈
+      tip.style.top = e.pageY + 'px' //没加px的没有妈
+
+      //想要元素有focus状态 需要添加tabIndex
+      tip.tabIndex = "1"
+
+      //或者使用focus状态来确定
+      tip.addEventListener('blur',e=>{
+        document.body.removeChild(tip)
+      })
+
+      document.body.appendChild(tip) // 在body元素里添加类名为tip的子元素
+
+      tip.focus()
+
+    })
+    //点击不来源于气泡 就让气泡消失
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>eat</title>
+  <style>
+    p{
+      width: 1000px;
+      height: 1000px;
+    }
+    .cat,.hat,.aat,.bat,.dat,.eat,.fat{
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      position: fixed;
+      display: inline-block;
+    }
+    .cat {
+      border: 15px solid black;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0;
+      border-top: 20;
+    }
+    .hat{
+      width: 20px;
+      height: 20px;
+      background-color: blue;
+    }
+    .aat{
+      width: 20px;
+      height: 20px;
+      background-color: tan;
+    }
+    .bat{
+      width: 20px;
+      height: 20px;
+      background-color: black;
+    }
+    .dat{
+      width: 20px;
+      height: 20px;
+      background-color: green;
+    }
+    .eat{
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+    }
+    .fat{
+      width: 20px;
+      height: 20px;
+      background-color: purple;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <p>
+    <span class="cat"></span>
+    <span class="hat">1</span>
+    <span class="aat">2</span>
+    <span class="bat">3</span>
+    <span class="dat">4</span>
+    <span class="eat">5</span>
+    <span class="fat">6</span>
+
+  </p>
+  <script>
+    var cat = document.querySelector('.cat')
+    var hat = document.querySelector('.hat')
+    var aat = document.querySelector('.aat')
+    var bat = document.querySelector('.bat')
+    var dat = document.querySelector('.dat')
+    var eat = document.querySelector('.eat')
+    var fat = document.querySelector('.fat')
+
+
+    var angle = 0
+    var angle2 = 0
+    var lastTime = null
+    var a
+    var ps = document.querySelector('p')
+    function nmsl (e){
+  requestAnimationFrame(function animate(time){
+
+    if (lastTime != null){
+      angle += (time - lastTime) * 0
+      angle2 += (time - lastTime) * 0.001
+    }
+    lastTime = time
+    
+    var catX = Math.sin(angle) * 100 + 200
+    var catY = Math.cos(angle) * 100 + 200
+
+    
+    var hatX = Math.sin(angle2) * 100 + 25 - 10 +catX
+    var hatY = Math.cos(angle2) * 100 + 25 - 10 +catY
+    
+
+    var aatX = hatX
+    var aatY = hatY
+
+    var batX = hatX
+    var batY = hatY
+
+    var datX = hatX
+    var datY = hatY
+
+    var eatX = hatX
+    var eatY = hatY
+
+    var fatX = hatX
+    var fatY = hatY
+
+    cat.style.left = catX + 'px'
+    cat.style.top = catY + 'px'
+
+
+
+
+
+    setTimeout(function(){
+      hat.style.left = hatX + 'px'
+      hat.style.top = hatY + 'px'
+    },0)
+    
+    
+
+    setTimeout(function(){
+      aat.style.left = hatX + 'px'
+      aat.style.top = hatY +'px'
+    },1000)
+
+    
+    setTimeout(function(){
+      bat.style.left = hatX + 'px'
+      bat.style.top =  hatY +'px'
+    },2000)
+    
+
+    setTimeout(function(){
+      dat.style.left = hatX + 'px'
+      dat.style.top =  hatY +'px'
+    },3000)
+
+    
+    setTimeout(function(){
+      eat.style.left = hatX + 'px'
+      eat.style.top = hatY +'px'
+    },4000)
+
+    
+
+    setTimeout(function(){
+      fat.style.left = hatX + 'px'
+      fat.style.top = hatY + 'px'
+    },5000)
+
+    
+    requestAnimationFrame(animate)
+    
+  })
+  
+}
+    ps.addEventListener("click",nmsl)
+
+
+var bodys = document.querySelector('body')
+    bodys.addEventListener('keydown',function(e){
+      a = requestAnimationFrame(nmsl)
+      if (e.key === 's'){
+        console.log(e)
+        cancelAnimationFrame(a)
+        
+      }
+    })
+  </script>
+
+
+
+
+
+
+</body>
+</html>

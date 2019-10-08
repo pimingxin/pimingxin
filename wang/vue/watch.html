@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    Price: <input type="text" v-model.number="price" />
+    Amount: <input type="text" v-model.number="amount" />
+    Total: <input type="text" v-model.number="total" />
+  </div>
+
+  <script>
+    var app = new Vue({
+      el:'#app',
+      data:{
+        price : 0,
+        amount : 0,
+        total : 0,
+      },
+      watch:{
+        price(val){
+          this.total = this.amount * val
+        },
+        amount(val){
+          this.total = val * this.price
+        },
+        total(val){
+          this.amount = val / this.price
+        }
+      }
+    })
+  </script>
+
+  <div id="animated-number-demo">
+    F: <input type="text" v-model.number="f">
+    C: <input type="number" v-model.number="c" step="1">
+  </div>
+  <script>
+    new Vue({
+      el:'#animated-number-demo',
+      data:{
+        f : 0,
+        c : 0,
+      },
+      watch : {
+        f(val){
+          this.c = (5 / 9*(val-32))
+        },
+        c(val){
+          this.f = (9/5*val+32)
+        }
+      }
+    })
+  </script>
+  <div id="app3">
+    China: <input type="text" v-model.number="china">
+    JP: <input type="text" v-model.number="jp" disabled="disabled">
+    USA: <input type="text" v-model.number="usa">
+  </div>
+  <script>
+    var app3 = new Vue({
+      el:"#app3",
+      data: {
+        china : 0,
+        jp : 0 ,
+        usa : 0,
+      },
+      watch:{
+        china(val){
+          this.usa = val * 0.14
+          this.jp = val * 14.94
+        },
+        // jp(val){
+        //   this.china = val * 0.067
+        //   this.usa = val * 0.0094
+        // },
+        usa(val){
+          this.china = 7.142857142857142 * val
+          this.jp = 106.78 * val
+        }
+      }
+    })
+  </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+
+<div id="app5">
+  <p>{{ message }}</p>
+  <button @click="getFunc()">click me</button>
+</div>
+<script>
+  var app5 = new Vue({
+    el:'#app5',
+    data:{
+      message:'Hello'
+    },
+    methods:{
+      getFunc(){
+        return (function f(e){
+          console.log(1)
+        })()
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="./vue.js"></script>
+  
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+  <div id="app">
+    <el-button @click="visible = true">Button</el-button>
+    <el-dialog :visible.sync="visible" title="Hello world">
+      <p>Try Element</p>
+    </el-dialog>
+  </div>
+  <template>
+    <el-input-number v-model="num" @chang="hangdleChange" :min="1" :max="10" label="描述文字">
+  </template>
+</body>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: function() {
+        return { visible: false }
+      }
+    })
+  </script>
+  <script>
+    export default {
+      data(){
+        return {
+          num:1
+        }
+      },
+      methods:{
+        hangdleChange(value){
+          console.log(value)
+        }
+      }
+    }
+  </script>
+</html>

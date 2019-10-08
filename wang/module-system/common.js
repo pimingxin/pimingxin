@@ -44,6 +44,5 @@ function require(path) {
 
   var returnValue = modFun(module,module.exports)
 
-  if (return)
 }
 require.moduleCache = {}

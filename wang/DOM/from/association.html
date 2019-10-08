@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>association</title>
+  <style>
+    ul li{
+      list-style-type: none;
+    }
+    
+    .lis{
+      opacity: 0;
+    }
+    
+  </style>
+</head>
+<body>
+  <input type="text" id="input">
+  <ul id="output">
+
+  </ul>
+  <script>
+    function getSuggestion(str,callback){
+      // var suggestions = ["杭州","杭州行","杭州行不","杭州行不行","杭州不太行噢"]
+      var suggestions = new Array(10).fill(0).map((_, idx) => idx).map(it => str + it)
+
+      setTimeout(() => {
+        callback(suggestions)
+      }, 500+500*Math.random());
+    }
+
+    var showTime = 0
+    var inputstr = document.querySelector('#input')
+    var strvalue = inputstr.value
+    var outputstr = document.querySelector('#output')
+    var time = Date.status()
+
+    getSuggestion(strvalue,set)
+
+    function set(suggestions){
+        for (var name in suggestions){
+          var li = document.createElement("li")
+          li.className = "sli"
+          li.innerHTML =  suggestions[name]
+          outputstr.appendChild(li)
+        }
+      
+      
+      
+      var input = document.querySelector("#input")
+      if (input.value == ""){
+        liClassNames = document.querySelectorAll('.sli')
+        for(let i = 0 ; i < liClassNames.length ; i++){
+          liClassNames[i].style.opacity = "0"
+        }
+      }
+      
+      
+      var uloutput = document.querySelector("#output")
+      clear()
+    }
+    if (input.blur()){
+        clear()
+      }
+    
+    function clear(){
+      var lis = document.querySelectorAll("li")
+      if (lis.length > 11){
+        for (var i = 0 ; i < 10 ; i++){
+          var li = document.querySelector("li")
+          outputstr.removeChild(li)
+          li = document.querySelector("li")
+        }
+      }
+      
+    }
+
+    inputstr.addEventListener("input", e => {
+      clear()
+
+        var value = e.target.value
+        getSuggestion(value,set)
+        liClassNames = document.querySelectorAll('.sli')
+          for(var i = 0 ; i < liClassNames.length ; i++){
+            liClassNames[i].style.opacity = "1"
+          }
+    })
+
+  </script>
+</body>
+</html>

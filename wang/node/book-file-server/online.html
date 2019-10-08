@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>online</title>
+  <style>
+    .dele{
+      height: 30px;
+      line-height: 30px
+    }
+
+    .dele button{
+      float: right;
+    }
+    .dele button:hover{
+      color:red;
+      cursor:pointer;
+    }
+
+    .dele a{
+      text-decoration:none;
+    }
+    .dele a:hover{
+      background-color: lightblue;
+    }
+
+    #cbbtn{
+      position: fixed;
+      right: 10px;
+      bottom: 10px;
+    }
+    #uploadFile{
+      position: fixed;
+      left:10px; 
+      bottom: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    
+    Current path：
+    <input type="text" id="cwd" name="cwd" value="/"/><button id="btn" onclick="chdir()">确定</button>
+    
+  <main id="ls"></main>
+  <div id="uploadFile"><input type="file" id="uploadInput"/> <input type="text" id="uploadname" style="display: none;"><button onclick="upload()">上传</button></div>
+  <button id="cbbtn" onclick="cb()">返回首页</button>
+  </div>
+  <script>
+    var base = 'http://localhost:8000'
+    function get(url){
+      return new Promise(resolve => {
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', base + url)
+        xhr.onload = () => {
+          resolve(xhr.responseText)
+        }
+        xhr.send()
+      })
+    }
+
+    function del(url){
+      return new Promise(resolve => {
+        var xhr = new XMLHttpRequest()
+        xhr.open('DELETE', base + url)
+        xhr.onload = () => {
+          resolve(xhr.responseText)
+        }
+        xhr.send()
+      })
+    }
+
+
+    function ls(path){
+      return get(path)
+    }
+
+    async function chdir(){
+      var path = cwd.value
+      var files = await ls(path)
+
+      document.getElementById('ls').innerHTML = `
+        ${files.split('\n').map(it => {
+          return `
+            <div class="dele"><a href="${it}">${it}</a><button>DELETE</button></div> 
+          `
+        }).join('')}
+      `
+    }
+
+    chdir()
+
+    function cb(){
+     cwd.value = '/'
+     btn.click()
+    }
+
+    document.querySelector('main')
+      .addEventListener('click' , e =>{
+        e.preventDefault()
+        if (e.target.matches('a')){
+          var target = e.target
+          var path = target.textContent
+          if (path.endsWith('/')){
+            cwd.value += path
+            btn.click()
+          }else{
+            window.open(base + cwd.value + path)
+          }
+        }
+        if (e.target.matches('button')){
+          var path = cwd.value + e.target.previousSibling.textContent
+          del(path).then(()=>{
+            btn.click()
+          })
+        }
+      })
+
+      uploadInput.onchange = e => {
+        uploadname.value = uploadInput.files[0].name
+      }
+    function upload(){
+      var path = cwd.value + uploadname.value
+
+      var fr = new FileReader()
+      fr.onload = () => {
+        var xhr = new XMLHttpRequest()
+        xhr.open('PUT',base + path)
+        xhr.onload = () => {
+          uploadInput.value = ''
+          btn.click()
+        }
+        xhr.send(fr.result)
+      }
+        fr.readAsArrayBuffer(uploadInput.files[0])
+      }
+
+      exports.xxx = {}
+
+
+      var x = require('xxx')
+  </script>
+</body>
+</html>

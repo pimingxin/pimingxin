@@ -1,0 +1,569 @@
+<html>
+  <script src="https://unpkg.com/vue"></script>
+  <div id="app">
+    <p>{{message}}</p>
+    <button v-on:click="reverseMessage">转</button>
+  </div>
+  
+  <div id="app6">
+    <p>{{ message }}</p>
+    <input v-model="message">
+  </div>
+
+
+
+
+
+<script>
+  const app6 = new Vue({
+    el:"#app6",
+    data:{
+      message:'Hello Vue!'
+    }
+  })
+
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message :'nmsl',
+    },
+    methods:{
+      reverseMessage:function(){
+        this.message = this.message.split('').reverse().join('')
+      }
+    }
+  })
+/*
+  v-bind 发生在html标签元素需要变化的情况下 将元素的某个属性于vue实例的某个属性保持一致
+  v-if 判断
+  v-for='one in some' data内为数组或者对象 可以使用对应的方法
+  v-on 添加事件 
+  v-on:click="function" 绑定 click事件
+  v-model
+
+  组件化 应用构建 
+
+
+*/
+</script>
+
+
+<div id="app7">
+  <ol>
+    <!-- 创建一个 todo-item组件的实例  -->
+    <!-- 
+      为每个todo-item 提供todo对象 todo对象是变量 内容可以是动态的
+      也要为每个组件提供一个key
+     -->
+  <todo-item 
+    v-for="item in groceryList"
+    v-bind:todo="item"
+    v-bind:key = "item.id">
+  </todo-item>
+  </ol>
+</div>
+
+
+
+<script>
+  // 定义名为 todo-item 的新组件
+  Vue.component('todo-item' , {
+    prors:['todo'],
+    template : '<li>{{ todo.text }}</li>'
+  })
+  var app7 = new Vue({
+    el:'#app7',
+    data:{
+      groceryList:[
+        {id:0,text:'蔬菜'},
+        {id:1,text:'酸奶'},
+        {id:2, text:'随便'}
+      ]
+    }
+  })
+</script>
+<!-- 
+  Vue实例
+  var vm = new Vue({
+    //选项
+  })
+
+  //数据对象
+  var data = {a:1}
+
+  var vm = new Vue({
+    data:data
+  })
+
+  vm.a == data.a  // =>true
+  //设置属性也会影响到原始数据
+  vm.a = 2
+  data.a = 2
+
+  //反之亦然
+  data.a = 3
+  vm.a = 3
+
+  vm.b = 'hi'
+  对b的改动将不会触发任何视图的更新 
+  如果你知道在晚些的时候需要一个属性 
+  但是它一开为空或者不存在的话 
+  你需要设置一些初始值 
+  data: {
+    newTodoText: '',
+    visitCount: 0,
+    hideCompletedTodos: false,
+    todos: [],
+    error: null
+  }
+  唯一例外的是使用Object.freeze()
+  这会阻止修改现有的属性 
+  响应系统无法再追踪变化 
+
+  var obj = {
+    foo : 'bar'
+  }
+  Object.freeze(obj)
+
+  new Vue({
+    el : '#app',
+    data : obj
+  })
+  //此时无法改变foo属性
+  <div id="app">
+    <p>{{ foo }}</p>
+    <button v-on:click="foo='baz'">Change it</button>
+  </div>
+
+  除了数据属性 vue实例暴露了一些有用的实例属性与方法
+  都有前缀$以便与用户定义的属性区分开来 
+
+  var data = {a : 1}
+  var vm = new Vue({
+    el:'#example',
+    data:data
+  })
+  vm.$data === data  // => true
+  vm.$el === document.getElementById('example') // => true
+
+  vm.$watch('a' , (newValue,oldValue) => {
+    // 这个回调将在 vm.a 改变后调用
+  })
+
+  例
+  <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <script src="https://unpkg.com/vue"></script>
+      <title>vue</title>
+    </head>
+    <body>
+      <div id="app">
+        <p>{{ a }}</p>
+        <button v-on:click="a = 3">{{ b }}</button>
+      </div>
+      
+      <script>
+        var data = { a:1,b:2 }
+        var vm = new Vue({
+          el:'#app',
+          data:data
+        })
+        vm.$watch('a' , (newValue,oldValue) => {
+          console.log(newValue,oldValue)
+        })
+      </script>
+    </body>
+    </html>
+ // 点击后将在控制台打印出 3 1
+
+实例 生命周期钩子
+created 钩子可以用来在一个实例被创建后执行代码
+new Vue({
+  data:{
+    a:1
+  },
+  created: function(){
+    //这里的this指向 vm实例
+    console.log('a is : ' + this.a )
+  }
+})
+
+也有一些其它的钩子，在实例生命周期的不同阶段被调用，如 mounted、updated 和 destroyed。生命周期钩子的 this 上下文指向调用它的 Vue 实例。
+
+
+！不要在选项属性或回调上使用箭头函数，比如 created: () => console.log(this.a) 或 vm.$watch('a', newValue => this.myMethod())。因为箭头函数是和父级上下文绑定在一起的，this 不会是如你所预期的 Vue 实例，经常导致 Uncaught TypeError: Cannot read property of undefined 或 Uncaught TypeError: this.myMethod is not a function 之类的错误。
+
+模板语法
+
+  如果熟悉虚拟DOM 并且喜欢原生js 也可以不用模板 
+  直接写渲染(render)函数 使用可选的JSX语法
+
+  插值
+    文本 数据绑定最常见的形式就是使用Mustache语法 双大括号
+
+      <span>Message:{{ msg }}</span>
+
+    Mustache标签将会替代为对应数据对象上的msg属性的值无论如何 
+    绑定的数据对象上msg属性发送了改变 插值的内容也会改变 
+
+    v-once 指令可以一次性的插值 
+    数据改变 插值处的内容不会更新
+
+    双大括号会将数据解释为普通文本
+    如果需要输出真正的html
+    需要使用 v-html指令
+
+    <p>Using mustaches: {{ rawHtml }}</p>
+    <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+
+    第一个输出纯文本
+    第二个为html
+
+    ！你的站点上动态渲染的任意 HTML 可能会非常危险，因为它很容易导致 XSS 攻击。请只对可信内容使用 HTML 插值，绝不要对用户提供的内容使用插值。
+
+特性
+  Mustache 语法不能作用在HTML特性上 遇到这种情况应该使用v-bind
+  <div v-bind:id="dynamicId"></div>
+
+  在布尔特性下 它们的存在暗示为true
+  v-bind会略有不同
+  button有disabled 属性 如果值不是true的话 disabled甚至不会被包含在渲染出来的button的元素中
+
+使用js表达式
+  {{ number + 1 }}
+  {{ ok ? 'yex' : 'no' }}
+  {{ message.split('').reverse().join('') }}
+  <div v-bind:id="'list-' + id "></div>
+
+ 下面这些例子不会生效
+    这是语句，不是表达式
+    {{ var a = 1 }}
+
+    流控制也不会生效，请使用三元表达式
+    {{ if (ok) { return message } }}
+
+！模板表达式都被放在沙盒中，只能访问全局变量的一个白名单，如 Math 和 Date 。你不应该在模板表达式中试图访问用户定义的全局变量。
+
+指令
+  v-前缀的
+  v-for
+  v-if
+
+  一些指令可以接收参数 
+  v-bind:href="href"
+
+  在这里 href 是参数 告知 v-bind 指令将该元素的 href 特性与表达式 url 的值绑定
+
+  v-on 监听dom事件
+
+  v-on:click="dosomething"
+  在这里参数是监听的事件名
+
+  修饰符
+    .
+    例如.prevent修饰符告诉v-on 指令对于触发的事件调用
+    event.preventDefault()
+    <form v-on:submit.prevent="onSubmit">...</form>
+  缩写
+    v-bind缩写
+    <a v-bind:href="url"></a>
+    <a :href="url"></a>
+
+    v-on缩写
+    <a v-on:click="doSomething"></a>
+    <a @click="doSomething"></a>
+计算属性和侦听器
+  计算属性
+
+  <div id="example">
+    {{ message.split('').reverse().join('')}}
+  <div>
+
+  这里是想显示变量message的翻转字符串 
+  对于复杂逻辑 都应该使用计算属性 
+  上面的例子应该写为
+  <div id="example">
+    <p>Original message:"{{ message }}"</p>
+    <p>Computed reversed message:{{ reversedMessage }}</p>
+  </div>
+  var vm = new Vue({
+    el:"#example",
+    data:{
+      message:'Hello'
+    },
+    computed:{
+      计算属性的 getter
+      reversedMessage:function(){
+        return this.message.split('').reverse().join('')
+      }
+    }
+  })
+  在这里声明了一个计算属性 reversedmessage
+  提供函数作为属性vm.reversedMessage的getter函数 
+
+  vm.reversedmessage的值 始终取决于vm.message的值
+
+  计算属性缓存vs方法
+
+  上例中 也可以通过方法来解决
+  
+  在组件中
+  methods : {
+    reversedmessage: function(){
+      return this.message.split('').reverse().join('')
+    }
+  }
+
+  两种方法的方式的最终结果是一样的 
+  不同的是 计算属性是基于它们的依赖进行缓存的
+  只在相关依赖改变时才会重新求值
+
+  下例的计算属性将不再更新 因为data.now()不是响应式
+  computed:{
+    now:function(){
+      return Date.now()
+    }
+  }
+  ！我们为什么需要缓存？假设我们有一个性能开销比较大的计算属性 A，它需要遍历一个巨大的数组并做大量的计算。然后我们可能有其他的计算属性依赖于 A 。如果没有缓存，我们将不可避免的多次执行 A 的 getter！如果你不希望有缓存，请用方法来替代。
+
+计算属性vs侦听属性
+  fristName
+  lastName
+  可以将fullname抽象为一个计算属性
+
+计算属性的setter
+  计算属性默认只有getter 在需要的时候也可以写一个setter
+
+  computed:{
+    fullName:{
+      get: function(){
+        return this.firstName + ' ' + this.lastName
+      },
+      set:function(newValue){
+        var names = newValue.split(' ')
+        this.firstName = names[0]
+        this.lastName = names[names.length - 1]
+      }
+    }
+  }
+  再运行的话 setter会改变fullName 和 fristName lsatName
+
+  侦听器
+    自定义侦听器
+    watch 属性发生变化时 调用属性的方法
+    当需要数据变化时 执行异步或开销较大的操作时 这个方法最有用
+
+    例如:
+    <div id="watch-example">
+      <p>Ask a yes / no question:
+        <input v-model="question">
+      </p>
+      <p>{{ answer }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script>
+      var watchExampleVM = new Vue({
+        el:'#watch-example',
+        data:{
+          question:'',
+          answer: 'I cannot give you an answer until you ask a question'
+        },
+        watch:{
+          question:function (newQuestion,oldQuestion){
+            this.answer = 'Wait fot you to stop typing'
+            this.debouncedGetAnswer()
+          }
+        },
+        created:function(){
+          this.debouncedGetAnswer = _.debounce(this.getAnswer,500)//防抖
+        },
+        methods:{
+          getAnswer : function(){
+            if (this.question.indexOf('?') == -1){
+              this.answer = '问号都没有问尼玛问题？'
+              return
+            }
+            this.answer = 'Thinking...'
+            var vm = this
+            axios.get('https://tesno.wtf/api')
+            .then(response => {
+              //capitalize 首字符大写
+              vm.answer = _.capitalize(response.data.answer)
+            }) 
+            .catch(err => {
+              vm.answer = 'Error'
+            })
+          }
+        }
+      })
+    </script>
+    在这个示例中，使用 watch 选项允许我们执行异步操作 (访问一个 API)，限制我们执行该操作的频率，并在我们得到最终结果前，设置中间状态。这些都是计算属性无法做到的。
+
+  除了 watch 选项之外，还可以使用 vm.$watch API
+
+  class于style绑定
+
+  可以传给v-bind:class一个对象 以动态的切换class
+
+  <div v-bind:class="{ active : isActive}"></div>
+
+
+  使用修饰符时，顺序很重要；相应的代码会以同样的顺序产生。因此，用 v-on:click.prevent.self 会阻止所有的点击，而 v-on:click.self.prevent 只会阻止对元素自身的点击。
+  阻止单击事件继续传播
+<a v-on:click.stop="doThis"></a>
+
+提交事件不再重载页面
+<form v-on:submit.prevent="onSubmit"></form>
+
+修饰符可以串联
+<a v-on:click.stop.prevent="doThat"></a>
+
+只有修饰符
+<form v-on:submit.prevent></form>
+
+添加事件监听器时使用事件捕获模式
+即元素自身触发的事件先在此处理，然后才交由内部元素进行处理
+<div v-on:click.capture="doThis">...</div>
+
+只当在 event.target 是当前元素自身时触发处理函数
+即事件不是从内部元素触发的
+<div v-on:click.self="doThat">...</div>
+点击事件将只会触发一次
+<a v-on:click.once="doThis"></a>
+
+
+.enter
+.tab
+.delete (捕获“删除”和“退格”键)
+.esc
+.space
+.up
+.down
+.left
+.right
+
+<input @keyup.enter="submit">
+
+可以通过全局 config.keyCodes 对象自定义按键修饰符别名：
+
+Vue.config.keyCodes.pi = 111
+
+双向绑定
+
+单行文字
+<input v-model="message" placeholder="edit me">
+<p>Message is: {{ message }}</p>
+
+多行文字
+<span>Multiline message is:</span>
+<p style="white-space:pre-line;">{{ message }}</p>
+<br>
+<textarea v-model="message" placeholder="add mulitple lines"></textarea>
+
+！在文本区域插值 (<textarea></textarea>) 并不会生效，应用 v-model 来代替。
+
+单个复选框 绑定到布尔值
+
+<input type="checkbox" id="checkbox" v-model="checked">
+<label for="checkbox">{{ checked }}</label>
+
+多个复选框 绑定到同一个数组
+
+<div id=""example-3>
+  <input type="checkbox" id="Jack" value="Jack" v-model="checkedNames" /><label for="Jack">Jack</label>
+  <input type="checkbox" id="john" value="john" v-model="checkedNames" /><label for="john">john</label
+  <input type="checkbox" id="mike" value="mike" v-model="checkedNames" /><label for="mike">mike</label>
+  <br>
+  <span>Checked names : {{ checkedNames }}</span>
+</div>
+<script>
+  new Vue({
+    el:'#example-3',
+    data:{
+      checkedNames:[]
+    }
+  })
+</script>
+
+！如果 v-model 表达式的初始值未能匹配任何选项，<select> 元素将被渲染为“未选中”状态。在 iOS 中，这会使用户无法选择第一个选项。因为这样的情况下，iOS 不会触发 change 事件。因此，更推荐像上面这样提供一个值为空的禁用选项。
+
+也可以用v-for渲染
+v-for="x in xs" v-bind:value="x.value"
+
+复选框 单选效果
+
+<input type="checkbox" v-model='toggle' true-value='yes' false-value='no'>
+
+当被选中时 toggle === yes
+没选中时 toggle === no
+
+单选 <input type="radio" v-model="pick" v-bind:value="a">
+
+选中时 vm.pick === vm.a
+
+选择框的选项
+
+<select v-model="selected">
+  内联对象字面量
+  <option v-bind:value="{number:123}"></option>
+</select>
+
+当被选中时 
+type vm.selected  => 'object'
+
+vm.selected.number  => 123
+
+v-model在每次input事件触发后 将输入框的值与数据进行同步
+可以添加lazy修饰符 从而转变为使用change事件进行同步
+
+<input v-model.lazy="msg">
+
+将用户输入值转换为数值类型 
+
+<input v-model.number="age" typ="number">
+
+去除两端空白
+
+v-model.trim="msg"
+
+
+
+
+
+
+ -->
+<script>
+function observer(obj){
+  
+  for (prop in obj){
+    let val = obj[prop]
+    if (typeof val == "object"){
+      val = observer(val)
+    }
+  }
+  Object.defineProperty(prop,obj,{
+    get function(){
+      return val
+    },
+    set function(value){
+      if (typeof value == 'object'){
+        value = observer(value)
+      }
+      val = value
+    }
+  })
+  
+  return obj
+}
+
+
+
+</script>
+
+
+
+</html>

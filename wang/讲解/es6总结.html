@@ -1,0 +1,165 @@
+<!-- 
+  块级绑定 变量声明 
+  let const 
+  作用域都是离他们最近的一个表达语句块的大括号里
+
+  for循环里的let
+
+  fns = []
+  for (let i = 0 ; i < 3 ; i++){
+    fns.push(function(){
+      return i
+    })
+  }
+  let 的话 fns 为 0 1 2
+  var 的话 fns 为 3 3 3
+  let 每个大括号都有1个i 有三个大括号 所以为0 1 2 
+
+  建议都使用 let来声明变量
+
+  var fns = []
+    for (let i = 0; i < 5; i++) {
+      //(function(i) {
+          i++
+          fns.push(   function(){return i}  )
+      //}(i))
+    }
+
+    此两种写法并不完全等价
+    var fns = []
+    for (var i = 0; i < 5; i++) {
+      (function(i) {
+          i++
+          fns.push(   function(){return i}  )
+      }(i))
+    }
+
+    BABEL 将es6 转成es5
+
+    let语句声明的变量 无法通过window访问到
+    可以想象为 let语句在一个大括号内运行 
+
+    字符串和正则表达式
+
+    可以支持\u{6122}unicode 
+    以前unicode只能输入4位数字 
+    现在可以在大括号内输入多个16进制数
+
+    `${}`
+    可以插值 可以回车等 
+    还可以 
+    html``
+    表示这是一段html代码
+    叫标签字符串
+    还可以SQL``
+    
+    可以讲模板字符串转成一个对象 
+    reaet 很多由这样组成的
+    var Button = styled.a`
+      color : red;
+      width : 80px;
+    `
+    类似这样的语法
+    
+    styled.a 为一个函数
+
+    正则表达式 新增了/uy 
+    u为unicode y为sticky
+
+    有y的话 lastIndex为 3 
+    
+    函数的默认参数 
+
+    function f(a=1){}
+
+    函数无法使用,,,
+    [,,,,,]
+
+    ...args
+
+    函数作为构造函数时候 可以在函数里面判断函数是否被new调用
+
+    function F(){
+      if (new.target === F){
+
+      }
+    }
+    判断是否被new调用
+
+    将this指向F instanceof 但是 F.call(new F())这种无法判断
+
+    f(...[1,2,3,4])
+
+    ...优先级比较低
+
+    用...可以浅赋值一个数组
+
+    a = [1,2,3]
+
+    b = [...a]
+
+    ...还能在对象上使用 
+    
+    把 a 展开 作为对象的属性
+
+    a = {x:1,y:2}
+
+    b = {...a,z:99}
+
+    函数有name属性
+
+    可以拿到函数名
+
+    函数如果被创造出来 函数名就已经固定了 
+
+    f.length length表达了 函数正常参数的数量 完全普通的参数
+
+    2..toString.length    == 1
+
+    箭头函数没有this super arg new.target
+    没有这些动态作用域 往外层找 外层如果也是箭头函数就再往外层找
+
+    不能被new调用
+
+    this不能改变 不会因为call改变 
+
+    tail call 尾调用
+
+    function f(){
+      return g()
+    }
+    这种算尾调用 如果return后面不是函数调用 而是表达式求值的话 就不算尾调用
+
+    尾递归 可以用来优化调用栈
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -->

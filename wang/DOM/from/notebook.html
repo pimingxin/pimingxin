@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    #current{
+      width: 450px;
+      height: 65.5px;
+    }
+    
+  </style>
+</head>
+<body>
+  <select id="list"></select><!-- 元素表示一个控件，提供一个选项菜单 -->
+  <button onclick="addNote()">Add note</button>
+  <textarea id="current" cols="30" rows="10" placeholder="What needs to nmsl?"></textarea>
+
+
+  <script>
+    var select = document.querySelector('#list')
+    var textarea = document.querySelector('#current')
+
+    function addToList(name) {
+      var option = document.createElement('option')
+      option.textContent = name
+      select.appendChild(option)
+    }
+    var notes = JSON.parse(localStorage.getItem('notes')) || {"shopping list": "mouse ketboard"}
+  
+    
+    for (var noteName in notes){
+      addToList(noteName)
+    }
+
+    function saveToStorage(){
+      localStorage.setItem('notes',JSON.stringify(notes))
+    }
+
+    textarea.value = notes[select.value]
+
+    select.addEventListener('change',e=>{//把textarea的内容覆盖为新的值
+      textarea.value = notes[select.value]
+    })
+
+
+    textarea.addEventListener('change',e=>{
+      notes[select.value] = textarea.value
+      saveToStorage()
+    })
+    function addNote(){
+      var noteName = prompt('input note title')
+      if (!noteName){
+        return 
+      }
+
+      if (!notes.hasOwnProperty(noteName)){
+        notes[noteName] = ''
+        addToList(noteName)
+        saveToStorage()
+      }
+      select.value = noteName
+      textarea.value = notes[noteName]
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,616 @@
+01. for in循环数组index 其中也会遍历数组的可枚举属性 还会存在index索引值为字符串 无法进行集合运算 遍历顺序的问题 for of是遍历数组元素值 value
+function a * (){
+  
+}
+02. Network 局域网 Internet 互联网 Web网页 
+03. property和Attribute 都表示为属性 property指的是这个节点 
+Attribute指的是 这个节点的HTML结构 很容易混淆
+proprety 指由标签生成的JS DOM对象的属性
+Attribute 指html标签中的标签属性
+$().prop(name) // this.name
+$().attr(name) // 
+04. 因为当前的节点已经存在于当前的文档树内了 这个节点会先删除原本的位置 再添加到指定的位置 innerHTML会替换 appendChild
+05. 
+
+<script>
+class Ary{
+  constructor(){
+    Object.setPrototypeOf(Ary,Array)
+  };
+  ary(arg){
+
+  }
+  
+}
+  function Ary(length){
+    var arr = {
+      _length : length,
+      get length(){
+        return this.length
+      },
+      set length(val){
+        let origlength = this._length // 原始数组长度 
+        this._length = val  //传入的值
+        if (origlength > val){
+          for (let i = 0 ; i < this._length ; i++){
+            delete arr[i+1]
+          }
+        }else if (val > origlength){
+          for (let i = origlength ; i <= val ; i++){
+            arr[i+1] = undefined
+          }
+        }
+        for (let i = 0 ; i < val ; i++){
+          arr[i] = undefined
+        }
+      }
+    }
+  }
+</script>
+06. 1  此时ary[1]调用 数组里的函数触发 this指向了最外层的ary[0] 输出ary[0]
+07. NAN obj里的b 的this 为 window window上面没有a这个方法 所以为undefined 输出NAN
+08. typeof prototype new.target === function
+09. 将数据结构或对象状态转换成可取用的格式
+    把一个在内存中使用随机位置存储的数据结构以不丢失信息量形式转换为连续的字节序列 用于存储在硬盘上或经由网络传输
+10. 都是伪随机数
+计算机里的随机数并不是真正的随机
+而是通过特定算法 生成的看似随机分布的数
+叫伪随机数
+实际上算法在给定特定的初始输入后 会生成固定的序列
+特定算法
+  线性同余
+  平方取中
+11. 就是排序算法在最极限的情况下 其时间复杂度也不会变化太大 函数        不会退化 它的作      用是判断排序算法是否可靠
+稳定性 排序前后不改变排序关键字的值相同元素的相对位置
+作用 利用该特性可以很方便的实现多关键字排序
+12. 严格模式是有限制性的JavaScript的变体 是为了防止懒散模式 
+    在所有语句前加上 "use strict"
+    不会默认错误 会直接抛出错误 将过失错误转换成异常 会引起静默失败
+13. 一般在测试有异常的语句内使用 需要注意finally是无论语句是否错误都会触发 测试函数
+catch里面不要什么都不做 捕获到异常后一个看错误是否能够被处理 如果不能 一个继续往外抛 在catch里判断错误的类型以继续处理
+14. 抽象 继承 多态 抽象 将难以理解的函数 一个一个抽分出来 变成更容易理解的函数 继承 个个函数之间 如需调用 可以直接继承过来 多态 多个场景都适合使用
+把细节隐藏 只暴露接口
+
+15. 可以自己编写需要的函数
+之所以称为构造函数是负责构造初始化 即为 构造
+16.  try出来的错误没有catch住
+报错 没有预料到} 因为(后面接的是参数或者) 遇到了} 
+整段代码没有开始运行：
+  因为js代码的启动有以下步骤
+  词法解析
+  语法解析
+  执行
+17. 一个类数组对象 [1,e,e,e,e] length:5 长度为5 0:1 
+Array(1,undefined,undefined,undefined,undefined)
+18.
+<script>
+function Person(str) {
+  var o = {
+    firstName: str.match(/\w+\b/g)[0],
+    lastName: str.match(/\w+\b/g)[1],
+    get fullName() {
+      return this.firstName + ' ' +this.lastName
+    },
+    set fullName(val) {
+      [this.firstName, this.lastName] = val.match(/\w+\b/g)
+    }
+  }
+  return o
+}
+
+</script>
+19. delete 这个对象的这个属性 让这个对象的这个属性变成不可枚举
+    Object.defineProperties(obj, props) configurable的值为true
+    writable false
+20. 
+原理 间歇性改变页面中元素的样式 间歇时间一般为16毫秒 
+<script>
+requestAnimationFrame(function animate(time){
+  //animate 什么时候调用 time就是什么时间 time精确到微秒
+  // 根据时间反推出函数运行的时间
+  // 需要回调 
+  requestAnimationFrame(animate)
+})
+</script>
+21. Object.create(null) obj = {}
+  object.setPrototypeOf(ojb,null)
+  obj.__proto__ = null
+22. 
+
+<script>
+function F(){}
+F.prototype = null
+  var f = new F
+</script>
+23. A.__proto__    B.__proto__   A.prototype.__proto__              B.prototype.__proto__    a      b     a.__proto__               b.__proto__   a.prototype     b.prototype
+
+A.__proto__ => function.prototype
+B.__proto__ => function.prototype
+A.prototype => Object.prototype
+B.prototype => Object.prototype
+A.prototype.__proto__ => B.prototype
+B.prototype.__proto__ => Object.prototype
+a => A{} 
+b => B{}
+a.__proto__ => A.prototype // 产生实例的原型
+b.__proto__ => B.prototype
+a.prototype => un
+b.prototype => un
+产生实例的原型
+24. 0 00000111100 0000001100100110000101111100000110111101101001010001  0001101
+
+0 1023 - 7 科学计数法后  不够补0
+1  11               53 
+25. 
+
+
+42.195
+26. 用来刻画被截断的无穷级数尤其是渐近级数的剩余项
+存在c和n0 当n > n0时
+c*f(n) >= t(n)
+t(n) = O(f(n))
+f(n)放大 让t(n)也能放大
+27. n*log2 n
+28. O(logN * N)  找到乱序数组中第k大的数 时间复杂度O(logN) 空间复杂度(2N)
+29. call apply 可以立即调用该函数 bind返回一个绑定函数
+    call()设置this值 该值为调用函数的对象
+    apply() 和call()this一样区别是第二个参数 apply的第二个参数接收实际函数参数作为数组
+    bind()this在调用函数中绑定函数时设置目标函数的this值
+    <script>
+
+Function.prototype.call
+f.call(thisArg,arg1,arg2...)
+f.apply(thisArg,[arg1,arg2...])
+f2 = f.bind(thisArg,arg1,arg2,...)
+返回一个新的函数 相当于原函数的this及若干个参数已经被固定为绑定的值
+
+function f(a,b,c)
+
+f2.bind(null,a+b+c)
+function f2(c){
+  this = 0
+  a = 1
+  b = 2
+  return a+b+c
+}
+
+      function bind(f){
+        function f (){
+          return apply(f)
+        }
+      }
+    </script>
+
+30. 
+
+function create(proto) {
+  function A(){}
+  A.prototype = proto
+  return new A()
+}
+31. 先打印出setTimeout函数的ID值  暂停1秒后打印出 0 1 2 3 4
+var j = 0 ; function fn(){
+  console.log(j)
+  j++
+}
+for (var i = 0 ; i < 5 ; i++){
+  function fn(){
+    console.log(i)
+  }
+  setTimeout(fn,2000)
+}
+<script>
+for (var i = 0 ; i < 5 ; i++){
+  function () {
+    setTimeout(() => {
+      console.log(i)
+    }, 1000*i);
+  }
+}
+
+</script>
+32. 
+不在函数中使用 window
+构造函数中 新的对象
+函数中 
+  函数被当场函数调用 f(),window
+  当场方法 obj.f() , obj
+  被call apply 
+    f.call()
+    obj.f.call()
+箭头函数
+  看其外部的this
+33.
+<script>
+Object.prototype.getter = function(getter){
+  return getter()
+}
+
+Object.defineProperty(Object, getter, {
+  getter:{
+    function(){
+      return getter
+    }
+  }
+})
+Object.defineProperty(Object, setter, {
+  setter:{
+    function(){
+      return setter
+    }
+  }
+})
+
+</script>
+34.
+<script>
+function forOwn(obj,iterator){
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)){
+      var val = obj[key]
+      if (iterator(val,key,obj) == false){
+        break
+      }
+    }
+  }
+  return obj
+}
+
+</script>
+35. 
+36. __proto__ 是原型链 prototype 是原型属性 原型链指向原型属性
+f = new F()
+f.__proto__ === F.prototype
+37. 
+<script>
+function parseQuertString(str){
+  var result = {}
+  str.split('&').forEach(pair => {
+    var [key,val] = pair.split('=')
+    if (result.hasOwnProperty(key)){
+      if (Array.isArray(result[key])){
+        result[key].push(val)
+      }else{
+        result[key] = [result[key],val]
+      }
+      
+    }else{
+      result[key] = val
+    }
+  })
+  return result
+}
+
+</script>
+38. 算法不同 对应的边缘情况也不同
+调整逆序数 交换逆序数的次数少 性能就越高
+
+39. 
+                9
+          6          8
+      5      4     7   1
+            3  2        0
+40. 例如 var a = new Function
+    首先 var a = new Object
+        a.__proto__ = Function.prototype
+        Function.call(a)
+<script>
+function NEW (f,...args){
+  obj = Object.create(f.prototype)
+  result = f.call(obj,...args)
+}
+
+</script>
+41. toString() for of 
+42. 从想要开始测试的地方开始 一般用于测试函数 或者正则表达式 
+判断一个条件是否成立 如果不成立就抛出一个错误
+可以简化条件不成立时 直接退出函数的逻辑
+一般用于测试函数
+42. 自顶向下分析算法
+实现解析递归结构的字符串时的一种写法
+
+解析器只需要关键自己能解析的一部分即可
+参考JSON解析器的写法
+
+43. innerHTML 从对象的起始位置到结束位置 包括HTML标签
+    innerText 从对象的起始位置到结束位置 不包括HTML标签
+    textContent 文本域的文本内容
+    outerHTML 除了包含innerHTML的全部内容除外 还包含对象标签本身
+    outerText 除了包含innerText的全部内容
+44. 方法里的属性的值就是属性描述符                                   Object.getOwnPropertyDescriptor(obj, prop)  
+用于描述一个属性的对象
+
+45. 等待300ms的原因是移动端浏览器在300ms内判断是否有第二次点击
+fastclick.js
+46. 
+<script>
+function forof(iterable,iterator) {
+  if (!iterable.next ){
+    iterable = iterable[Symbol.iterator]()
+  }
+  var gen = iterable.next()
+  while(gen.done) {
+    if (iterator(gen.val) == false){
+      break
+    }
+    gen = iterable.next()
+  }
+  iterable.return()
+}
+
+</script>
+47. /(?<!xx)OO(?=yy)/g
+48. 
+49. 
+50. 
+<script>
+
+</script>
+51. 1foo2bar6
+52. 先输出1 两秒之后输出 2 
+53. 因为DOM节点添加是append 如果直接放入的DOM中的话 会被认为是替换     进去的新DOM节点
+54. 触发一次单击 再触发一个单击 再触发一个双击
+P P 和P的一段话 触发双击事件时 触发阻止冒泡函数 
+55. 输出长度为8的空数组
+因为原生数组的高阶方法 都不会迭代不存在下标项
+不存在下标项的数组叫稀疏数组
+
+规避 ：
+  使用普通for循环
+  使用lodash lodash的各个函数在处理稀疏数组时 都会当成undefined
+56. 
+57. 每个event 都有一个event.bubbles属性 
+58. 
+59. 正则表达式会用到
+在用字符串表达特殊内容时 当特殊内容里有特殊符号时 用字符串表达这个符号本身 就需要赚义 这时候就会涉及到多重转义 
+如正则表达式
+new RegExp('\\d+')
+60. 零宽断言 从这个位置开始的左边或者右边 满足或不满足某些条件 
+零宽断言匹配一个位置 
+61. String.prototype.replace(regex,str)
+    返回一个新的满足regex的字符串 原str不变 
+    String.prototype.search(regex)
+    在全局搜索 如果找到匹配的字符串 返回第一个找到的索引值 如果没有找到的话 返回-1
+    String.prototype.match(regex)
+    返回满足正则表达式的字符串 返回一个数组
+    RegExp.prototype.test
+    返回一个布尔值 搜索正则表达式和字符串满足的匹配 
+    RegExp.prototype.exec
+    在指定字符串里搜索匹配 返回一个数组或者null
+62. 就是原生js
+63. &xx; \ \ % \
+64. polyfill:在老浏览器里把新浏览器的功能完全实现
+    shim : 无法在老浏览器完全实现的实现 object.create object.defineProperty
+65. 使用匹配回溯算法 在字符串中查找符合正则表达式的字符串
+66. 阻止事件冒泡 如果bubbles为true 可以是用stopPropagation()
+    也可以使用 stopImmediatePropagation() 取消当前事件的进一步捕获或者冒泡取消一切事件处理程序被调用
+    阻止默认行为 preventDefault()
+    使用touch事件 调试工作台切换成移动端
+    el.click()
+
+    el.dispatchEvent(new Event('click'))
+
+67. 事件代理利用了事件冒泡 只指定一个祖先元素的事件 就可以管理在这个祖先元素底下的所有后代元素触发的事件
+68. addeventListener   在事件面前加on  
+标签 里直接加 onclick 代码只在全局作用域运行
+元素.on    绑定的函数可以处于任何作用域 会覆盖
+元素.addeventListener 可以绑定多个 不覆盖 函数可以处于任何作用域
+69. 阻止默认行为 preventDefault() 
+    那些事件处理函数在事件发生以后才调用的事件 无法阻止 如scroll
+    换用同等效果的另一组在默认行为发生之前调用的事件 mousewheel
+70. mouseover与mouseout 从父元素移动到子元素 这两个事件也会被触发
+    会冒泡
+    换用 mouse enter/leace
+71. 随着时间的推移 控制触发函数的次数
+    debounce 频繁触发的事件结束一定时以后才触发
+    输入联想
+    trottle 间歇触发 只是降低频率
+    窗口缩放时 调整页面布局
+72. 
+    storage
+    popstate
+    window.onerror
+    window.onbeforeunload
+    window.document.DOMContentLoaded
+    window.document.readystatechange
+    message
+    hashchange
+
+73. 调用栈 你想要身份证 可是身份证在钱包里 钱包在书包里 书包在身后
+    事件循环 俺也不懂
+    闭包 当一个内部函数被其外部函数之外的变量引用时，就形成了一个闭包。
+
+
+    调用栈 指函数之间的调用形成的栈结构 每种函数语言都有这个概念
+    闭包 从一个作用域里面返回一个函数 只有这个函数能够访问该作用域内的变量
+    同步 一个函数立刻执行并且能够立即给出结果 以返回形式
+    异步 一个函数被稍后调用 这调用发生之前 可能还有其他代码执行
+74. 6个位为一个字符打印信息
+UTF8
+变长编码用来表示符号的编号
+Base64
+用64进制来编码二进制数据
+75. DataURL使用Base64编码 对于正常的URL来说 占用内存 CPU资源 耗时 都比正常的URL多 优点是减少链接数 打开的速度更快 
+DataURL把数据直接编码进了URL里面 可以通过base64 也可以直接把数据放在文本里 
+优势 
+  不需要额外的请求就能拿到数据 小文件效果明显
+劣势 
+  大文件 体积增大了133% 解码需要事件 尤其对于移动端不友好 
+  无法缓存 
+76. 字节应该按照那种顺序来排序 
+当一份数据占用不止一个字节时 ， 数据占用字节的存储顺序 
+分BE和LE
+在使用不同软件或平台处理时 需要统一字节序
+windows使用的就是LE反过来的
+77. damiao
+编码btoa  解码atob
+78. 主机号id 255.255.252.244 网络id10.0.0.0
+79.  
+先发送 TTL 为 1 的回应数据包，并随后的每次发送过程将 TTL 递增 1，直到目标响应或 TTL 达到最大值，从而确定路由
+
+利用ip数据包头的ttl字段第一跳会减1 且减到0以后 包会被丢弃
+且丢弃该数据包的路由器会给源发送者一个反馈
+
+逐次发送ttl值递增的ip数据包
+这些数据包将会依次在该链路上的距离源地址越来越远的路由器上被丢弃
+80. 可靠的确认需要三次
+一次可靠的信息交换就至少需要三次成功的单次通信
+
+双放方交换了初始的序列号以及同意于对方建立连接 这个信息 
+81. tcp能够握手成功 则可 ping tracert
+  ICMP
+    ping request
+    ping response
+82. 尝试连接该端口 如果能成功建立连接 由说明可达
+net.connect()
+nc ip port
+telent ip port
+83. 不能保证探测某udp端口是否可达
+    除非对方回复消息 
+
+
+84. 一开始 窗口的值较小 发送窗口 发送未确认的数据 存在窗口内  窗口有一定长度 长度就是用来控制拥塞的 一旦确认 窗口就往后移动 
+
+  滑动窗口是tcp用来控制接收和发送速率以及用来重组消息顺序的机制
+
+  接收方告知发送方窗口宽度 发送方就可以发送窗口内的所有数据 及时前面的包 没有收到确认也可以发送后面的包 进而达到控制传输速率的效果 
+  拥塞窗口 发送根据丢包的情况来调整的窗口
+  发送窗口 由对方的接收窗口和自己的拥塞窗口来共同确定的
+85. 网卡 ARP协议
+原理就是ARP广播
+
+86. 
+一个服务器在某个端口监听
+任意多个客户端可以建立一个到这个端口的连接
+每个包所属的连接由一个四元组确定 源ip port 目的ip port
+
+连接连理完成后 双方在该连接都只能向对方发消息
+连接就像一水管（字节流管道）
+87. 
+每个UDP端口是对等的 不存在服务器/客户端一说
+任何一个UDP端口也可以向任何其他的UDP端口发送消息
+不局限于只能为某个端口发送消息
+发送的消息不保证能送达
+
+没有连接的概念
+udp仅在ip上加了端口
+88. 
+http是请求 响应模型 
+浏览器会建立一个到服务器的tcp连接 然后发送自己的请求 服务器响应 结束
+作为对比 FTP则是 对话型协议
+
+DNS 请求 响应模型
+NTP协议也是请求 响应模型
+89. 物理层 链路层 网络层 传输层 应用层
+90. 传输层
+91. 网络层
+92. 把你网线 连在别的网线上 链路层 或者 网络层 
+  想象成是电脑拉了一根虚拟的网线到VPN服务器机房
+93. 同一局域网内 先发送ARP广播 根据MAC地址将数据发出 
+经过中间的路由 一次一次的转到目的地址
+94. 端口转发是从一个端口到另一个端口中间进行数据处理封装加密等操作
+常见于NAT路由器
+即NAT路由将从自己某个端口收到的数据 转发到内网某台机器的某个端口
+也可以用于广域网
+
+95. 
+96. 
+NAT Net Address Translate
+为了解决ipv4地址不够用的情况
+原理 大家公用一个公网ip地址
+NAT路由器为了能够区分自己收到的包应该给内网的那台机器 
+它会维护一个动态的端口转发表
+
+透明
+  因为内网的机器以为自己在外网 直接给外网的机器发消息
+    发出去的数据包 会以路由器做SNAT
+  收到的数据包 看起来也确实是来自远程目标机器的
+  实际上通过DNAT转换的 
+97. 
+因为 编码携带了时钟信号
+特点就是每个时钟周期都会有信号的跳变
+
+98. ipconfig /all
+
+    sudo
+    interface
+99. 链路层
+
+也有三层交换机 
+不过其工作职责依然是二层的  不过它能够识别ip数据包的一些信息
+可以用来防止arp广播攻击
+100. 因为需要对每个数据包的地址给予控制 保证数据包得以发送至正确的位置
+主干道上的路由器不可能存储42亿条目的路由表
+就必然导致路由表的某一个条目对应的所有ip地址都从某一个端口出去
+进而对应同一个地区 于是乎同一个地区的ip则会有类似之处
+
+想象成快递分拣机
+101. 
+因为自动获取了ip地址的配置信息
+DHCP
+两次广播
+102. netstat 
+资源监视器
+ss -l查看监听端口
+ss 查看tcp连接
+netstat -naop 同时查看到进程id
+
+103. 解析域名 dns主要用来域名 和 IP地址的转换 没DNS 上百度就要在地址栏输入       220.181.38.141
+104. 网卡 MAC 
+让对方出示我信任的证书
+105. 对称加密 两个公钥 一个私钥 非对称加密 一边一个公钥 一个私钥
+tcp可以半开
+
+106. 在挥手的时候 有一方数据包没传输完毕 所以一方只能先回复ack 等到数据包发送或者接收完毕了 再fin 所以就是四次挥手 
+107. 0.0.0.0 本机IP 255.255.255.255 网络IP或子网掩码
+0.0.0.0 代表本机所有ip地址
+255.255.255.255 代表广播地址
+108. 网卡 网线 ， tcp udp ，
+01信号的传输
+以太网帧的传输
+全球任意两台机器之间的传输
+两个机器中 两个程序间的信息传送
+传输过来的数据怎么用
+109. 在广域网的身份证 
+被主干网上的路由器认可的ip
+110. 在局域网的身份证
+仅局域网设备认可的ip地址
+111. 最大传输单元是指一种通信协议的某一层上面所能通过的最大数据包大小
+Maxium Transfer Unit
+
+112. 因为HTTP协议所有的内容都可以以文本获得 其他协议的内容都是二进制表达的
+http协议在该tcp连接上发送的都是字符串
+包括协议的首部和头
+
+协议的包头中的数据都是以二进制形式编码的
+
+113. 因为DHCP是动态IP协议 在广域网中 DHCP是通过
+
+客户端可以拔了网线就走 拔网线的瞬间不会通知网络中的机器
+对于DHCP服务器来说 它会认为你还在 就不会把ip分给别人 
+长此以往IP就会被分光 新来的机器就没ip可能
+
+所以需要续租 当不续租的时候 就回收
+114. 服务器端因为某种原因关闭了链接 而客户端还在传输或读写数据
+
+代表中间设备或对方给你发了一个RST置1的包
+
+Connection Refused 
+代表对方没有监听
+115. 因为外网IP 和 局域网IP 不一样 
+因为NAT路由不止你在监听
+所以自己收到的数据包 不知道转发给内网的那个ip 所以被丢弃了
+
+解决办法 设置端口转发
+UPnP 内网的程序告诉路由器 我在监听 让路由器把特定端口的数据发给我的机器 
+116. 浏览器先找到和https://www.mi.com/index.html相关联的服务器地址然后尝试通过80端口建立TCP连接 其中80端口是HTTP的默认通信端口 如果服务器接受了该连接 浏览器就会发送请求报头 然后服务器端 会反馈一个HTTP报头 
+
+读缓存
+hosts文件的读取
+dns解析器
+建立tcp连接
+证书交换 建立tls连接
+发送http请求
+接收响应
+构建DOM树
+渲染页面

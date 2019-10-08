@@ -1,0 +1,27 @@
+<script>
+//创建自定义对象的最简单的方法就是创建一个Object的实例
+var person = new Object()
+person.name = "pi"
+person.age = 888
+person.job = "five"
+
+person.sayName = function(){
+  alert(this.name)
+}
+
+//通过Object.create 创建的新对象 使用现有的对象来提供新创建的对象的__proto__
+var person = {
+  isHuman:false,
+  print:function(){
+    console.log(`My name is ${this.name} I am human? ${this.isHuman}`)
+  }
+}
+var me = Object.create(person)
+
+me.name = "pi"
+me.isHuman = true
+me.print()
+//Object.create(proto[, propertiesObject]) propertiesObject
+//Object.defineProperties()
+</script>
+<img src="" alt="" style="width: ;">

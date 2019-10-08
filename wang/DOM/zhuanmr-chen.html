@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>eat</title>
+  <style>
+    p {
+      width: 1000px;
+      height: 1000px;
+    }
+
+
+    .cat {
+      width: 20px;
+      height: 20px;
+      position: fixed;
+      color: red;
+      display: inline-block;
+      font-size: 3em;
+    }
+
+    .hat {
+      width: 20px;
+      height: 20px;
+      position: fixed;
+      color: blue;
+      display: inline-block;
+      font-size: 3em;
+    }
+
+    .aat {
+      width: 20px;
+      height: 20px;
+      position: fixed;
+      color: green;
+      display: inline-block;
+      font-size: 3em;
+    }
+
+    .xat {
+      width: 20px;
+      height: 20px;
+      position: fixed;
+      color: cyan;
+      display: inline-block;
+      font-size: 3em;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <p>
+    <span class="cat">n</span>
+    <span class="hat">m</span>
+    <span class="aat">s</span>
+    <span class="xat">l</span>
+
+  </p>
+  <script>
+    var cat = document.querySelector('.cat')
+    var hat = document.querySelector('.hat')
+    var aat = document.querySelector('.aat')
+    var xat = document.querySelector('.xat')
+    var id = 0
+
+    var angle = 0
+    var ps = document.querySelector('p')
+
+
+    
+    var lastTime = null, flag = false, el
+    
+
+    function start(e) {
+      function animate(time) {
+        if (lastTime != null) {
+          angle += (time - lastTime) * 0.1
+        }
+        
+        
+        lastTime = time
+        var catX = Math.sin(-angle) * 100
+        var catY = Math.cos(-angle) * 100
+
+
+        var hatX = Math.sin(-angle + 36) * 100
+        var hatY = Math.cos(-angle + 36) * 100
+
+        var aatX = Math.sin(-angle + 72) * 100
+        var aatY = Math.cos(-angle + 72) * 100
+
+        var xatX = Math.sin(-angle + 108) * 100
+        var xatY = Math.cos(-angle + 108) * 100
+
+        var clientX = el.clientX
+        var clientY = el.clientY
+
+        cat.style.left = catX + clientX - 10 + 'px'
+        cat.style.top = catY + clientY - 10 + 'px'
+
+        hat.style.left = hatX + clientX - 10 + 'px'
+        hat.style.top = hatY + clientY - 10 + 'px'
+
+        aat.style.left = aatX + clientX - 10 + 'px'
+        aat.style.top = aatY + clientY - 10 + 'px'
+
+        xat.style.left = xatX + clientX - 10 + 'px'
+        xat.style.top = xatY + clientY - 10 + 'px'
+        id = requestAnimationFrame(animate)
+      }
+      el = event
+      if (!flag) {
+        id = requestAnimationFrame(animate)
+        flag = true
+      }
+    }
+    var ramtime = Math.random()*10000
+    function stop(e) {
+      if (e.key === 'Control') {
+        setTimeout(function(){
+          cancelAnimationFrame(id)
+          // ps.removeEventListener('mousemove', start)
+          flag = false
+        },ramtime)
+      }
+    }
+
+    ps.addEventListener("mousemove", start)
+    window.addEventListener("keydown", stop)
+
+
+
+  </script>
+</body>
+
+<html>

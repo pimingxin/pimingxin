@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .completed span {
+      text-decoration: line-through;
+    }
+    /* body {
+      counter-reset: count;
+    }
+    ul > li:not(.completed) {
+      counter-increment: count;
+    }
+
+    #count::before {
+      content: counter(count);
+    } */
+    ul[data-show="all"] {
+
+    }
+    ul[data-show="active"] li.completed {
+      display: none;
+    }
+    ul[data-show="completed"] li:not(.completed) {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="todo-app"></div>
+  <script>
+    var showingCategory = 'all'
+    var editing = -1
+    
+
+    var todos = JSON.parse(localStorage.getItem('todos')) || [{
+      done: true,
+      content: 'eat',
+      arrIdx: 0,
+    }, {
+      done: true,
+      content: 'drink',
+      arrIdx: 1,
+    }, {
+      done: false,
+      content: 'sleep',
+      arrIdx: 2,
+    }]
+    var length = todos.length
+    var todoAppEl = document.querySelector('#todo-app')
+
+    function showing(todo, idx) {
+      if (showingCategory === 'all') {
+        return true
+      }
+      if (showingCategory === 'active') {
+        return !todo.done
+      }
+      if (showingCategory === 'completed') {
+        return todo.done
+      }
+    }
+    function render() {
+      localStorage.todos = JSON.stringify(todos)
+      var html = `
+        <div>
+          <input type="checkbox" class="toggle-all" ${todos.every(todo => todo.done) ? 'checked' : ''} /> <input type="text" class="todo-input" />
+        </div>
+        <ul>
+          ${
+            todos.filter(showing).map((todo, idx) => {
+              return `
+                <li data-arrIdx="${todo.arrIdx}" data-idx="${idx}" class="${todo.done ? 'completed' : 'uncompleted'}">
+                  <input type="checkbox" class="toggle-todo" ${todo.done ? 'checked' : ''}/>
+                  ${editing === idx ? 
+                    `<input type="text" value="${todo.content}" />`
+                    :
+                    `<span class="todo-content">${todo.content}</span>`
+                  }
+                  <button class="delete-todo">&times;</button>
+                </li>
+              `
+            }).join('')
+          }
+        </ul>
+        <div>
+          <span>${todos.filter(todo => !todo.done).length} item${todos.filter(todo => !todo.done).length > 1 ? 's' : ''} left</span>
+          <span>
+            <label><input type="radio" name="category" ${showingCategory == 'all' ? 'checked' : ''} value="all"/> All</label>
+            <label><input type="radio" name="category" ${showingCategory == 'active' ? 'checked' : ''} value="active"/> Active</label>
+            <label><input type="radio" name="category" ${showingCategory == 'completed' ? 'checked' : ''} value="completed"/> Completed</label>
+          </span>
+          ${
+            todos.some(todo => todo.done) ?
+              '<button class="clear-completed">Clear Completed</button>'
+              :
+              ''
+          }
+        </div>
+
+      `
+      todoAppEl.innerHTML = html
+    }
+
+    render()
+
+    todoAppEl.addEventListener('keyup', e => {
+      if (e.target.matches('input.todo-input')) {
+        if (e.keyCode == 13) {
+          var todoText = e.target.value.trim()
+          if (todoText) {
+            todos.push({
+              content: todoText,
+              done: false,
+              arrIdx: length++,
+            })
+            render()
+            todoAppEl.querySelector('input.todo-input').focus()
+          }
+        }
+      }
+    })
+
+
+
+
+    todoAppEl.addEventListener('click', e => {
+      if (e.target.matches('button.delete-todo')) {
+          var idx = parseInt(e.target.parentNode.dataset.arridx)
+          todos.splice(idx, 1)
+          length--
+          for (let i = idx; i < length; i++) {
+            todos[i].arrIdx = i
+          }
+          render()
+      }
+    })
+    
+    todoAppEl.addEventListener('click', e => {
+      if (e.target.matches('input.toggle-todo')) {
+          var idx = parseInt(e.target.parentNode.dataset.idx)
+          todos[idx].done = !todos[idx].done
+          render()
+      }
+    })
+
+    todoAppEl.addEventListener('click', e => {
+      if (e.target.matches('button.clear-completed')) {
+          todos = todos.filter(todo => !todo.done)
+          render()
+      }
+    })
+
+    //  改变展示类型
+    todoAppEl.addEventListener('click', e => {
+      if (e.target.matches('input[type="radio"]')) {
+          showingCategory = e.target.value
+          render()
+      }
+    })
+
+    todoAppEl.addEventListener('click', e => {
+      if (e.target.matches('input.toggle-all')) {
+          if (todos.every(it => it.done)) {
+            todos.forEach(it => it.done = false)
+          } else {
+            todos.forEach(it => it.done = true)
+          }
+          render()
+      }
+    })
+
+    todoAppEl.addEventListener('dblclick', e => {
+      if (e.target.matches('span.todo-content')) {
+          var idx = parseInt(e.target.parentNode.dataset.idx)
+          editing = idx
+          render()
+          var editBox = todoAppEl.querySelector('li input[type="text"]')
+          editBox.focus()
+          editBox.selectionStart = editBox.selectionEnd = 999999999
+      }
+    })
+
+    todoAppEl.addEventListener('focusout', e => {
+      if (e.target.matches('li input[type="text"]')) {
+          if (editing == -1) {
+            return
+          }
+          if (e.target.value){
+            todos[parseInt(e.target.parentNode.dataset.arridx)].content = e.target.value
+            editing = -1
+            render()
+          }else{
+            let idx = parseInt(e.target.parentNode.dataset.arridx)
+            todos.splice(idx,1)
+            length--
+            for (let i = idx; i < length; i++) {
+            todos[i].arrIdx = i
+          }
+        }
+        render()
+      }
+    })
+
+    todoAppEl.addEventListener('keyup', e => {
+      if (e.target.matches('li input[type="text"]')) {
+        
+        if (e.keyCode == 13) {
+          if (e.target.value){
+            todos[parseInt(e.target.parentNode.dataset.arridx)].content = e.target.value
+          }else{
+            let idx = parseInt(e.target.parentNode.dataset.arridx)
+            todos.splice(idx,1)
+            length--
+            for (let i = idx; i < length; i++) {
+            todos[i].arrIdx = i
+          }
+        }
+          render()
+          
+          
+        } else if (e.keyCode == 27) {
+          editing = -1
+          render()
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <!-- 
+    Vue.component 定义组件
+      data funciton
+      template 定义模板 可在里面使用v-等指令操作 
+      props Prop 是你可以在组件上注册的一些自定义特性。当一个值传递给一个 prop 特性的时候，它就变成了那个组件实例的一个属性。为了给博文组件传递一个标题，我们可以用一个 props 选项将其包含在该组件可接受的 prop 列表中
+
+    new Vue实例
+      在new Vue实例中 也有可能在data里有一个props的数组
+   -->
+   <div id="app">
+    <button-count></button-count>
+   </div>
+   <script>
+     Vue.component('button-count' , {
+       data : function(){
+         return {
+           count:0
+         }
+       },
+       template:`
+        <button @click="count++">{{ count }}</button>
+       `
+     })
+     new Vue({
+       el:'#app'
+     })
+   </script>
+   <div id="app1">
+      <test-props title="nmsl"></test-props>
+   </div>
+   <script>
+     Vue.component('test-props' , {
+       props:['title'],
+       template:'<h3>{{ title }}</h3>'
+     })
+     new Vue({
+       el:'#app1'
+     })
+   </script>
+   <div id="app2">
+     <nmsl
+      v-for="post in posts"
+      v-bind:value="post.id"
+      v-bind:title="post.title"
+     ></nmsl>
+   </div>
+   <script>
+    Vue.component('nmsl',{
+      props:['title'],
+      template:`<h3>{{ title }}</h3>`
+    })
+
+
+     new Vue({
+       el:'#app2',
+       data:{
+        posts:[
+           { id:1 , title:'nmsl'},
+           { id:2 , title:'zhouzhou'},
+           { id:3 , title:'xiaomizhou'}
+        ]
+       }
+     })
+   </script>
+   <!-- 
+     vm里的data里的posts 只是提供给组件的数据 
+     组件如果想要使用的话 需要在组件标签中配合v-for 和v-bind使用
+    -->
+    <hr>
+    <div id="app3">
+      <div :style="{fontSize:postFontSize + 'em'}">
+      <blog
+        v-for="post in posts"
+        v-bind:post="post"
+        @enlarge-text="onEnlargeText"
+      >
+      </blog>
+    </div>
+    </div>
+
+    <script>
+      Vue.component('blog' , {
+        props:['post'],
+        template:`
+          <div>
+            <h3>{{ post.title }}</h3>
+            <button @click="$emit('enlarge-text' , 0.1)">
+              Enlarge text
+            </button>
+            <div v-html="post.content"></div>
+          </div>
+        `,
+        
+      })
+//button 绑定一个click事件 当事件触发的时候 触发另一个事件 enlarge-text 在组件标签上定义这个事件 组件标签的值 可以获取来自new Vue的实例 在实例的data中 定义一个属性 然后在标签定义事件的地方来控制这个值的行为 
+
+//$emit可以传入第二个参数 来决定抛出的值 然后可以在定义标签事件的地方 使用$event来接住这个值 可以传到上层的父组件内 父组件又能改变自身data的值 
+
+//如果这个事件处理函数是一个方法 需要在vm内定义这个方法
+      var vm = new Vue({
+        el:'#app3',
+        data:{
+          posts:[
+            {title:'nmsl' , content:'cnm'},
+            {title:'ndsl' , content:'cnd'},
+            {title:'nbs' , content:'njwbs'}
+          ],
+          postFontSize:1
+        },
+        methods:{
+          onEnlargeText: function(e){
+            this.postFontSize += e
+          }
+        }
+      })
+    </script>
+    <!-- 
+      对于组件来说 Vue.component('base' , {
+        model:{
+          prop:'checked',
+          evnet:'change',
+        }
+      })
+      对这个base使用v-model 相当于使用checked属性 和 change事件
+     -->
+<hr>
+     <div id="app4">
+        <date-picker v-model="born"></date-picker>
+     </div>
+     <script>
+     
+     Vue.component('date-picker' , {
+       template:`
+        <span>
+          请选择日期：
+          <input type="date" :value="date" @change="dateChange">
+        </span>
+       `,
+       methods:{
+        dateChange(e){
+          this.$emit('input', new Date(e.target.value))
+        }
+       },
+       watch:{
+        value(val){
+          this.date = val.toLocaleDateString().replace(/\//g , '-')
+        }
+       },
+       props:{
+         value:{
+           type: Date,
+           default: new Date()
+         }
+       },
+       data(){
+         return {
+           date:this.value.toLocaleDateString().replace(/\//g , '-')
+         }
+       }
+     })
+
+     var vm = new Vue({
+       el:'#app4',
+       data(){
+         return {
+           born: new Date('2017-11-11')
+         }
+       },
+
+     })
+     </script>
+</body>
+</html>

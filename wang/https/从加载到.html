@@ -1,0 +1,139 @@
+触屏到cpu
+  电容屏 Capacitive
+  触屏控制器 Synaptics S3350B
+CPU内部处理
+  移动设备中CPU和GPU等芯片继承在一起 称为SoC
+  时钟控制下 电流经过莫斯管 MOSFET
+CPU到操作系统内核
+  记录触摸触发次数 手指单击会产生两次中断 滑动会产生上百次中断
+操作系统GUI到浏览器
+  监听
+浏览器到浏览器内核
+  前面提到操作系统 GUI 将输入事件传递到了浏览器中，在这过程中，浏览器可能会做一些预处理，比如 Chrome 会根据历史统计来预估所输入字符对应的网站，比如输入了「ba」，根据之前的历史发现 90% 的概率会访问「www.baidu.com 」，因此就会在输入回车前就马上开始建立 TCP 链接甚至渲染了，这里面还有很多其它策略，感兴趣的读者推荐阅读 High Performance Networking in Chrome。
+  接着是输入 URL 后的「回车」，这时浏览器会对 URL 进行检查，首先判断协议，如果是 http 就按照 Web 来处理，另外还会对这个 URL 进行安全检查，然后直接调用浏览器内核中的对应方法，比如 WebView 中的 loadUrl 方法。
+  在浏览器内核中会先查看缓存，然后设置 UA 等 HTTP 信息，接着调用不同平台下网络请求的方法。
+HTTP请求的发送
+  通过DNS查询IP
+  通过Socket发送数据
+DNS查询
+  应用程序可以直接调用Libc提供的getaddrinfo()方法来实现DNS查询
+  DNS查询基于UDP实现
+  这是个逐步缩小范围的查找过程
+  首先由本机所配置的DNS服务器向DNS根节点查询 负责.com区域的服务器然后通过其中一个负责.com服务器的查询 负责baidu.com的服务器
+  最后一个由一个baidu.com的域名服务器查询fex.baidu.com域名的地址
+通过Socket发送数据
+  有了IP地址 可以通过Socket API发送数据
+  可以选择TCP和UDP
+  HTTP常用的是TCP
+协议
+  TCP协议加载HTTP文本前面的
+  再往上就是MAC协议
+  当一台电脑加入网络时 ARP协议告诉其他网络设备它的IP及对应MAC 通过ip地址来查找对应的设备
+数据从本机网卡发送到服务器
+  原理是基于无线电，通过电流变化来产生无线电，这个过程也叫「调制」，而反过来无线电可以引起电磁场变化，从而产生电流变化，利用这个原理就能将无线电中的信息解读出来就叫「解调」，其中单位时间内变化的次数就称为频率
+运营商网络内的路由
+  可以通过traceroute查看路由的ip和位置
+主干网间的传输
+  对于长线的数据传输，通常使用光纤作为介质，光纤是基于光的全反射来实现的，使用光纤需要专门的发射器通过电致发光（比如 LED）将电信号转成光，比起前面介绍的无线电和双绞线，光纤信号的抗干扰性要强得多，而且能耗也小很多
+IDC内网
+  这时可以先通过分光器将流量镜像一份出来方便进行安全检查等分析
+  需要注意的是，一般网络书中提到的交换机都只具备二层（MAC 协议）的功能，但在 IDC 中的交换器基本上都具备三层（IP 协议）的功能，所以不需要有专门的路由了。
+服务器 CPU
+  数据到达服务器网卡 网卡会将数据拷贝到内存中 通过中断来通知CPU
+服务器接收到数据后进行哪些处理
+  负载均衡
+    有基于硬件的
+    操作系统传输层TCP上的LVS
+    应用层HTTP实现的反向代理
+    LVS
+      LVS作用是对外看来只有一个IP 而实际上 这个IP后面对应的是多台机器
+      NAT也是LVS中的工作默认 还有DR TUNNEL 缺点是无法跨网段
+    反向代理
+      工作在HTTP上的 基于HAProxy 和 Nginx
+服务器返回数据后浏览器如何处理
+  01到字符
+    HTTP请求返回的HTML传递到浏览器后
+    有gzip先解压
+    编码
+  js的执行
+  外链资源加载
+  字符到图片
+  跨平台2D绘制库
+  GPU合成
+浏览器如何将页面展示出来
+  一个内存区域的映射 这段内存区域称为Framebuffer
+  内存到LCD
+    SoC 中通常都会有一个 LCD 控制器，当 Framebuffer 准备好后，CPU 会通过 AMBA 内部总线通知 LCD 控制器，然后这个控制器读取 Framebuffer 中的数据，进行格式转换、伽马校正等操作，最终通过 DSI、HDMI 等接口发往 LCD 显示器。
+
+
+//zhihu
+第一步 浏览器对用户输入的网址做初步的格式化检查
+只输入zhihu.com默认使用http协议 现在大多为https
+浏览器处理部分
+  TCP/IP 只接收ip地址 zhihu.com没用
+  浏览器到DNS查询zhihu.com的ip地址
+  先查自己内存的DNS Cache
+  再查本地硬盘的host文件
+  DNS服务器查询 8.8.8.8 谷歌ip地址
+  DNS将查询到的数据打包
+  DNS联系TCP/IP
+  UDP发送数据包
+  UDP给到IP
+  IP查找MAC
+  没找到就发送ARP广播
+  相对应的网关发送自己的MAC给IP
+  网关 gateway www
+  如果zhihu.com对应的IP没有缓存
+  DNS会通过DNS域名系统的根服务器"."
+  zhihu.com的完整写法应该是zhihu.com.
+  根域名服务器全球一共13台
+  DNS知道13台根服务器的IP地址
+  
+  拿到服务器IP地址 DNS把结果返回给浏览器
+  浏览器通过TCP/IP
+  TCP三次握手
+  TCP于对方建立可靠的虚拟通道
+  浏览器将http请求消息 打包给TCP
+  通过IP传输
+  http server
+  HTTP Redirect
+  TLS
+  交换证书
+
+
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+  <body>
+    <button>cat</button>
+    <div>getcats</div>
+    <script>
+      var btn = document.querySelector('button')
+      var div = document.querySelector('div')
+
+      function get(url,callback){
+        var xhr  = new XMLHttpRequest()
+        xhr.open('GET',url)
+      }
+      btn.addEventListener('click',e=>{
+        btn.textContent = 'loading...'
+        get('https',data =>{
+          btn.textContent = 'show cats'
+          var ary = JSON.parse(data)
+          for (var imgOBJ of ary) {
+            var img = document.createElement('img')
+            img.src = 'https' + imgOBJ.url
+            div.append(img)
+          }
+        })
+      })
+    
+    </script>
+  </body>
+  </html>

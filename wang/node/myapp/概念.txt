@@ -1,0 +1,21 @@
+express 
+
+express() 是一个函数
+
+工厂函数
+
+中间件 
+
+express.json([options])
+
+req.body 解析完成的请求体 存储的地方
+
+express.static(root)
+
+静态文件
+
+app.rander()
+直接调用相当于
+res.rander()
+从文件里返回一个页面给浏览器
+

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    在浏览器输入elquentjavascript.net/17_http.html
+    浏览器先找到和elquentjavascript.net相关联的服务器地址
+    然后尝试通过80端口建立TCP链接 Transmission Control Protocol 传输控制协议
+    其中80端口是http的默认通信端口 
+    如果服务器存在并接收了该链接 
+    浏览器就会发送如下内容
+    GET / 17_http.html HTTP/1.1
+    Host: qloquentjavascript.net
+    User-Agent: Your browser's name
+
+    服务器会通过同一个链接返回如下内容
+    HTTP/1.1 200 OK
+    Content-Length: 65585
+    Content-Type: text/html
+    Last-Modidied: Web, 09 Apr 2014 10:4809 GMT
+    最后修改
+    <!doctype html>
+    ... the rest of the document//文件的其余部分
+
+    浏览器会除去响应中的空行 并将剩余部分作为HTML文档展示
+    由客户端发出的信息叫做请求 请求的第一行如下 
+
+    GET /17_http.html HTTP/1.1
+
+    请求的第一个单词的请求方法
+    GET表示我们希望得到一个我们制定的资源其他方法还有DELETE 用于删除一个资源
+    PUT用于替换资源 POST用于发送消息
+    服务器不一定会处理所有收到的请求
+
+    GET 请求获得指定资源
+    17_http.html请求的地址
+    HTTP/1.1 协议版本
+
+    版本号后面的是应答状态首先是三位的状态码 然后是一个可读的字符串
+    HTTP/1.1 200 OK
+    以2开头的状态码表示请求成功 以4开头的状态码说明请求中有错误 
+    以5开头的状态码表示服务器出现了问题 请求没有问题
+
+    请求或响应的第一行后可能会有任意个消息头
+    Content-Length: 65585
+    Content-Type: text/html
+    Last-Modidied: Web, 09 Apr 2014 10:4809 GMT
+
+    一些消息头是必须的 例如 指定主机名的Host头在请求中是必须的
+    因为一个服务器在一个IP地址下有多个主机名服务 
+    如果没有Host头 服务器则无法判断客户端尝试请求哪儿主机
+
+    请求和应答可能会在消息头后包含一个空行 
+    后面则是消息体
+    包含所发送的数据 
+    GET和DELETE请求不单独发送任何数据
+    但PUT和POST请求则会
+    一些响应类型不需要有消息体 例如错误应答
+   -->
+  <!-- 
+     GET得到指定资源
+     DELETE 删除一个资源
+     PUT 替换资源
+     POST 发送消息
+    2开头 请求成功
+    4开头 请求中有错误
+    5开头 服务器出现了问题 请求没有问题
+    -->
+  <form method="GET" action="example/message.html">
+    <p>Name: <input type="text" name="name"></p>
+    <p>Message: <br><textarea name="message"></textarea></p>
+    <p><button type="submit">Send</button></p>
+  </form>
+  <!-- 
+      浏览器会将这个请求字符串添加到action属性的URL中 然后向这个URL发送GET请求
+      GET /example/message.html?name=Jean&message=Yes%3F HTTP/1.1
+      
+      ?后面是多个名称和值 &用来分隔不同的名称对 
+      %3F使用一个百分号和16进制的数字来对字符进行编码3F 十进制为63就是问号的编码
+      encodeURLComponent
+      decodeURLComponent
+
+      如果将本例的method属性改为POST
+      则浏览器会使用POST方法发送该表单 并将请求字符串放到请求体中 而不是添加到URL中
+
+      POST /example/message.html HTTP/1.1
+      Content-length: 24
+      COntent-type: application/x-www-form-urlencoded
+
+      name=Jean&message=Yes%3F
+     -->
+  <!-- 
+       request 请求
+      浏览器端的JavaScript发送HTTP请求所用的接口叫作XMLHttpRequest
+      -->
+  <!-- 
+        发送请求
+        为了发送一个请求 我们需要使用XMLHttpRequest 构造器创建一个请求对象
+        并调用其open和send方法
+       -->
+  <script>
+    var req = new XMLHttpRequest()
+    req.open("GET", "example.data.txt", false)
+    req.send(null)
+    console.log(req.responseText)
+  </script>
+  <!-- 
+        open方法会配置请求 本例选择向example.data.txt发送GET请求
+        不以协议名开头的URL是相对URL
+        即该浏览器会根据当前文档路径解析URL
+        如果URL以/开头浏览器会有其替换当前路径服务器后的路径
+        如果没有/开头则浏览器会将相对URL添加到当前路径后 并在中间使用/进行分隔
+
+        -->
+  <!-- 
+          Fetch
+          浏览器可以通过fetch接口生成HTTP请求由于它比较新 所以他很方便的使用了Promise
+
+         -->
+  <!-- 
+          打开请求之后可以使用send方法发送请求send方法的参数为请求体 GET请求中可以传递null 如果open方法的第三个参数为false send会在接收到请求的响应后返回结果
+          可以通过读取request对象的responseText属性得到响应体
+          通过statusText获取人类可以理解的状态文本 通过getResponseHeader获取响应头 
+ -->
+ <script>
+   var req= new XMLHttpRequest()
+   req.open("GET","example/data.txt",false)
+   req.send(null)
+   console.log(req.status,req.statusText)
+   //200 OK
+   console.log(req.getResponseHeader("content-type"))
+   //text/plain
+ </script>
+ <script src="./a.js"></script>
+ <!-- 
+   头信息的名称不区分大小写 浏览器会自动添加一些头消息例如Host和其他一些服务器用来辨识请求体
+   可以通过调用setRequestHeader方法来添加更多的头消息 这种用法通常只用于一些特殊用途 同时需要服务端的配合 服务器可以忽略任何无法处理的头信息
+  -->
+</body>
+
+</html>

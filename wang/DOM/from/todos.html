@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    html{
+      transition: .5s;
+    }
+    h1{
+      color: rgba(175,47,47,0.15);
+      top : 0px;
+      width: 100%;
+      font-size: 100px;
+      font-weight: 100;
+      text-align: center;
+
+    }
+    body{
+      line-height: 1.4em;
+      color: #4d4d4d;
+      min-width:230px;
+      max-width: 550px;
+      margin: 0 auto;
+      padding:0;
+      display: block;
+    }
+    div {
+      display: block;
+    }
+    header {
+      display: block;
+    }
+    #nmsl{
+      border: none;
+      background-color: rgba(0,0,0,0.05);
+      box-shadow: inset 0 -2px 1px rgba(95, 61, 61, 0.05);
+      width: 85%;
+      padding: 15px;
+    }
+    #nmms {
+      float: left;
+      height: 40px;
+      width: 40px;
+    }
+    #nmsl::placeholder{
+      font-style: italic;
+      text-align: center;
+    }
+    ul {
+      list-style-type: none;
+    }
+    .list li{
+    
+      height: 40px;
+    }
+    .close {
+      float: right;
+      color: red;
+      display: none;
+      cursor: pointer;
+    }
+    .isli:hover .close{
+      display: block;
+    }
+    .dontshow{
+      overflow: hidden;
+      height: 0px!important;
+      transition: .5s;
+    }
+    .leave{
+      text-decoration: line-through;
+      color:rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>todos</h1>
+  <div id="all">
+    <header id="nbysl">
+      <input type="checkbox" name="" onclick="checkall()" id="nmms">
+      <input type="text" placeholder="What needs to nmsl?"  id="nmsl">
+    </header>
+    <section id="sec">
+      <ul id="list">
+
+      </ul>
+    </section>
+    <footer>
+      <div><span id="itemsNumber">0</span> items left</div>
+      <div>
+        <button onclick="filter('all')">All</button>
+        <button onclick="filter('active')">Active</button>
+        <button onclick="filter('completed')">Completed</button>
+        <button onclick="remove()" id="xixihaha" class="dontshow">Clear completed</button>
+    </div>
+    </footer>
+    
+  </div>
+
+  <script>
+    var nmsl = document.querySelector('#nmsl')//选择器选择到input
+    var list = document.querySelector('#list')//选择器选择到ul元素
+    
+
+    nmsl.addEventListener('keydown',function(e){//input绑定keydown事件
+      if (e.key == 'Enter' && nmsl.value != ''){//添加触发条件
+        var temp = `<li class="isli"> <input type="checkbox" class = "xixi">`+ nmsl.value +`<i class = "close">X</i> </li>`//DOM结构
+        var li = document.createRange().createContextualFragment(temp)//创建节点
+        nmsl.value = ''//回车后 input内容清零
+        list.appendChild(li)//添加到主DOM里 ul的子元素
+        checklonely()//左下角数字实时更新
+      }
+    })
+    list.addEventListener("click",e=>{//ul元素绑定事件
+      if (e.target.classList.contains("close")){ //如果触发事件元素含有类名为close的
+        list.removeChild(e.target.parentElement)//删掉自己的父元素li
+        checklonely()//更新左下角
+      }
+      if (e.target.classList.contains("xixi")){
+        checklonely()//更新checkbox选中的状态
+      }
+    })
+
+    function checkall (){
+      var nmms = document.querySelector("#nmms")//上方负责全选的checkbox
+      var xixi = document.querySelectorAll(".xixi")//负责选择单个li checkbox的
+      // console.log(xixi)
+      for (let x = 0 ; x < xixi.length ; x++){
+        xixi[x].checked = nmms.checked//如果单个li全部全选了 对应的上方的checkbox也要变成选中状态 如果有一个没有被选中 那就是没checked的状态
+      }
+      checklonely() //更新左下方
+
+    }
+    function checklonely(){//左下方数字和全选状态
+      var xixi = document.querySelectorAll(".xixi")
+      var flag = true
+      var count = 0
+      var galf = false
+      var itemsNumber = document.getElementById('itemsNumber')
+      var a = document.querySelector('#xixihaha')
+      for (var x = 0 ; x < xixi.length ; x++){
+        if (xixi[x].checked == false){
+          flag = false
+          count++
+          xixi[x].parentElement.classList.remove("leave")
+        }else{
+          galf =true
+          xixi[x].parentElement.classList.add("leave")
+        }
+      }
+        nmms.checked = flag//判断全选
+        itemsNumber.textContent = count//左下方数字的更新
+        
+        if (galf){
+          a.classList.remove("dontshow")
+        }else{
+          a.classList.add("dontshow")
+        }
+    }
+    function filter(show){
+      var nmms = document.querySelector("#nmms")
+      var xixi = document.querySelectorAll(".xixi")
+      if (show == 'all'){
+        for (let x = 0 ; x < xixi.length ; x++){
+          xixi[x].parentElement.classList.remove('dontshow')
+      }
+    }
+
+      if (show == 'active'){
+        for (let x = 0 ; x < xixi.length ; x++){
+          if (xixi[x].checked == true){
+            xixi[x].parentElement.classList.add('dontshow')
+          }else{
+            xixi[x].parentElement.classList.remove('dontshow')
+          }
+      }
+      }
+      
+      if (show == 'completed'){
+        for (let x = 0 ; x < xixi.length ; x++){
+          if (xixi[x].checked != true){
+            xixi[x].parentElement.classList.add('dontshow')
+          }else{
+            xixi[x].parentElement.classList.remove('dontshow')
+          }
+        }
+      }
+    }
+    function remove(){
+      var xixi = document.querySelectorAll('.xixi')
+      for (let x = 0 ; x  < xixi.length ; x++){
+        if (xixi[x].checked == true){
+          list.removeChild(xixi[x].parentElement)
+        }
+      }
+      checklonely()
+    }
+
+  </script>
+
+</body>
+</html>

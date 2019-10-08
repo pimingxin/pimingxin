@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>simple virtual list</title>
+  <style>
+    .list-wrap{
+      height: 400px;
+      width: 300px;
+      border: 5px solid red ;
+      overflow-y: scroll;
+    }
+    ul {
+      position: relative;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      box-sizing: border-box;
+      height: 50px;
+      border: 2px solid;
+      padding: 5px;
+      position: absolute;
+      left: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="list-wrap">
+    <ul class="list" style="height: 0">
+      <li>01</li>
+      <li>02</li>
+      <li>03</li>
+      <li>04</li>
+      <li>05</li>
+      <li>06</li>
+      <li>07</li>
+      <li>08</li>
+      <li>09</li>
+      <li>10</li>
+      <li>11</li>
+      <li>12</li>
+      <li>13</li>
+      <li>14</li>
+      <li>15</li>
+      <li>16</li>
+      <li>17</li>
+      <li>18</li>
+      <li>19</li>
+      <li>20</li>
+      <li>21</li>
+      <li>22</li>
+      <li>23</li>
+      <li>24</li>
+      <li>25</li>
+      <li>26</li>
+      <li>27</li>
+      <li>28</li>
+      <li>29</li>
+      <li>30</li>
+    </ul>
+  </div>
+  <script>
+    var list = document.querySelector('.list')
+    var listWrap = document.querySelector('.list-wrap')
+    var itemHeight = 50
+    var items = new Array(1000).fill(0).map((_,it) => it)
+
+    function showContentFromScrollPos(scrollTop) {
+      var start = scrollTop
+      var end = start + 400 
+      var startIdx = Math.floor(start / itemHeight)
+      var endIdx = Math.min(Math.ceil(end / itemHeight) + 1,items.length)
+
+      // var showingItems = items.slice(startIdx,endIdx)
+
+      list.innerHTML = ''
+      
+      for (var i = startIdx ; i < endIdx ; i++) {
+        var li = document.createElement('li')
+        li.textContent = items[i]
+        li.style.top = i * itemHeight + 'px'
+        list.append(li)
+      }
+      list.style.height = Math.max((i * 50),parseInt(list.style.height)) + 'px'
+    }
+    showContentFromScrollPos(0)
+    listWrap.addEventListener('scroll' , function(e){
+      var start = listWrap.scrollTop
+      showContentFromScrollPos(start)
+    })
+  
+  
+  
+  </script>
+</body>
+</html>

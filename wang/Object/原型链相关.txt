@@ -1,0 +1,2 @@
+原型最底端是Object.prototype 再向下就是null
+查找某个原型链没有的属性 的值 那就是undefined

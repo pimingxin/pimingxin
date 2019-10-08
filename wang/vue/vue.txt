@@ -1,0 +1,331 @@
+{{ 可以写任意表达式 }}
+
+数据于模板的绑定
+
+<span v-bind:title="message"></span>
+
+message在这里直接就是表达式 然后绑定在span的title
+
+v-xxx 指令 特殊的属性
+
+随着数据的改动而改动
+
+<li v-for="a in as">
+  {{ a.text }}
+</li>
+
+v-for 重复的是li这个元素 而不是 {{  }}
+
+如果在as里push一个元素 也会立即显示出来
+
+:后面的东西是参数
+
+v-on:click="function"
+
+""里面是一个函数或者可以写一段代码
+
+函数的话 最好卸载 methods里 
+
+写在methods里的话 应该要接一个值 事件e function(e)
+
+而且要使用函数表达式 不能写箭头函数 原因是this无法正确指向
+
+如果直接写代码的话 会有个特殊的对象 $event 如果给函数传参的话 可以使用
+
+执行这个函数 函数返回结果为某个值
+
+如果求值结果是一个函数的话 则vue不会按预期运行
+
+v-model 一般用在表单交互元素上
+
+当前应用的状态 对应的数据
+
+由model 驱动整段数据的ui
+
+这就叫双向绑定
+
+<div id="app">
+  <p>{{ message }}</p>
+  <input v-model="message" />
+</div>
+
+new Vue({
+  el:"#app"
+  data:{
+    message:'hello'
+  }
+})
+
+v-model="message"
+
+:value="message" @input="message= $event.target.value"
+
+这两种写法 在input上 效果相同
+
+<div id="app">
+<select v-model="like">
+  <option :value="1">apple</option>
+  <option :value="2">google</option>
+  <option :value="{ a:1 }">orange</option>
+</select>
+</div>
+
+var app = new Vue({
+  el:'app',
+  data:{
+   like= [],
+ }
+})
+
+在select加multiple可以多选 
+
+对应的 app.like 可以拿到选中的value
+
+文本插值 标签之间使用 {{  }}
+
+标签如果有这个属性 v-once 只会执行一次 如果有很多绑定 那就会使用
+
+如果message是html代码的话 可以使用v-html="message"
+
+v-bind:id="'list-' + id"
+
+如果v-bind:null的话 会解除绑定
+
+:[arrt]="a" 用中括号这种写法的话 值必须为字符串 
+
+v-bind:class="{  }"
+
+v-bind:class="[ , ]"
+
+对象里面的属性会自动展平
+
+:class="[function,{},str,{a:true,b:false}]"
+
+内联样式
+
+:style="{color:'red',fontSize:'16px'}"
+
+font-size 可以不写成中划线式的
+
+
+条件渲染
+
+v-if 判断真假 可写函数 
+
+v-else
+
+同级 连续 并列 的元素才能写else
+
+如果想要多个元素出现或者不出现 可以添加一个template
+
+key
+
+vue会尽可能高效的渲染元素 
+
+
+
+
+
+<template v-if="xx">
+  <li v-for="yyy"></li>
+</template>
+
+
+等价于
+if (xx) {
+  for(yyy) {
+
+  }
+}
+
+<li v-if="xx" v-for="yyy"></li>
+等价于
+for(yyy) {
+  if (xxx) {
+
+  }
+}
+
+
+
+v-for="(item, index) in items"
+
+v-for="(value, key, index) in object">
+
+:key=""
+
+一般用在比较不同的值 先比较diff 
+
+如果没有key 就会从上往下比
+
+如果有key 就会先去比较key的diff
+
+建议尽可能在使用 v-for 时提供 key
+
+修改数组下标 无法在DOM中显示修改的数据
+
+可以使用数组方法来设置 app.Array.splice(start,how , { xx:'xxx' })
+
+也可以使用set Vue.set(app.Array,{xx:'xxx'})
+
+.lazy
+
+.number
+
+.trim
+
+每个Vue应用 都是通过Vue函数 创建的一个新的Vue实例
+
+
+
+var app = new Vue({
+  data : data
+})
+
+代理
+
+app.a = data.a
+
+freeze 阻止对 对象增加或删改
+
+每个属性都变成get set 
+
+$data
+
+$el 
+
+$watch
+
+每个Vue实例在被创造时都要经过一系列的初始化过程
+
+这个过程就称生命周期
+
+每个阶段都有对应的钩子 (事件)
+
+设置数据监听
+
+编译模板
+
+将实例挂载到DOM
+
+并在数据变化时更新DOM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+组件
+
+web components
+
+<p>is="word-count"</p>
+<word-count></word-count>
+
+Custom elements(自定义元素)
+
+Shadow DOM(影子DOM)
+
+HTML templates(HTML模板)
+
+document.fragment 
+
+文档片段
+
+用来存放并列DOM的容器
+
+在new Vue 之前 
+
+Vue.component('componentName' , {
+  template:`
+	组件内部结构 必写
+`，
+  data(){
+    return{
+     count:0,        返回一个对象 避免元素公用同一个元素
+  }
+ },
+   methods:{
+    
+  }
+})
+
+
+
+component里面的data 是配合template模板使用的
+
+props 属性 通过template模板定义 再在组件标签内定义
+
+props还可以定义在data里面 再在标签中 使用各种方法定义 props可以是一个类数组对象
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+浏览器解析于非浏览器解析
+
+组件名的定义
+
+在body标签里 处于浏览器解析的话 标签一定要是中划线分隔的
+
+Vue.component 全局注册
+
+局部注册 
+
+components :{
+    foo:{
+      data:,
+      template:,
+      methdos:{},
+      component:{},
+  }
+}
+
+
+Prop
+
+单向数据流 
+
+单向下行绑定
+
+
+
+
+
+
+
+
+
+

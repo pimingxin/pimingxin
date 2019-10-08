@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <pre id="world"></pre>
+  <script>
+    class Snake {
+      constructor(width = 20 , height = width){
+        this.width = width
+        this.height = height
+
+        this.world = Array(height).fill(0).map(it => Array(width).fill('.'))
+
+        this.generaterApple()
+        this.head = this.tail = this.generaterHead()
+      }
+      generaterHead(){
+        var x = ((this.width / 2) * Math.random() + this.width / 4) | 0
+        var y = ((this.height / 2) * Math.random() + this.height / 4) | 0
+        if (this.world[y][x] == '.'){
+          this.world[y][x] = '>'
+          return [x,y]
+        } else{
+          return this.generaterHead()
+        }
+      }
+      generaterApple(){
+        var x = (this.width) * Math.random() | 0
+        var y = (this.height) * Math.random() | 0
+        if (this.world[y][x] !== 'Q'){
+          this.world[y][x] = 'Q'
+          return [x,y]
+        } else{
+          return this.generaterApple()
+        }
+      }
+
+      getNextPos(x,y){
+        switch(this.world[y][x]){
+          case 'A':
+            return [x,y - 1]
+          case 'V':
+            return [x,y + 1]
+          case '<':
+            return [x - 1,y]
+          case '>':
+            return [x + 1,y]
+        }
+      }
+
+      getPosFlag(x,y){
+        if (this.world[y][x] > 30){
+          throw ('lose')
+        }
+        return this.world[y][x]
+      }
+
+
+      setPosFlag (x,y,flag){
+        this.world[y][x] = flag
+      }
+
+      setHeadDirection(direction) {
+        var [x, y] = this.head
+        var headFlag = this.getPosFlag(x, y)
+        if (direction == 'A' && headFlag == 'V') {
+          return
+        }
+        if (direction == 'V' && headFlag == 'A') {
+          return
+        }
+        if (direction == '<' && headFlag == '>') {
+          return
+        }
+        if (direction == '>' && headFlag == '<') {
+          return
+        }
+        this.world[y][x] = direction
+      }
+
+
+
+
+      next() {
+        var [hx,hy] = this.head
+        var [hnx,hny] = this.getNextPos(hx,hy)
+        var [tx,ty] = this.tail
+        var [tnx,tny] = this.getNextPos(tx,ty)
+
+
+        if (hx > 21 && hy > 21 || hx < 0 && hy < 0){
+          console.log(1)
+        }
+
+        var headFlag = this.getPosFlag(hx,hy)
+        var headNextFlag = this.getPosFlag(hnx,hny)
+
+        if (headNextFlag == 'Q'){
+          this.setPosFlag(hnx,hny,headFlag)
+          this.head = [hnx,hny]
+          this.generaterApple()
+        }else{
+          this.setPosFlag(hnx,hny,headFlag)
+          this.head = [hnx,hny]
+          this.tail = [tnx,tny]
+          this.setPosFlag(tx,ty,'.')
+        }
+
+        
+      }
+      toString() {
+          return '\n' + this.world.map(it => it.join('')).join('\n')
+      }
+    }
+    
+    var s = new Snake()
+
+   
+
+    var intervalId
+    
+    function auto() {
+      intervalId = setInterval(() => {
+        s.next()
+        world.textContent = s.toString()
+      }, 200)
+    }
+    auto()
+
+    window.addEventListener('keyup', e => {
+      switch (e.key) {
+        case 'ArrowUp':
+          s.setHeadDirection('A')
+          clearInterval(intervalId)
+          s.next()
+          world.textContent = s.toString()
+          auto()
+          return
+        case 'ArrowDown':
+          s.setHeadDirection('V')
+          clearInterval(intervalId)
+          s.next()
+          world.textContent = s.toString()
+          auto()
+          return
+        case 'ArrowLeft':
+          s.setHeadDirection('<')
+          clearInterval(intervalId)
+          s.next()
+          world.textContent = s.toString()
+          auto()
+          return
+        case 'ArrowRight':
+          s.setHeadDirection('>')
+          clearInterval(intervalId)
+          s.next()
+          world.textContent = s.toString()
+          auto()
+          return
+      }
+    })
+  </script>
+</body>
+</html>

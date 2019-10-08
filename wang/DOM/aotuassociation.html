@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+  <style>
+    *{
+      background-color: rgba(0,0,0,0.08);
+    }
+    .autpcompletion{
+      position: relative;
+      border: 1px solid;
+    }
+    .suggest{
+      position: absolute;
+      margin: 0;
+      top: 100%;
+      width: 200px;
+      height: 200px;
+      background-color: red;
+    }
+  </style>
+<body>
+  <div class="autocompletion">
+    <input type="text">
+    <ul class="suggest" style="display: none"></ul>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    $('input').on('input',function(e) {
+      var inputEl = this
+      var inputStr = this.value//全局
+      if (inputStr){
+        getSuggestion(inputStr,suggestions => {
+          var items = $(suggestions).map((idx,suggest) => {
+            return $(`<li><a>${suggest}</a></li>`)[0]//创建节点 
+          })
+          $('ul').empty().append(items).show()//一开始清空
+        })
+      }
+
+    }).blur(function(e){
+      $('.suggest').hide()
+    }).focus(function(e){
+      if(this.value){
+        $('.suggest').show()
+      }
+    })
+  
+    $('ul').on('click','li a' , function(e){
+      var suggest = this.textContent
+      inputEl.value = suggest
+    })
+
+
+
+      function getSuggestion(str,callback) {
+        var suggestions = new Array(10).fill(0).map((_,idx) => idx).map(it => str + it)
+
+        setTimeout(()=>{
+          callback(suggestions)
+        }, 500 + 500 * Math.random())
+      }
+  </script>
+</body>
+</html>

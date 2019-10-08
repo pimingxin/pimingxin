@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>progress</title>
+</head>
+<body>
+
+
+
+  <button id="start">start</button>
+  <button id="next">next</button>
+  <button id="set"><input type="text">set</button>
+  <button id="end">end</button>
+
+
+  <script>
+    class ProgressJS {
+      constructor(){
+        this.el = document.createElement('div')
+        this.el.style = `
+          position : fixed;
+          height : 10px;
+          background-color:blue;
+          top:0;
+          left:0;
+          width:1%;
+          transititon: width .2s;
+        `
+        this.percentage = 1
+      }
+
+      start(){
+        this.percentage = 1
+        this.el.style.width = this.percentage + '%'
+        document.body.appendChild(this.el)//将div元素添加到body里面
+      }
+
+
+      increase(amount = 5){
+        this.percentage += amount
+        this.el.style.width = this.percentage + '%'
+      }
+      
+
+
+      set(amount){
+        this.percentage = amount
+        this.el.style.width = this.percentage + '%'
+      }
+
+
+      complete(){
+        this.percentage = 100
+        this.el.style.width = this.percentage + '%'
+        setTimeout(() => {
+          document.body.removeChild(this.el)
+        },500)
+      }
+    }
+  </script>
+  <script>
+    var a = new ProgressJS
+  
+    var start = document.querySelector("#start")
+    var next = document.querySelector("#next")
+    var set = document.querySelector("#set")
+    var end = document.querySelector("#end")
+
+  </script>
+</body>
+</html>

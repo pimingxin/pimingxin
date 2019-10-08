@@ -1,0 +1,102 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+  </div>
+  <div class="world"></div>
+  <script>
+
+  class Wrap  {
+    constructor(width = 9, height = width){
+      this.width = width
+      this.height = height
+      this.world = Array(height).fill(0).map(it => Array(width).fill(0))
+      this.random()
+    };
+    random(ration = 0.1){
+      this.world.forEach((row,rowIdx) =>{
+        row.forEach((cell , colIdx) => {
+          if (Math.random() < ration){
+            this.world[rowIdx][colIdx] = 1
+          }
+        });
+      })
+    };
+    toString() {
+      return '\n' + this.world.map(row => row.join("")).join('\n')
+    };
+    updateBoard(board, click) {
+      if(board[click[0]][click[1]]=='M'){
+          board[click[0]][click[1]]='X'
+        
+      }
+      if(board[click[0]][click[1]]=='E'){
+        judgeBlock(board,click)
+        
+      }
+      return board
+  };
+    judgeBlock(board,click){
+      var col = click[0]
+      var row = click[1]
+      if(col<0||row<0||col>board.length-1||row>board[0].length-1){
+          return
+      }
+      var arr_round=[
+          [col-1,row-1],
+          [col-1,row],
+          [col-1,row+1],
+          [col,row-1],
+          [col,row+1],
+          [col+1,row-1],
+          [col+1,row],
+          [col+1,row+1],
+      ]
+      var sweep_count = 0
+      for(let val of arr_round){
+          if(board[val[0]]!=undefined&&board[val[0]][val[1]]!=undefined){
+              if(board[val[0]][val[1]]=='M'){
+                  sweep_count++
+              }
+          }
+      }
+      if(sweep_count==0){
+          board[col][row]="B"
+            for(let val of arr_round){
+                if(board[val[0]]!=undefined&&board[val[0]][val[1]]!=undefined&&board[val[0]][val[1]]=='E'){
+                judgeBlock(board,val)
+          }
+      }
+      }else{
+          board[col][row]=sweep_count+''
+      }
+        
+    }
+
+  }
+
+  var c = new Wrap()
+function renderHTML(c){
+  return c.world.map(row => {
+    return `<div>
+        ${row.map(cell => `<input type="checkbox" ${cell ? 'checked' : ''}>`).join('')}      </div>`
+  }).join('')
+}
+
+  document.querySelector('.world').innerHTML = renderHTML(c)
+
+  </script>
+  
+</body>
+</html>

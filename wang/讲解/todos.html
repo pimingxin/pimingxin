@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .completed span {
+      text-decoration: line-through;
+    }
+    /* body {
+      counter-reset: count;
+    }
+    ul > li:not(.completed) {
+      counter-increment: count;
+    }
+
+    #count::before {
+      content: counter(count);
+    } */
+    ul[data-show="all"] {
+
+    }
+    ul[data-show="active"] li.completed {
+      display: none;
+    }
+    ul[data-show="completed"] li:not(.completed) {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="todo-app"></div>
+  <script>
+    var todos = [{
+      done: true,
+      content: 'eat',
+    }, {
+      done: false,
+      content: 'drink',
+    }, {
+      done: false,
+      content: 'sleep',
+    }]
+
+    var todoAppEl = document.querySelector('#todo-app')
+
+    function render() {
+      var html = xxxxx
+      todoAppEl.innerHTML = html
+    }
+
+    todoAppEl.addEventListener('keyup', e => {
+      if (e.target.matches('input.todo-input')) {
+        if (e.keyCode == 13) {
+
+          var todoText = e.taget.value
+          todos.push({
+            content: todoText,
+            done: false,
+          })
+          render()
+        }
+      }
+    })
+
+    
+    todoAppEl.addEventListener('keyup', e => {
+      if (e.target.matches('button.delete-todo')) {
+          var idx = xxxxx
+
+          todos.splice(idx, 1)
+
+          render()
+      }
+    })
+
+
+  </script>
+</body>
+</html>

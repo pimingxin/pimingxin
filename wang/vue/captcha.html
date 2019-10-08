@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>captcha</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <captcha-input v-model="c" @input-complete="send">
+    </captcha-input>
+  </div>
+
+  <script>
+    Vue.component('captcha-input' ,{
+      template :`
+        <span>
+          <input style="width:2em ;  text-align:center;" maxlength="1" v-for="(cach,i) in captchas" v-model="captchas[i]" @keyup="keyup"/>
+        </span>
+      `,
+        methods:{
+          keyup(e){
+            var next = e.target.nextElementSibling
+            var prve = e.target.previousElementSibling
+            if (e.key == 'Backspace'){
+              // e.preventDefault()
+              if (e.target.value == '' && !prve){
+                return
+              }
+              prve.focus()
+              return
+            }
+            if (e.target.value.trim() == '' && !next){
+              prev.value = ''
+              prev.focus()
+              
+            }else{
+              if (e.target.value.trim().length){
+                if (!next){
+                  //如果没有下一个元素的话 应该要提交
+                  this.$emit('input-complete',this.captchas.join(''))
+                  this.$emit('input',this.captchas.join(''))
+                  return
+                }
+                next.focus()
+              }
+            }
+          }
+        },
+        data(){
+          return{
+            captchas : [,,,,,,]
+          }
+        }
+    })
+    
+    var app = new Vue({
+      el:'#app',
+      data:{
+        c : ''
+      },
+      methods:{
+        send(captcha){
+          console.log(captcha)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

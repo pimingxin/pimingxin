@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>life-cycle-hooks</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <div id="app">
+    <p> {{ msg }} </p>
+  </div>
+  <script>
+
+    var data = {
+      msg : 'hello world'
+    }
+
+    var app = new Vue({
+      el:'#app',
+      data:data
+    })
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <img src="./Vue实例生命周期.png" alt="">
+  <!-- 
+    new Vue() 事件触发发生器
+    vm.on()
+    vm.emit()
+    事件 就是在初始化事件 生命周期完成的
+    变成一个事件中心
+    绑上事件名称 和事件的对应关系
+
+    这个过程结束后 就会执行钩子函数
+
+    beforeCreate
+
+    初始化 注入 校验
+    data的每一个字段 变成 get set 
+
+    变完以后 钩子函数执行
+
+    created
+
+    然后就去判断有无el选项
+
+    再判断有无template选项
+
+    再到编译模板函数
+
+    如果有模板的话 就将template编译到render函数中
+
+    没有模板的话 将el outHTML作为template编译
+
+    虚拟DOM模板
+
+    然后再调用钩子函数
+
+    beforeMount
+
+    然后创建vm.$el 并用其替代el
+
+    el写的时候是字符串 编译完之后 为一个原生的元素
+
+    el是用document.querySelector调用的
+
+    mounted 数据与模板拼接的页面
+
+    然后挂载完毕
+
+    当data被修改时
+    beforeUpdata
+    虚拟DOM重新渲染并应用更新 
+    updated
+
+    当调用vm.$destroy()函数时
+
+    beforedestroy运行
+
+    解除绑定 摧毁子组件及事件监听器
+
+    摧毁完毕后 执行钩子函数
+
+    destroyed
+
+   -->
+</body>
+</html>

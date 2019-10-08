@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="components-demo">
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+
+</div>
+<script>
+  //定义一个名为 button-counter的新组件
+  Vue.component('button-counter' , {
+    data: function(){
+      return {
+        count : 0
+      }
+    },
+    template:'<button v-on:click="count++">You click me {{ count }} times. </button>'
+  })
+</script>
+<script>
+  new Vue({
+    el: '#components-demo'
+  })
+</script>
+<!-- 
+  Vue.component 第一个参数为组件名 后面为data template是显示在DOM里的东西 使用的话直接使用组件名 
+  可以将组件进行任意次复用
+  每用一次组件 就会有一个它的新实例被创建
+
+  data必须是一个函数
+
+  如果data不是一个函数的话
+  点击一个按钮就有可能会影响到其他实例
+
+  为了能在模板中使用，这些组件必须先注册以便 Vue 能够识别。这里有两种组件的注册类型：全局注册和局部注册。至此，我们的组件都只是通过 Vue.component 全局注册的
+  -->
+
+<!-- 
+  通过Prop向子组件传递数据
+  Prop可以在组件上注册的一些自定义特性 
+  当一个值传递给一个prop特性的时候
+  它就变成了那个组件实例的一个属性
+  例
+-->
+<script>
+    Vue.component('blog-post' , {
+      props:['title'],
+      template : '<h3>{{ title }}</h3>'
+    })
+  </script>
+  <!-- 
+  组件默认可以拥有任意数量的prop
+  能够在组件实例中访问这个值 就像访问data中的值一样
+  -->
+<blog-post title="aaaa"></blog-post>
+<blog-post title="bbbb"></blog-post>
+<blog-post title="cccc"></blog-post>
+
+
+<!-- 
+  在典型的应用中 可能在data里有一个博文的数组
+-->
+<script>
+  new Vue({
+    el:'#blog-post-demo',
+    data:{
+      posts:[
+        {id:1 , title:'aaa'},
+        {id:2 , title:'bbb'},
+        {id:3 , title:'ccc'}
+      ]
+    }
+  })
+</script>
+<!-- 
+  并想要为每篇博文渲染一个组件
+  -->
+  <blog-post
+    v-for="post in posts"
+    v-bind:key="post.id"
+    v-bind:title="post.title"
+  ></blog-post>
+  <!-- 
+    可以使用v-bind来动态传递prop 
+   -->
+
+   <!-- 
+     当构建一个组件时 模板最终包含的东西不止一个标题
+
+    <h3>{{ title }}<h3>
+    <div v-html="content"></div>
+    如果这么写的话 会报错
+    每个组件必须只有一个根元素
+    可以将模板包裹在一个父元素内
+    例
+    <div class="blog-post">
+      <h3>{{ title }}</h3>
+      <div v-html="content"></div>
+    </div>
+
+    如果博文需要更多的信息 为每个组件定义prop就会变得很麻烦
+    所以需要重构一下这个blog-post 让它变成接收一个单独的post的prop
+  -->
+  <blog-post
+    v-for="post in posts"
+    v-bind:key="post.id"
+    v-bind:post="post"
+  ></blog-post>
+
+  <script>
+    Vue.component('blog-post' , {
+      props:['post'],
+      //这里使用模板字符串让多行的模板更易读
+      template: `
+        <div class="blog-post">
+          <h3>{{ title }}</h3>
+          <div v-html="post.content"></div>
+        </div>
+      `
+    })
+  </script>
+  <!-- 
+    现在 为post对象添加一个新的属性 他都会自动在blog-post内可用
+   -->
+   <!-- 
+     通过事件向父级组件发送消息
+     可能会引入一个可访问性的功能来放大博文字号
+     同时让页面其他部分保持默认字号
+
+     在其父组件中 我们可以通过添加一个postFontSize数据来支持这个功能
+
+     
+    -->\
+    <script>
+      new Vue({
+       el:"#blog-posts-events-demo",
+       data:{
+         posts:[/* .... */],
+         postFontSize : 1
+       }
+     })
+    </script>
+    <!-- 在模板中用来控制所有博文的字号  -->
+    <div id="blog-posts-events-demo">
+      <div :style="{fontSize : postFontSize + 'em'}">
+        <blog-post 
+          v-for="post in posts"
+          v-bind:key="post.id"
+          v-bind:post="post"
+        ></blog-post>
+      </div>
+    </div>
+  <!-- 
+    在template内的模板字符串里 增加一个按钮 用于增加字号
+  -->
+  <button>Enlarge text</button>
+  <!-- 
+    可以使用内建的$emit方法 传入事件的名字 来向父级元素触发一个事件
+  例 在template内的模板字符串里
+  -->
+    <button v-on:click="$emit('enlarge-text')">Enlarge text</button>
+
+  <!-- 
+    然后就能用v-on 在博文组件上监听这个事件
+  -->
+  <blog-post
+    ...
+    v-on:enlarge-text="postFontSize += 0.1">
+  </blog-post>
+
+  <!-- 
+    使用事件抛出一个值
+
+    有时候用一个事件抛出一个特定的值是非常有用的
+    可能想让<blog-post>组件 决定它的文本放大多少
+    这个时候就可以使用$emit的第二个参数 来提供这个值
+  -->
+  <button v-on:click="$emit('enlarge-text' , 0.1)">Enlarge text</button>
+  <!-- 
+    在父级组件监听这个事件的时候
+    可以通过$event访问到抛出的这个值
+
+    这里$event就是0.1
+  -->
+  <blog-post
+  ...
+  v-on:enlarge-text="postFontSize += $event"
+  ></blog-post>
+
+  <!-- 
+    或者 如果这个事件处理函数是一个方法
+    -->
+    <blog-post
+      ...
+      v-on:enlarge-text="onEnlargeText"
+    ></blog-post>
+  <!-- 
+    那么这个值会作为第一个参数传入这个方法
+  -->
+  <script>
+    new Vue({
+      el:'#xxx',
+      data:data,
+      methods:{
+        onEnlargeText: function(enlargeAmount){
+          this.postFontSize += enlargeAmount
+        }
+      }
+    })
+  </script>
+  <!-- 
+    在组件上使用 v-model
+
+    自定义事件也可以用于创建支持v-model的自定义输入组件
+   -->
+   <input v-model="searchText">
+   <!-- 等价于 -->
+   <input v-bind:value="searchText" v-on:input="searchText = $event.target.value">
+
+   <!-- 当用在组件上的时 v-model则会 -->
+   <custom-input
+      v-bind:value="searchText"
+      v-on:input="searchText = $event"
+   ></custom-input>
+
+  <!-- 
+    为了让它正常工作 这个组件内的input必须
+    将其value特性绑定到一个名叫value的prop上
+    在其 input事件被触发时 将新的值通过自定义的input事件抛出
+  -->
+  <script>
+    Vue.component('custom-input' , {
+      props : ['value'],
+      template : `
+        <input 
+        v-bind:value="value" 
+        v-on:input="$emit('input',$event.target.value)"
+        >
+      `
+    })
+  </script>
+  <!-- 这样v-model就可以在这个组件上工作起来了 -->
+
+  <!-- 
+    通过插槽分发内容
+   -->
+
+  <alert-box>
+     Something bad happened.
+  </alert-box>
+
+  <!-- 可能想要渲染出 Error! Something bad happened -->
+
+  <!-- Vue自定以的<slot>元素 -->
+  <script>
+    Vue.component('alert-box' , {
+      template:`
+        <div class="demo-alert-box">
+          <strong>Error!</strong>
+          <slot></slot>
+        </div>
+      `
+    })
+  </script>
+  <!-- 动态组件 例 见本文件夹的例动态组件 -->
+  <!-- 解析DOM模板时的注意事项 -->
+
+  <!-- 有些HTML元素 如 ul ol table select 对于哪些元素出现在其内部是有很严格的要求的 li tr option 只能出现在特定的元素内部 
+  例
+  -->
+  <table>
+    <blog-post-row></blog-post-row>
+  </table>
+  <!-- 自定义组件blog-post-row
+    会被做无效化内容提升到外部 
+    最后导致渲染出错
+    is特性有变通的方式
+
+    如果从以下来源使用模板 这条限制是不存在的
+    字符串 template : ' ... '
+    单文件组件 .vue
+    <sctipt tpye="text/x-template">
+  -->
+</body>
+</html>

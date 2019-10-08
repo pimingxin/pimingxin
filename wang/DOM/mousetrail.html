@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>mousemove</title>
+  <!-- <style>
+    .trail{
+      position: absolute;
+      height: 6px;
+      width: 6px;
+      border-radius: 3px;
+      background: red;
+    }
+    body{
+      height: 300px;
+    }
+  </style> -->
+  
+  <style>
+  .mouse {
+    width: 10px;
+    height: 10px;
+    position: fixed;
+    background-color: red;
+  }
+  
+  </style>
+</head>
+<body>
+  <script type="xx">
+    var dots = []
+    for(var i = 0 ; i < 20 ; i++){
+      var node = document.createElement('div')
+      node.className = 'trail'
+      document.body.appendChild(node)
+      dots.push(node)
+    }
+    var currentDot = 0
+
+    window.addEventListener("mousemove",e => {
+      var dot  = dots[currentDot]
+      dot.style.left = (e.pageX - 3) + "px"
+      dot.style.top = (e.pageY - 3) + "px"
+      currentDot = (currentDot + 1) % dots.length
+    })
+  </script>
+  <script>
+    var res = []
+    window.addEventListener("mousemove",e =>{
+      var mouse = document.createElement("span")
+      res.push(mouse)
+
+      if (res.length > 16) {
+        document.body.removeChild(res.shift())
+      }
+      mouse.className = "mouse"
+
+      mouse.style.left = e.clientX + "px"
+      mouse.style.top = e.clientY + "px"
+
+      document.body.appendChild(mouse)
+
+      setTimeout(()=>{
+        document.body.removeChild(mouse)
+        res.shift()
+      },300)
+    })
+    
+  
+  </script>
+
+</body>
+</html>

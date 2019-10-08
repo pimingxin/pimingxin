@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>500px </title>
+  <style>
+    
+    html,body{
+      width: 100%;
+      height: 100%;
+    }
+    div {
+      width: 80%;
+      height: 80%;
+      margin: auto;
+      position: relative;
+    }
+    span{
+      display: none;
+      position: relative;
+      font-size: 5em;
+    }
+    
+    footer{
+      position: relative;
+    }
+    img{
+      position: absolute;
+      height: 500px;
+      width: 500px;
+      display: flex;
+    }
+  </style>
+
+</head>
+
+<body>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae corrupti in, quasi earum facere esse soluta debitis, sunt molestiae autem tenetur vel dolorum, eum ea consequatur dolores unde aspernatur delectus.
+  Deserunt officia, quos fugiat odit iusto et in. Quaerat, molestiae a. Esse harum nemo aliquid cum, ipsa praesentium amet provident impedit, odio magnam libero beatae incidunt consectetur possimus, fugiat fugit?
+  Voluptatem dolores minus magnam excepturi sapiente commodi maiores doloribus atque tempora ducimus tenetur quisquam libero possimus dolorem similique molestias odio, eius asperiores quis eaque corrupti totam at omnis quas. Ab!
+  Laboriosam voluptatem non fuga quas, aut sequi repudiandae quisquam officiis facilis asperiores nemo molestiae adipisci porro explicabo exercitationem, iure sint? Earum temporibus modi dolores! Cum commodi ad quasi officiis iure?
+  Officia ut dolores tenetur numquam delectus eum, quisquam quaerat praesentium maiores dolorem tempore, ipsa necessitatibus adipisci nostrum amet ex nemo corporis. Dolorem, porro autem. Ut optio perspiciatis soluta voluptatem dolorem?
+  Quam atque id eos, magnam blanditiis sed aperiam labore fuga obcaecati excepturi laboriosam non, dolore harum quae nisi explicabo quisquam consequatur corrupti error eius itaque illo assumenda libero vitae! Odit?
+  Ea ipsam consequatur atque, nostrum, ratione officiis omnis facere officia sed nisi non quam. Explicabo expedita perferendis nostrum incidunt nisi quo earum amet temporibus! Qui molestiae distinctio nisi quasi? Possimus.
+  Perspiciatis tenetur totam fugit suscipit porro laborum iure error rerum repellendus rem! Eius corporis amet officia eum. Id recusandae esse reiciendis, fugit autem pariatur perspiciatis et odit harum similique velit.
+  Ratione quas assumenda non vero velit possimus error natus suscipit tenetur nesciunt! Illum magnam quidem natus, porro quibusdam, fuga minus magni repellendus nulla similique nostrum! Rem officia ea quos voluptates?
+  Sapiente tempore cum nesciunt, ad reiciendis explicabo libero quos. Iusto id ullam adipisci sunt. Totam, aliquam similique! Accusamus vel quisquam id ex. Sapiente perspiciatis architecto officiis adipisci vel porro repellat!</p>
+  <div>
+    <span>nmsl</span>
+  </div>
+  <a href="baidu.com">abcdefc</a>
+  <footer>
+    <img src="2.jpg" alt="">
+    <img src="five.png" alt="">
+    <img src="four.png" alt="">
+  </footer>
+  <script>
+    var div = document.querySelector("div")
+    div.addEventListener("contextmenu", e => {
+      e.preventDefault()//取消默认行为
+      
+    })
+    div.addEventListener("mousedown",function(event){
+      if (event.which == 3){
+        var div = document.querySelector("div")
+        var span = document.querySelector("span")
+        span.style.display = "block"
+        span.style.left = event.clientX -150 + "px"
+        span.style.top = event.clientY -150 + "px"
+        span.style.color = "rgb(" + Math.random()*256 + ',' + Math.random()*256 + ',' + Math.random()*256 + ")"
+        console.log(event.clientX,event.clientY)
+        event.stopPropagation() // 取消冒泡行为 
+        //冒泡是从内到外 如果取消冒泡的话 事件不会继续冒泡到父元素
+        console.log(event)
+      }
+    })
+
+    var body = document.querySelector("body")
+
+    body.addEventListener("mousedown",function(e){
+      var span = document.querySelector("span")
+      span.style.display = "none"
+    })
+
+
+    addEventListener("keydown",function(e){
+      var step = window.pageYOffset
+      if (e.keyCode == 106||e.keyCode == 74){
+        window.scrollBy(0,100)
+      }
+      if (e.keyCode == 107||e.keyCode == 75){
+        window.scrollBy(0,-100)
+      }
+    })
+    // var footer = document.querySelectorAll("img")
+    // fotter.addEventListener("click",function(e){
+    //   for (var i = 0 ; i < footer)
+    // })
+    addEventListener("keydown",function(e){
+      console.log(e)
+    })
+
+
+    
+  </script>
+</body>
+
+</html>

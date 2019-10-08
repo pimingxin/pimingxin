@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>re</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <re v-model="reg">
+    </re>
+
+  </div>
+  <script>
+    Vue.component('re',{
+      props:{
+        value:{//定义一开始所需的属性 和输入属性的各种条件
+          type:RegExp,
+          required:true
+        }
+      },
+      template:`
+        <span style="border:2px solid;">
+          <input type="text" :value="reText" @change="reTextChange"/>
+          <span>
+            <input type="checkbox" v-for="flag of flags" :checked="flag.value" :title="flag.name"></input>
+          </span>
+        </span>
+      `,
+      methods:{
+        reTextChange(e){//触发事件元素 都有$event事件 
+          var re = new RegExp(e.target.value)
+          this.$emit('input' , re)//触发到外部
+        }
+      },
+      watch:{ // 监视value属性有无改变
+        value(val){
+
+          this.reText = val.source
+
+          //
+          var flags = [{
+            name:'i',
+            value:false
+          },{
+            name:'g',
+            value:false
+          },{
+            name:'m',
+            value:false
+          }]
+          flags.forEach(it => {
+            if (val.flags.indexOf(it.name) >= 0){
+              it.value = true
+            }
+          })
+          this.flags = flags
+        }
+      },
+      data(){//初始状态
+        var flags = [{
+          name:'i',
+          value:false
+        },{
+          name:'g',
+          value:false
+        },{
+          name:'m',
+          value:false
+        }]
+        flags.forEach(it => {
+          if (this.value.flags.indexOf(it.name) >= 0){
+            it.value = true
+          }
+        })
+        
+        return {
+          reText: this.value.source, //绑定在元素上
+          flags:flags
+        }
+      },
+    })
+    var app =new Vue({
+      el:'#app',
+      data(){
+        return {
+          reg:/foo/ig,
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+理解RESTful框架
+Representational State Transfer的缩写
+表现层状态转化
+
+客户端用到的手段 只有HTTP
+客户端有四个操作 GET POST PUT DELETE
+
+RESTful架构
+  每一个URI代表一种资源
+  客户端和服务器之间 传递这种资源的某种表现层
+  客户端用过四个HTTP动词 对服务器端资源进行操作 实现表现层状态转化
+
+GET /collection：返回资源对象的列表（数组）
+GET /collection/resource：返回单个资源对象
+POST /collection：返回新生成的资源对象
+PUT /collection/resource：返回完整的资源对象
+PATCH /collection/resource：返回完整的资源对象
+DELETE /collection/resource：返回一个空文档

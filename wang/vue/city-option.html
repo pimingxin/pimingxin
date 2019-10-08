@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://unpkg.com/vue"></script>
+  <script src="./china-city-area-zip.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <select  v-model="chinaname">
+      <option disabled value="">请选择</option>
+      <option v-for="cn in china" :value="cn.id">{{ cn.name }}</option>
+    </select>
+    <select v-model="cityname">
+      <option disabled value="">请选择</option>
+      <option v-for="ct in city" :value="ct.id">{{ ct.name }}</option>
+    </select>
+    <select v-model="areaname">
+      <option disabled value="">请选择</option>
+      <option v-for="ar in area" :value="ar.id">{{ ar.name }}</option>
+    </select>
+  </div>
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        china : china_city_area_zip,
+        city : [],
+        area : [],
+        chinaname : '',
+        cityname : '',
+        areaname : ''
+      },
+      watch:{
+        chinaname(val){
+          this.cityname = ''
+          this.areaname = ''
+          this.chinaname = val
+          this.city = (china_city_area_zip.filter(it => it.id == val))[0].child
+          
+        },
+        cityname(val){
+          this.areaname = ''
+          this.cityname = val
+          this.area = (this.city.filter(it => it.id == val))[0].child
+        }
+      }
+    })
+
+
+
+    console.log(china_city_area_zip[0])
+    //使用id来区分每个数据的不同 比使用name更好 因为id不可能会有相同的 而name有概率会相同
+  </script>
+</body>
+</html>

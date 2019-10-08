@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Censored-keyboard</title>
+</head>
+<body>
+  <input type="text">
+
+  <script>
+    var input = document.querySelector("input")
+    input.addEventListener('keydown', e => {
+      if (e.key == "Q"||e.key == "W" || e.key == "X"){
+        e.preventDefault()
+      }
+    })
+    input.addEventListener('input',e=>{
+      input.value = input.value.replace(/[QWX]/g,"*")
+    })
+    var valueDescriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(input),"value")//input原型上的value属性 属性描述符
+    Object.defineProperty(input,"value",{//defineProperty target目标对象 propertyKey 要定义或修改的属性名称 要定义或修改的属性描述
+      get: function(){
+        return valueDescriptor.get.call(this)
+      },
+      set:function(val){
+        val = val.replace(/[QWX]/g,"*")
+        valueDescriptor.set.call(this,val)
+      }
+    })
+  </script>
+</body>
+</html>

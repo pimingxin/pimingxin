@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>component</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+      <captcha-input v-model="captcha" @input-complete="send">
+
+      </captcha-input>
+    <hr>
+      <date-picker v-model="born"></date-picker>
+    <hr>
+  <button-counter>
+  </button-counter>
+</div>
+  <script>
+    Vue.component('button-counter' , {
+      template:`
+        <span>
+          <button @click="dec">-</button>
+          <span>{{ count }}</span>
+          <button @click="inc">+</button>
+        </span>
+      `,
+      data(){
+        return {
+          count : 0,
+        }
+      },
+      methods:{
+        dec(){
+          this.count--
+        },
+        inc(){
+          this.count++
+        }
+      }
+    })
+
+
+    Vue.component('date-picker' , {
+      props:{
+        value : {
+          type : Date,
+          default : new Date()
+        }
+      },
+      template:`
+        <span>
+          请选择日期:
+          <input type="date" :value="date" @change="dateChange" />
+        </span>
+      `,
+      methods:{
+        dateChange(e) {
+          this.$emit('input', new Date(e.target.value))
+        }
+      },
+      watch:{
+        value(val){
+          this.date = val.toLocaleDateString().replace(/\//g , '-')
+        }
+      },
+      data(){
+        return {
+          date: this.value.toLocaleDateString().replace(/\//g , '-')
+        }
+      }
+    })
+
+
+    Vue.component('captcha-input', {
+      props:{
+        value:{
+        }
+      },
+      template:`
+        <span>
+          <input @keyup="keyup" type="text" :value="captcha.putValue" @change="captchaChange" v-for="captcha in captchaNumber"/>
+        </span>
+      `,
+      watch:{
+        value(val){
+          console.log(val)
+          
+        }
+      },
+      data(){
+        var captchaNumber = [{
+          id:1,
+          value : 9,
+          putValue: ''
+        },{
+          id:2,
+          value : 9,
+          putValue: ''
+        },{
+          id:3,
+          value : 9,
+          putValue: ''
+        },{
+          id:4,
+          value : 9,
+          putValue: ''
+        },{
+          id:5,
+          value : 9,
+          putValue: ''
+        },{
+          id:6,
+          value : 9,
+          putValue: ''
+        }]
+        return {
+          captchaNumber : captchaNumber
+        }
+      },
+      methods:{
+        captchaChange(e){
+          this.$emit('input',e.target.value)
+        },
+        keyup(e){
+          var next = e.target.nextElementSibling
+          var prve = e.target.previousElementSibling
+          if (e.target.value.trim().length){
+            e.target.nextElementSibling.focus()
+          }
+        }
+      }
+    })
+
+    var app = new Vue({
+      el:'#app',
+      data(){
+        return {
+          captcha:'',
+          born:new Date("2018-11-11"),
+        }
+      },
+      methods:{
+        send(captcha){
+          console.log(1)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

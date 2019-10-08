@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>move-div</title>
+  <style>
+    body{
+      position: relative;
+      height: 500px;
+      width: 500px;
+      user-select: none;
+    }
+    div{
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      border: 2px solid black;
+    }
+    #d1{
+      left: 10px;
+      top: 10px;
+    }
+    #d2{
+      background-color: blue;
+    }
+  
+  </style>
+</head>
+<body>
+  <div id="d1"></div>
+  <div id="d2"></div>
+
+  
+  <script>
+    function a (e){
+      var div = document.getElementById("d1")
+      if (e.which != 0){
+        div.style.left = e.clientX - 50+ "px"
+        div.style.top = e.clientY - 50 + "px"
+      }
+    }
+    function b (e){
+      var div = document.getElementById("d2")
+      if (e.which != 0){
+        div.style.left = e.clientX - 50+ "px"
+        div.style.top = e.clientY - 50 + "px"
+      }
+    }
+    var count = 0
+    document.getElementById("d1").addEventListener("mousedown",function(e){
+      e.preventDefault()
+      document.getElementById("d1").addEventListener("mousemove",a)
+      div = document.getElementById("d1")
+      if (e.which == 1){
+          div.style.zIndex = ++count
+        }else{
+          count = 0
+        }
+    })
+      document.getElementById("d1").addEventListener("mouseup",function(e){
+      document.getElementById("d1").removeEventListener("mousemove",a)
+    })
+    
+    document.getElementById("d2").addEventListener("mousedown",function(e){
+      e.preventDefault()
+      document.getElementById("d2").addEventListener("mousemove",b)
+      div = document.getElementById("d2")
+      if (e.which == 1){
+          div.style.zIndex = ++count
+        }else{
+          count = 0
+        }
+    })
+    document.getElementById("d2").addEventListener("mouseup",function(e){
+      document.getElementById("d2").removeEventListener("mousemove",b)
+    })
+    
+  </script>
+</body>
+</html>

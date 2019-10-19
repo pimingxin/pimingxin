@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/immer/dist/immer.umd.js"></script>
+</head>
+<body>
+  <div id="root">
+  </div>
+  <script type="text/babel">
+    class TodoApp extends React.Component{
+      constructor(props){
+        super(props)
+        this.state = {
+          showing:'all', // complated/active
+          todos:[{
+            content:'n',
+            done:false,
+          },{
+            content:'m',
+            done:true,
+          },{
+            content:'s',
+            done:false,
+          },{
+            content:'l',
+            done:true,
+          }]
+        }
+      }
+
+      leftCount() {
+        return this.state.todos.filter(it => !it.done).length
+      }
+
+      deleteTodo(todo){
+          this.setState({
+          todos:this.state.todos.filter(it => it !== todo)
+        })
+      }
+
+      isAllSelected() {
+        return this.state.todos.every(it => it.done)
+      }
+
+      hasCompleted = () => {
+        return this.state.todos.some(it => it.done)
+      }
+
+      clearCompleted = () => {
+        this.setState({
+          todos : this.state.todos.filter(it => !it.done)
+        })
+      }
+
+
+      // {
+      //       todos: this.state.todos.map(it => {
+      //         if (it.done) {
+      //           it.done = false
+      //           return it
+      //         }
+      //       })
+      //     }
+
+      // {
+      //       todos: this.state.todos.map(it => {
+      //         if (!it.done) {
+      //           it.done = true
+      //         }
+      //         return it 
+      //       })
+      //     }
+
+      toggleAllSelece = () => {
+        if (this.isAllSelected()) {
+          this.setState(state => {
+            return immer.produce(state,draft => {
+              draft.todos.forEach(it => {
+                it.done = false
+              })
+            })
+          })
+        }else{
+          this.setState(state => {
+            return immer.produce(state,draft => {
+              draft.todos.forEach(it => {
+                it.done = true
+              })
+            })
+          })
+        }
+      }
+
+      // {
+      //     showing : e.target.value
+      //   }
+
+      //合成事件函数 
+      changeShowing(e){
+        e.persist()
+        // 因为这一步是使用回调的形式调用的 等到调用的时候 e已经被清空了 所以需要使用persist
+        this.setState(state => {
+          debugger;
+          return immer.produce(state, draft => {
+            draft.showing = e.target.value
+          })
+        })
+      }
+
+      toggleTodoStatus (todo) {
+        this.setState({
+          todos: this.state.todos.map(it => {
+            if (it == todo){
+              return {
+                ...it,
+                done:!todo.done
+              }
+            }else{
+              return it 
+            }
+          })
+        })
+      }
+
+      addTodoItem = (e) => {
+        if (e.keyCode == 13){
+          this.state.todos.push({
+            content:e.target.value,
+            done:false
+          });
+          this.setState({
+            todos:this.state.todos.map(it => {
+              return {
+                ...it
+              }
+            })
+          })
+          e.target.value = ''
+        }
+      }
+
+      render(){
+        return(
+          <div>
+            <h1>Todos</h1>
+            <div>
+              <input onChange={this.toggleAllSelece} type="checkbox" checked={this.isAllSelected()} />
+              <input type="text" onKeyDown={this.addTodoItem} />
+            </div>
+            <ul className={this.state.showing}>
+              {
+                this.state.showing == 'all' && 
+                this.state.todos.map((it,idx) => {
+                  return (
+                    <li key={idx}>
+                      <input type="checkbox" checked={it.done} onChange={() => this.toggleTodoStatus(it)}/>
+                      <span>{ it.content }</span>
+                      <button onClick={() => this.deleteTodo(it)}>X</button>
+                    </li>
+                  )
+                }) || this.state.showing == 'active' &&
+                this.state.todos.map(it => {
+                  if (it.done !== true){
+                    return (
+                    <li>
+                      <input type="checkbox" checked={it.done} onChange={() => this.toggleTodoStatus(it)}/>
+                      <span>{ it.content }</span>
+                      <button onClick={() => this.deleteTodo(it)}>X</button>
+                    </li>
+                  )}else{
+                    return null
+                  }
+                   
+                })
+                  || this.state.showing == 'completed' &&
+                this.state.todos.map(it => {
+                  if (it.done == true){
+                    return (
+                    <li>
+                      <input type="checkbox" checked={it.done} onChange={() => this.toggleTodoStatus(it)}/>
+                      <span>{ it.content }</span>
+                      <button onClick={() => this.deleteTodo(it)}>X</button>
+                    </li>
+                  )}else{
+                    return null
+                  }
+                })
+              }
+            </ul>
+            <div>
+              <span>{this.leftCount()} item(s) left</span>
+              <span>
+                <input type="radio" onChange={(e) => this.changeShowing(e)} checked={this.state.showing === 'all'} value="all"/><span>all</span>
+                <input type="radio" onChange={(e) => this.changeShowing(e)} checked={this.state.showing === 'active'} value="active"/><span>active</span>
+                <input type="radio" onChange={(e) => this.changeShowing(e)} checked={this.state.showing === 'completed'} value="completed"/><span>completed</span>
+              </span>
+              {
+                this.hasCompleted() && 
+                <button onClick={this.clearCompleted}>Clear Completed</button>
+              }
+            </div>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <TodoApp />,
+      document.getElementById('root')
+    )
+  </script>
+</body>
+</html>

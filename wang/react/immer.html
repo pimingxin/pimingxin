@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>immer</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/immer/dist/immer.umd.js"></script>
+</head>
+<body>
+  <script>
+    var {produce} = immer
+    var obj = {
+      a:'',
+      b:[{content:'n' , done:false},{content:'m',done:true}]
+    }
+
+    var obj2 = immer.produce(obj,draft => {
+      console.log(draft)
+      draft.b.push({content:'s',done:false})
+      draft.a = 'all'
+    })
+  </script>
+</body>
+</html>

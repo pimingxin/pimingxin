@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="./vuex.js"></script>
+  <script src="./vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p>{{ count }}</p>
+    <p>
+      <button @click="inc">+</button>
+      <button @click="dec">-</button>
+    </p>
+  </div>
+  <script>
+    const store = new Vuex.Store({
+      state:{
+        count:0
+      },
+      mutations:{
+        inc:state => state.count++,
+        dec:state => state.count--
+      }
+    })
+    
+    new Vue({
+      el:'#app',
+      computed: {
+        count(){
+          return this.$store.state.count
+        }
+      },
+      methods: {
+        inc(){
+          store.commit('inc')
+          //commit 调用store里的方法
+        },
+        dec(){
+          store.commit('dec')
+        }
+        
+      },
+    })
+  </script>
+</body>
+</html>

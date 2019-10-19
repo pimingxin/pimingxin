@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src='https://cdn.jsdelivr.net/g/lodash@4(lodash.min.js+lodash.fp.min.js)'></script>
+  <script src="https://code.jquery.com/jquery.min.js"></script>
+  
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+    #index{
+      position: relative;
+      margin-left: 40%;
+    }
+    #home,#address,#me,#find,#page{
+      height: 500px;
+      overflow-y: scroll;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div style="width: 100%">
+      <router-view >
+        <div>首页</div>
+      </router-view>
+      <center v-if="">
+        <div  style="display: flex; flex-direction: row; margin:20px;">
+            <center id="index">
+          <ul class="nav nav-pills" style="list-style-type: none;">
+              <li role="presentation" class="active">
+                <span>
+                  <i class="glyphicon glyphicon-exclamation-sign"></i>
+                </span>
+                <router-link to="/home">微信</router-link>
+              </li>
+              <li role="presentation">
+                <span>
+                  <i class="glyphicon glyphicon-align-left"></i>
+                </span>
+                <router-link to="/address">通讯录</router-link>
+              </li>
+              <li role="presentation">
+                <span>
+                  <i class="glyphicon glyphicon-tint"></i>
+                </span>
+                <router-link to="/find">发现</router-link></li>
+              <li role="presentation">
+                <span>
+                  <i class="glyphicon glyphicon-user"></i>
+                </span>
+                <router-link to="/me">我</router-link></li>
+            </ul>
+            </center>
+        </div>
+      </center>
+    </div>
+
+    
+
+  </div>
+  <script>
+    
+    const Home = {
+      template:`
+      <center id="home">
+        <div >
+          <h1>微信</h1>
+        </div>
+        <ul style="list-style-type: none;">
+          <li v-for="(i,idx) in 8">
+            <router-link to="../say">
+              <div>
+                <h1>nmsl</h1>
+              </div>
+            </router-link>
+            {{ idx }}
+            </li>
+        </ul>
+      </center>
+      `
+    }
+    const Address = {
+      template:`
+      <center id="address">
+        <div>
+          <h1>通讯录</h1>
+          <input style="text-align:center" placeholder="搜索" />
+          <ul style="list-style-type: none;">
+            <li v-for="(i,idx) in 4">{{ idx }}</li>
+          </ul>
+          <ul style="list-style-type: none;">
+            <li v-for="(i,idx) in 8">{{ idx }}</li>
+          </ul>
+        </div>
+        </center>
+      `
+    }
+
+    const Find = {
+      template:`
+      <center id="find">
+      <div>
+        <h1>发现</h1>
+        <ul style="list-style-type: none;">
+          <li v-for="(i,idx) in 8">{{ idx }}</li>
+        </ul>
+      </div>
+      </center>
+      `
+    }
+
+    const Me = {
+      template:`
+      <center id="me">
+        <div>
+          <img style="display:inline" src="./1.png"></img>
+          <h3>昵称</h3>
+          <span>微信号: nmjwbs</span>
+        </div>
+        <ul style="list-style-type: none;">
+          <li v-for="(i,idx) in 8">{{ idx }}</li>
+        </ul>
+      </center>
+      `
+    }
+    
+    const Say = {
+      template:`
+        <center id="Say">
+          <div v-for="(i,idx) of 8">
+            <div><img src="./1.png" ></img></div>
+            <div>nmsl</div>
+          </div>
+        </center>
+      `
+    }
+    
+
+  const router = new VueRouter({
+    routes : [{
+      path:'/',
+      // redirect:'/home自动跳转',
+      component:{
+        template:`
+          <center id="page">
+            <div>
+              <h1>臭弟弟 登录了吗？</h1>
+              <input type="text" value="没登录你说你马呢？" />
+            </div>
+          </center>
+        `
+      }
+    },{
+      path:'/home',
+      component: Home,
+      children:[{
+        path:'say',
+        component:{
+          template:`
+          <center>
+            <div>
+              <button><a href="#/home">返回首页</a></button>
+            </div>
+          </center>
+          `
+        }
+      }]
+    },{
+      path:'/address',
+      component:Address,
+    },{
+      path:'/find',
+      component:Find,
+    },{
+      path:'/me',
+      component:Me
+    },{
+      path:'/say',
+      component:Say
+    }
+  ]
+  })
+
+
+  const app = new Vue({
+    router
+  }).$mount('#app')
+
+
+  </script>
+</body>
+</html>

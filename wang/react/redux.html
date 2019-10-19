@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/immer/dist/immer.umd.js"></script>
+  <script src="./redux.js"></script>
+  <script src="./react-redux.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+  </div>
+  
+  <script type="text/babel">
+
+    var { produce } = immer
+    var { connect, Provider } = ReactRedux
+
+    var state = {
+      showing:'all',
+      todos:[{
+        content:'n',
+        done:false
+      },{
+        content:'m',
+        done:true
+      }]
+    }
+
+
+    var mutations = {
+      addTodo:produce((state,action) => {
+          state.todos.push({
+            content:action.todoText
+          })
+        }),
+      
+
+      deleteTodo:produce((state,action) => {
+          state.todos.splice(action.idx,1)
+        }),
+        toggleTodoStatus:produce((state,action) => {
+          state.todos[action.idx].done = !state.todos[action.idx].done
+        }),
+
+      };
+
+    var store = Redux.createStore((state,action) => {
+      var mutation = mutations[action.type]
+      if (mutation){
+        return mutation(state,action)
+      }else{
+        return state
+      }
+    },state)
+
+
+
+    function TodoItem(props) {
+      return <li>{props.todo.content}</li>
+    }
+
+    // 如果想要拿到数据的话 需要connect一下
+    //connect 使用的时候接两个参数 mapStateToProps mapDispatchToProps 然后返回一个函数 这个函数接收一个组件 
+    //connect 两个参数都应该是对象 一个用来定义属性 一个用来定义操作属性的方法
+    //从state里拿数据或者操作
+    const TodoList = connect(state => {
+      return {
+        todos:state.todos
+      }
+    }, dispatch => {
+      return {
+        foo : () => {
+          dispatch({type:'addTodo' , todoText:'hello'})
+        }
+      }
+    })(function TodoList(props) {
+      console.log(props)
+      return (
+        <ul>
+          {
+            props.todos.map((todo,idx) => {
+              <TodoItem key={todo.content} todo={todo} idx={idx} />
+            })
+          }
+        </ul>
+      )
+    })
+
+    function TodoApp() {
+      return (
+        <Provider store={store}>
+          <div>
+            <TodoList a={1} />
+          </div>
+        </Provider>
+      )
+    }
+    
+    ReactDOM.render(
+      <TodoApp />,
+      document.querySelector('#root')
+    )
+
+    
+  </script>
+
+  <script type="xxx">
+      //监听store 这个函数一般不接参数
+      store.subscribe(() => {
+        //subscribe like onStateOnChange
+        console.log(1)
+      })
+  
+  </script>
+</body>
+</html>

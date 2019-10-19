@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>todo</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <todo-app></todo-app>
+    <!-- 
+      如果写在todo-app里面的话 不是todo-app的子组件 而是todo-app的子元素 
+      如果想要在todo-app里写的话 需要在template加上slot标签 
+     -->
+  </div>
+  <script>
+
+    Vue.component('todo-app' , {
+      template:`
+        <div>
+          <todo-input @new-input="newTodo" @selece-all="seleceAll" :todos="todos"></todo-input>
+          <todo-list @delete="deletetodo" @toggle-state="toggleState" :todos="todos"></todo-list>
+          <todo-footer :todos="todos"></todo-footer>
+        </div>
+      `,
+      data(){
+        return {
+          todos :[{
+            content:'eat',
+            done:false
+          },
+          {
+            content:'sleep',
+            done:false
+          },
+          {
+            content:'fuck',
+            done:true
+          }]
+        }
+      },
+      methods: {
+        deletetodo(todo){
+          this.todos = this.todos.filter(it => it !== todo)
+        },
+        toggleState(todo){
+          todo.done = !todo.done
+        },
+        seleceAll(){
+          if (this.todos.every(it => it.done)){
+            this.todos.forEach(it => {
+              it.done = false
+            })
+          }else{
+            this.todos.forEach(it => {
+              it.done = true
+            })
+          }
+        },
+        newTodo(content){
+          if (content){
+            this.todos.push({
+              content,
+              done:false
+            })
+            
+          }
+        }
+      },
+    })
+
+    Vue.component('todo-input' , {
+      props:['todos'],
+      template:`
+        <div>
+          <input type="checkbox" @click="$emit('selece-all')" :checked="todos.every(it => it.done)">
+          <input type="text" @keyup.enter="newTodo">
+        </div>
+      `,
+      methods: {
+        newTodo(e){
+          this.$emit('new-input', e.target.value.trim())
+          e.target.value = ' '
+        }
+      },
+
+    })
+
+//需要接到父组件的数据 需要使用props
+    Vue.component('todo-list' , {
+      props:['todos'],
+      template:`
+        <ul>
+          <todo-item 
+          v-for="(todo,idx) of todos" 
+          :key="idx" 
+          @toggle-state = "$emit('toggle-state' , todo)" 
+          @delete = "$emit('delete' , todo)" 
+          :todo="todo"
+          ></todo-item>
+        </ul>
+      `
+    })
+
+    Vue.component('todo-item' , {
+      props:['todo'],
+      template:`
+        <li>
+          <input type="checkbox" :checked="todo.done" @click="$emit('toggle-state')">
+          <span>{{ todo.content }}</span>
+          <button @click="$emit('delete')">X</button>
+        </li>
+      `,
+    })
+    Vue.component('todo-footer' , {
+      props:['todos'],
+      template:`
+        <div>
+          <div><span>{{ todos.filter(it => !it.done).length }} item {{ todos.filter(it => !it.done).length > 1 ? 's' : ''}} left</span></div>
+          <div>
+            
+          </div>
+        </div>
+      `
+    })
+
+
+    var app = new Vue({
+      el:'#app',
+
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="./vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <todo-app></todo-app>
+  </div>
+  <script>
+// state 保存数据 mutations 保存对数据进行的操作的函数
+    const store = new Vuex.Store({
+      state:{
+        todos:[{
+          content:'eat',
+          done:false
+        },{
+          content:'sleep',
+          done:true
+        }]
+      },
+      getters:{
+        //从原始状态推导出来的其他状态
+        //使用的话 在需要改变状态的模板 增加computed return this.$store.getters.leftCount
+      },
+      mutations:{
+        addTodo(state , content){
+          state.todos.push({
+            content,
+            done:false
+          })
+        },
+        deleteTodo(state,todo){
+          state.todos = state.todos.filter(it => it !== todo)
+        },
+        toggleTodoState(state,todo){
+          todo.done = !todo.done
+        },
+        toggleSelectAll(state){
+          if (state.todos.every(it => it.done)){
+            state.todos.forEach(it => {
+              it.done = false
+            })
+          }else{
+            state.todos.forEach(it => {
+              it.done = true
+            })
+          }
+        }
+      }
+    })
+
+//组件自身给state触发事件
+    Vue.component('todo-app' , {
+      template:`
+        <div>
+          <todo-input ></todo-input>
+          <todo-list></todo-list>
+          <todo-footer></todo-footer>
+        </div>
+      `,
+      data(){
+        return {}
+      },
+      methods: {
+      },
+    })
+
+    Vue.component('todo-input' , {
+      template:`
+        <div>
+          <input type="checkbox" @click="toggleSelectAll" :checked="todos.every(it => it.done)">
+          <input type="text" v-model.trim="todoText" @keyup.enter="addTodo">
+        </div>
+      `,
+      computed: {
+        todos(){
+          return store.state.todos
+        }
+      },
+      methods: {
+        addTodo(e){
+          if (this.todoText){
+            store.commit('addTodo' , this.todoText)
+            this.todoText = ''
+          }
+        },
+        toggleSelectAll(e){
+          store.commit('toggleSelectAll')
+        }
+      },
+      data:{
+        return:{
+          todoText : ''
+        }
+      }
+//如果数据不需要更新 直接在data里定义 data(){return {todos:store.todos}}
+//需要更新的话 就在computed定义方法
+    })
+
+    Vue.component('todo-list' , {
+      template:`
+        <ul>
+          <todo-item 
+          v-for="(todo,idx) of todos" 
+          :key="idx"
+          :todo="todo"
+          ></todo-item>
+        </ul>
+      `,
+      computed: {
+        todos(){
+          return store.state.todos
+        }
+      },
+    })
+    
+
+    Vue.component('todo-item' , {
+      props:['todo'],
+      template:`
+        <li>
+          <input type="checkbox" :checked="todo.done" @click="toggleTodoState">
+          <span>{{ todo.content }}</span>
+          <button @click="deleteTodo">X</button>
+        </li>
+      `,
+      methods: {
+        deleteTodo(){
+          store.commit('deleteTodo',this.todo)
+        },
+        toggleTodoState(){
+          store.commit('toggleTodoState',this.todo)
+        }
+      },
+    })
+    Vue.component('todo-footer' , {
+      template:`
+        <div>
+          1
+        </div>
+      `
+    })
+
+
+    var app = new Vue({
+      el:'#app',
+      store,
+    })
+    //只要根组件加载了的话 在store前 加上$store
+  </script>
+
+</body>
+</html>

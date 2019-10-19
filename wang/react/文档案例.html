@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+  <div id="root">
+  </div>
+  <script type="xxxx">
+    //get set
+    function watch(obj,handler) {
+      var scheduled = false 
+      return observe(obj)
+      function observe(obj) {
+        for(let prop in obj) {
+          let val = obj[prop]
+          if (typeof val == 'object') {
+            val = observe(val)
+          }
+  
+          Object.defineProperty(obj, prop, {
+            
+            get: function() {
+              console.log('getting property', prop)
+              return val
+            },
+            set: function(value) {
+              console.log('setting property', prop, 'to', value)
+              if (typeof value == 'object') {
+                value = observe(value)
+              }
+              val = value
+              if (!scheduled){//一次变更触发多次函数的运行 
+                Promise.resolve().then(() => {
+                  handler()
+                  scheduled = false
+                })
+                scheduled = true
+              }
+            }
+          })
+        }
+        return obj
+      }
+    }
+
+
+
+
+    // class Repeat extends React.Component{
+    //   constructor(props){
+    //     super(props)
+    //     var ary = []
+    //     for (let i = )
+    //   }
+    // }
+
+
+    //继承与组合
+
+    // 覆盖了原来的render方法 继承
+    class BorderedTodoApp1 extends TodoApp{
+      render() {
+        return (
+          <div style={{border:'1px solid;'}}>
+            {super.render()}
+          </div>
+        )
+      }
+    }
+
+    //TodoApp是BorderedTodoApp2的子组件 组合 一般建议使用组合
+    class BorderedTodoApp2 extends React.component{
+      render(){
+        return (
+          <div style={ {border:'1px solid;'} }>
+            <TodoApp />
+          </div>
+        )
+      }
+    }
+    </script>
+    <script type="xxx">
+
+    //状态提升
+
+    
+
+    
+
+    class Calculator1 extends React.Component {
+      constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this) // 使this不丢失
+        this.state = {
+          temperature:''
+        };
+      }
+      //接收一个事件对象e
+      handleChange(e){
+        this.setState({
+          temperature : e.target.value
+        });
+      }
+
+      render(){
+        const temperature = this.state.temperature
+        return (
+          <fieldset>
+            <legend>Enter temperature in Celsius</legend>
+            <input 
+            value={template}
+            onChange={this.handleChange}
+             />
+            
+            <BoilingVerdict
+              celsius={parseFloat(temperature)}
+             />
+          </fieldset>
+        )
+      }
+    }
+</script>
+    
+
+    <script type="text/xx">
+//温度的转换
+    function  toCelsius(fahrenheit) {
+      return (fahrenheit - 32) * 5 / 9
+    }
+
+    function  toFahrenheit(celsius) {
+      return (celsius * 9 / 5) + 32 
+    }
+
+    // 例如，tryConvert('abc', toCelsius) 返回一个空字符串，而 tryConvert('10.22', toFahrenheit) 返回 '50.396'。
+    function tryConvert(temperature,convert) {
+      const input = parseFloat(temperature);
+      if (Number.isNaN(input)){
+        return ''
+      }
+      const output = convert(input)
+      const rounded = Math.round(output * 1000) / 1000
+      return rounded.toString();
+    }
+
+    function BoilingVerdict(props){
+      if (props.celsius >= 100){
+        return <p>The water would boil.</p>
+      }
+      return <p>The water would not boil.</p>
+    }
+    const scaleNames = {
+      c:'Celsius',
+      f:'Fahrenheit'
+    };
+
+    class TemperatureInput extends React.Component{
+      constructor(props){
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = {
+          temperature:''
+        }
+      }
+      // handleChange(e){
+      //   this.setState({
+      //     temperature:e.target.value
+      //   })
+      // }
+      
+      handleChange(e){
+        this.props.onTemperatureChange(e.target.value)
+      }
+
+
+      render(){
+        // const temperature = this.state.temperature
+        const temperature = this.props.temperature
+        const scale = this.props.scale
+        return (
+          <fieldset>
+            <legend>Enter temperature in {scaleNames[scale]}:</legend>
+            <input 
+              value={temperature}
+              onChange={this.handleChange}
+            />
+          </fieldset>
+        )
+      }
+    };
+
+    class Calculator extends React.Component {
+      constructor(props){
+        super(props);
+        this.handleCelsiusChange = this.handleCelsiusChange.bind(this)
+        this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this)
+        this.state = {
+          temperature:'',
+          scale:'c'
+        };
+      }
+
+      handleCelsiusChange(temperature){
+        this.setState({scale:'c',temperature})
+      }
+
+      handleFahrenheitChange(temperature){
+        this.setState({scale:'f',temperature})
+      }
+
+      
+
+      render(){
+        const scale = this.state.scale;
+        const temperature = this.state.temperature;
+        const celsius = scale === 'f' ? tryConvert(temperature,toCelsius) : temperature;
+        const fahrenheit = scale === 'c' ? tryConvert(temperature,toFahrenheit) : temperature;
+        return (
+          <div>
+            <TemperatureInput 
+              scale="c"
+              temperature={celsius}
+              onTemperatureChange={this.handleCelsiusChange}
+            />
+            <TemperatureInput 
+              scale="f"
+              temperature={fahrenheit}
+              onTemperatureChange={this.handleFahrenheitChange}
+              />
+              <BoilingVerdict 
+              celsius={parseFloat(celsius)} />
+          </div>
+        )
+      }
+    }
+
+
+    ReactDOM.render(
+    <Calculator />
+      ,
+      document.getElementById('root1')
+    )
+
+    // 
+  </script>
+
+  
+  <script type="text/babel">
+  //react的 ref有三种用法 第一种
+    //适合使用refs的情况  管理焦点 触发强制动画 集成第三方DOM库
+
+    //jquery 日期选择器材
+
+    //无法在构造函数里使用 需要在componentDIdiMount函数内
+    class DatePicker extends React.Component {
+      constructor(props){
+        super(props)
+      }
+
+      componentDidMount(){
+        $(this.refs.box).datepicker()
+      }
+
+      render(){
+        return <input type="text" ref="box" />
+      }
+    }
+    
+
+    ReactDOM.render(
+      <div>
+        <DatePicker />
+      </div>,
+      document.querySelector('#root')
+    )
+  </script>
+  <script type="text/babel">
+  //try it 
+  class ButtonC extends React.Component{
+    constructor(props){
+      super(props)
+    }
+    componentDidMount(){
+      $(this.refs.btn).Button()
+    }
+    render(){
+      return <button ref="btn">111</button>
+    }
+  }
+  ReactDOM.render(
+    <div>
+      <ButtonC />
+    </div>,
+    document.querySelector('#root')
+  )
+  </script>
+
+
+  <script type="text/babel">
+  // 第二种 ref接收一个函数
+  class DatePicker extends React.Component {
+    constructor(props){
+      super(props)
+    }
+
+    componentDidMount(){
+      $(this.box).datepicker()// 如果使用函数的方式 就不能使用this.refs.box
+    }
+
+    render(){
+      return( 
+        <input type="text" ref={el => this.box = el} />
+        // ref为函数时 input被创建的时候 然后将元素挂在this上 然后在别的地方再使用this去调用
+        )
+    }
+    // 此时 ref的el 指向原生的input 同样可以使用在组件上 效果也是获取组件自身的实例
+    // 如果ref是个函数的话 函数会在这个组件被创建以后运行
+  }
+  // 如果将函数直接取出来 放在事件触发函数上的话 定义函数需要使用箭头函数 xx = () => 
+
+  ReactDOM.render(
+    <div>
+      <DatePicker />
+    </div>,
+    document.querySelector('#root')
+  )
+  </script>
+  <script type="text/babel">
+    //第三种 ref回调形式
+    class CustomTextInput extends React.Component {
+      constructor(props){
+        super(props)
+
+        this.textInput = null;
+
+        this.setTextInputRef = element => {
+          this.textInput = element;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

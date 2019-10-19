@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://www.echartsjs.com/examples/vendors/echarts/echarts.min.js?_v_=1571424732409"></script> 
+  
+ <script src="https://www.echartsjs.com/examples/vendors/echarts-gl/echarts-gl.js"></script> 
+  <script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+  <div id="main" style="width: 600px;height: 400px;"></div>
+  <script type="xxxxx/javascript">
+  // 基于准备好的dom，初始化echarts实例
+    var myChat = echarts.init(document.getElementById('main'))
+    
+  // 指定图表的配置项和数据
+    var option = {
+      titel:{
+        text:'nmsl'
+      },
+      tooltip:{},
+      legend:{
+        data:['销量']
+      },
+      xAxis:{
+        data:["n","m","j","w","b","s"]
+      },
+      yAxis:{},
+      series:[{
+        name:'销量',
+        type:'bar',
+        data:[1,2,3,4,5,6]
+      }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChat.setOption(option)
+  </script>
+
+  <script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'))
+    // const ROOT_PATH = "https://www.echartsjs.com/examples/"
+  $.get('http://127.0.0.1:8080/json.json', function(data) {
+
+    function getAirportCoord(idx) {
+        return [data.airports[idx][3], data.airports[idx][4]];
+    }
+    var routes = data.routes.map(function(airline) {
+        return [
+            getAirportCoord(airline[1]),
+            getAirportCoord(airline[2])
+        ];
+    });
+
+myChart.setOption({
+    backgroundColor: '#000',
+    globe: {
+        baseTexture: './world.topo.bathy.200401.jpg',
+        heightTexture: './bathymetry_bw_composite_4k.jpg',
+
+        shading: 'lambert',
+
+        light: {
+            ambient: {
+                intensity: 0.4
+            },
+            main: {
+                intensity: 0.4
+            }
+        },
+
+        viewControl: {
+            autoRotate: false
+        }
+    },
+    series: {
+
+        type: 'lines3D',
+
+        coordinateSystem: 'globe',
+
+        blendMode: 'lighter',
+
+        lineStyle: {
+            width: 1,
+            color: 'rgb(50, 50, 150)',
+            opacity: 0.1
+        },
+
+        data: routes
+    }
+});
+});
+  
+  </script>
+</body>
+</html>

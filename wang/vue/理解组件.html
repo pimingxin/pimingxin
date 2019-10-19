@@ -142,11 +142,18 @@
         <span>
           请选择日期：
           <input type="date" :value="date" @change="dateChange">
+          <hr>
+          <button @click="focus">focus this:</button>
+          <input ref="inputBox" type="text"/>
         </span>
        `,
        methods:{
         dateChange(e){
           this.$emit('input', new Date(e.target.value))
+        },
+        focus(e){
+          console.log(this.$root === app4)
+          this.$refs.inputBox.focus()
         }
        },
        watch:{
@@ -174,8 +181,41 @@
            born: new Date('2017-11-11')
          }
        },
-
      })
      </script>
+     <hr>
+
+
+
+
+
+
+
+<script>
+
+
+
+
+  function mapGetters(getters){
+    return new Object(
+      
+    )
+  }
+
+  function mapState(state){
+    var obj = {}
+    for(let s of state){
+      obj[s] = {}
+    }
+  }
+
+
+  function sum(...args){
+    var ret = sum.bind(null,...args)
+    ret.toString = function (){
+      return args.reduce((a,b) => a + b , 0)
+    }
+  }
+</script>
 </body>
 </html>

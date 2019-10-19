@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src='https://cdn.jsdelivr.net/g/lodash@4(lodash.min.js+lodash.fp.min.js)'></script>
+  <script src="https://code.jquery.com/jquery.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+    #index{
+      position: relative;
+    }
+    #recent,#contacts,#discover,#me{
+      height: 500px;
+      overflow-y: scroll;
+    }
+    ul {
+      list-style-type: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <router-view id="index"></router-view>
+  </div>
+
+  <script>
+    
+    const img = {
+      template:`
+      <img src="./2.png"></img>
+      `
+    }
+
+    const Index = {
+      template: `
+        <div style="display: flex; flex-flow: column;height: 100%">
+          <center>
+            
+            <ul class="nav nav-pills" style="list-style-type: none;">
+
+          <main style="flex-grow: 1">
+            <router-view></router-view>
+          </main>
+          <div class="container" style="width: 100%">
+            <div class="row home-nav" style="width:300px;">
+              <div class="col-xs-3">
+                <router-link to="/index/recent">
+                  <li role="presentation" class="active">
+                    <span>
+                      <i class="glyphicon glyphicon-exclamation-sign"></i>
+                    </span>
+                  </li>
+                  微信
+                  </router-link>
+              </div>
+              <div class="col-xs-3">
+                <router-link to="/index/contacts">
+                  <li role="presentation">
+                    <span>
+                      <i class="glyphicon glyphicon-align-left"></i>
+                    </span>
+                  </li>
+                  通信录
+                  </router-link>
+              </div>
+              <div class="col-xs-3">
+                <router-link to="/index/discover">
+                  <li role="presentation">
+                    <span>
+                      <i class="glyphicon glyphicon-tint"></i>
+                    </span>
+                  </li>
+                    发现
+                  </router-link>
+              </div>
+              <div class="col-xs-3">
+                <router-link to="/index/me">
+                  <li role="presentation">
+                    <span>
+                      <i class="glyphicon glyphicon-user"></i>
+                    </span>
+                    </li>
+                    我
+                  </router-link>
+              </div>
+            </div>
+          </div>
+          </ul>
+        </center>
+        </div>
+      `
+    }
+    const Recent = {
+      template: `
+        <div id="recent">
+          <center>
+            <h1 >微信 </h1><div style="display:absolute; width:10px;height:10px; right:0
+            " @click="addfriend"><span class="input-group-addon"><i class="glyphicon glyphicon-plus-sign"></i></span></div>
+          </center>
+          <ul>
+            <li><router-link to="/chatting/zhangshan">张三</router-link></li>
+            <li><router-link to="/chatting/lishi">李四</router-link></li>
+          </ul>
+        </div>
+      `,
+      methods: {
+        addfriend(){
+          alert('你加你马呢?')
+        }
+      },
+    }
+
+    const Contacts = {
+      template: `
+        <div id="contacts">
+          <h1>通信录</h1>
+          <ul>
+            <li><router-link to="/profile/zhangshan">张三</router-link></li>
+            <li><router-link to="/profile/lishi">李四</router-link></li>
+            <li><router-link to="/profile/wantwu">王五</router-link></li>
+          </ul>
+        </div>
+      `
+    }
+
+    const Discover = {
+      template: `
+        <div id="discover">
+          <h1>发现</h1>
+          <ul>
+            <li><router-link to="/friend-circle">朋友圈</router-link></li>
+            <li><router-link to="/see-around">看一看</router-link></li>
+          </ul>
+        </div>
+      `
+    }
+    
+    const Me = {
+      template:`
+        <div id="me">
+          我
+        </div>
+      `
+    }
+
+    const FriendCircle = {
+      template: `
+        <div>
+          朋友圈
+        </div>
+      `
+    }
+    const SeeAround ={
+      template:`
+        <div>
+          看一看
+        </div>
+      `
+    }
+    
+
+    const Chatting = {
+      template: `
+        <div>
+          <button @click="$router.go(-1)" class="btn btn-primary">返回</button>
+          正在跟 {{$route.params.id}} 聊天
+          <router-link :to=" '/profile/' + $route.params.id ">查看此人信息</router-link>
+        </div>
+      `
+    }
+
+    const Profile = {
+      template: `
+        <div>
+          <button @click="back" class="btn btn-primary">返回</button>
+          <div>
+            正在查看 {{$route.params.id}} 的详细信息
+          </div>
+          <router-link class="btn btn-primary" :to="'/chatting/' + $route.params.id">跟他聊天</router-link>
+        </div>
+      `,
+      methods: {
+        back() {
+          this.$router.go(-1)
+        }
+      }
+    }
+
+
+
+  const router = new VueRouter({
+    routes : [{
+      path:'/',
+      redirect:'index/recent'
+    },{
+      path:'/index',
+      component:Index,
+        children:[{
+          path:'recent',
+          component: Recent,
+        },{
+          path:'contacts',
+          component:Contacts,
+        },{
+          path:'discover',
+          component:Discover
+        },{
+          path:'me',
+          component:Me
+        }]
+    },{
+      path:'/friend-circle',
+      component:FriendCircle
+    },{
+      path:'/see-around',
+      component:SeeAround
+    },{
+      path:'/chatting/:id',
+      component:Chatting
+    },{
+      path:'/profil/:id',
+      component:Profile
+    },]
+  })
+
+
+  const app = new Vue({
+    router
+  }).$mount('#app')
+
+
+  </script>
+</body>
+</html>

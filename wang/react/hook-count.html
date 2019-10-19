@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/immer/dist/immer.umd.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+  var {useState} = React
+
+    // State Hook
+
+  var ColorContext = React.createContext()
+
+  function App() {
+    var [color,setColor] = useState('red')
+  }
+
+    //在这个解构中 一个是源数据 第二个是set源数据  useState不建议使用对象 如果需要多个 可以声明多个useState
+    function Counter(props) {
+      const [count , setCount] = useState(0)
+      //可以声明多个state变量
+
+      const [todos,setTodos] = useState([{content:'n',done:false}, {content:'x',done:true}])
+
+      return (
+        <div>
+          <button onClick={() => setCount(count - 1)}>-</button>
+          <span>{count}</span>
+          <button onClick={() => setCount(count + 1)}>+</button>
+        </div>
+      )
+    }
+
+    ReactDOM.render(
+      <Counter />,
+     document.querySelector('#root')
+    )
+    </script>
+    <script type="text/babel">
+     //Effect Hook
+     //useEffect 它跟componentDidMount componentDidUpdate componentWillUnmount相同
+     //不过被合成了一个API
+      
+    //更新页面标题
+    const {useState, useEffect} = React
+      function Example() {
+        const [count,setCount] = useState(0);
+
+        useEffect(() => {
+          document.title = `You clicked ${count} times`
+        });
+        return (
+          <div>
+             <p>You clicked {count} times</p>
+             <button onClick={() => setCount(count + 1)}>
+              Click me 
+            </button>
+          </div>
+        )
+      }
+
+    ReactDOM.render(
+      <Example />,
+     document.querySelector('#root')
+    )
+
+    </script>
+
+
+    <script type="text/babel">
+    //函数副作用以及如何清除副作用 例如 setInterval 每隔一秒打印 实际打印的时间 要比一秒要短 是因为 在函数触发的时候 没有取消对函数有副作用的函数 需要解绑函数 对于setInterval来说 可以是用setTimeout 因为setTimeout在本次函数运行完 它自己就会消失了 而数据存放的地方是在useState上的 如果使用setInterval的话 需要进行解绑
+      const {useState , useEffect} = React
+      function tryWrong(props) {
+        const [time , setTime] = useState(0)
+
+        function runTime() {
+          var id = setInterval(() => {
+            setTime(time + 1)
+          }, 1000);
+
+          return () => {
+            clearInterval(id)
+          }
+        }
+
+        return(
+          <div>
+            <span>{time}</span>
+          </div>
+        )
+      }
+
+      ReactDOM.render(
+        <tryWrong />,
+        document.querySelector('#root')
+      )
+    </script>
+    <script>
+      //自定义Hook
+    </script>
+
+    <script type="text/babel">
+      //useContext可以不使用组件嵌套就可以订阅React的Context
+      function Example() {
+        const lacale = useContext(LocaleContext)
+        const theme = useContext(ThemeContext)
+      }
+
+      //useReducer 可以通过reducer来管理粗剪本地的复杂state
+      function Todos() {
+        const [todos,dispatch] = useReducer(todosReducer)
+      }
+    </script>
+
+    <script type="text/babel"> 
+      // React的函数组件
+      const Example = (props) => {
+        // 可以在这使用Hook
+        return <div />
+      }
+      function Example0(props) {
+        //Hook
+        return <div />
+      }
+    
+
+
+      //通过跳过Effect进行性能优化
+      useEffect(() => {
+        document.title = `You clicked ${count} times`;
+      },[count]) // 仅在count更改时更新
+      // 对有清除操作的effect同样适用
+
+      
+
+
+
+    </script>
+</body>
+</html>

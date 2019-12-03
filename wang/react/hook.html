@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>hook</title>
+</head>
+<body>
+  <div id="root">
+
+  </div>
+
+  <script type="text/babel">
+    function lazy(f) {
+      class Lazy extends React.Component {
+        constructor(props) {
+          super(props)
+
+          this.state = {
+            loading: true
+          }
+
+          f().then(Comp => {
+            this.Comp = Comp
+            this.setState({
+              loading: false
+            })
+          })
+        }
+
+        render() {
+          if (this.state.loading) {
+            return <span style={{color:'red'}}>loading...</span>
+          } else {
+            var Comp = this.Comp
+            var {children, forwardRef, ...props} = this.props
+            return <Comp ref={forwardRef} {...props}>{children}</Comp>
+          }
+        }
+      }
+
+      return React.forwardRef((props, ref) => {
+        return <Lazy {...props} forwardRef={ref}/>
+      })
+    }
+  
+  </script>
+  <script type="text/babel">
+
+// 尝试用React实现类似Vue的以下功能
+// var Comp = React.lazy2({
+//   compoent: () => import('./MyComponent'),
+//   loading: (props) => {
+//     return <div>loading...</div>
+//   },
+//   error: (props) => {
+//     return <div>error</div>
+//   },
+//   timeout: 3000,
+//   delay: 200,
+// })
+
+    React.lazy2 = function(obj) {
+      return function Lazy(props) {
+        var [delay,setDelay] = useState(false)
+        setTimeout(() => {
+          setDelay(true)
+        },obj.delay)
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    window.addEventListener('message', async e => {
+      var data = await fetch(e.data.url).then(res => res.json())
+
+      window.top.postMessage(data, 'http://www.a.com:8080/')
+    })
+
+  </script>
+</body>
+</html>

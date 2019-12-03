@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/immer/dist/immer.umd.js"></script>
+  <script src="./redux.js"></script>
+  <script src="./react-redux.js"></script>
+  <script src="./react-router-dom.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+
+  </div>
+  <script type="text/babel">
+    var {
+      HashRouter,
+      Switch,
+      Route,
+      Link
+    } = ReactRouterDOM
+
+    function About() {
+      return <div>about</div>
+    }
+    function Users() {
+      return (
+        <div>
+          <div>users</div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/users/zhouzhou">小米粥</Link>
+                </li>
+              <li>
+                <Link to="/users/a">a</Link>
+                </li>
+              <li>
+                <Link to="/users/b">b</Link>
+                </li>
+            </ul>
+          </nav>
+          <div>
+            <Route path="/users/zhouzhou">
+              <div>小米粥</div>
+              </Route>
+              <Route path="/users/a">
+                <div>a</div>
+              </Route>
+              <Route path="/users/b">
+                <div>b</div>
+              </Route>
+          </div>
+        </div>
+        )
+    }
+
+    function Home() {
+      return <div>home</div>
+    }
+
+    
+
+    function App() {
+      return (
+        <HashRouter>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/about">About</Link>
+                </li>
+                <li>
+                  <Link to="/users">Users</Link>
+                </li>
+              </ul>
+            </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. 精确匹配exact*/}
+            <Switch>
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/users">
+                <Users />
+              </Route>
+              <Route path="/user/:id">
+                <User />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </div>
+        </HashRouter>
+      )
+    }
+
+    ReactDOM.render(
+      <App />,
+      document.querySelector('#root')
+    )
+
+  </script>
+</body>
+</html>

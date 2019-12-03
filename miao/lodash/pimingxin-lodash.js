@@ -1,3 +1,4 @@
+//By With Right While 的identity
 var pimingxin = {
   compact: function(ary) {
     return ary.filter(it => it)
@@ -64,8 +65,8 @@ var pimingxin = {
   },
   filter:function(ary,test) {
     var result = []
-    for (var i = 0 ; i < array.length ; i++) {
-      if (test(ary[i],i,ary)) {
+    for (var i = 0 ; i < ary.length ; i++) {
+      if (test(ary[i])) {
         result.push(ary[i])
       }
     }
@@ -102,32 +103,42 @@ var pimingxin = {
       }
     }
   },
-  difference(array,...values){
+  difference:function(array,...values){
     var res = []
     for (value of values){
       res.push(...value)
     }
     return array.filter(it => res.indexOf(it) == -1)
   },
-  differenceBy(array,...values){
-
+  differenceBy:function(array,...values){
+    var iteratee = values.pop()
+    if (typeof iteratee == 'function'){
+      array.map(it => {
+        if (it == values){
+          return 
+        }
+      })
+    }
   },
-  drop(array,n = 1){
+  drop:function(array,n = 1){
     return array.slice(n)
   },
-  dropRight(array,n=1){
+  dropRight:function(array,n=1){
     if (n > array.length){
       return []
     }
     return array.slice(0,array.length - n)
   },
-  fill(array, value, start = 0, end = array.length){
+  dropRightWhile:function(array,){
+
+  },
+  fill:function(array, value, start = 0, end = array.length){
     for (let i = start ; i < end ; i++){
       array[i] = value
     }
     return array
   },
-  indexOf(array, value,fromIndex=0){
+  indexOf:function(array, value,fromIndex=0){
     if (isNaN(value)){
       for (let i = fromIndex ; i < array.length ; i++){
         if (isNaN(array[i])){
@@ -143,13 +154,13 @@ var pimingxin = {
     }
     return -1
   },
-  head(array){
+  head:function(array){
     return array[0]
   },
   initial(array){
     return array.slice(0,array.length-1)
   },
-  intersection(array,...arrs){
+  intersection:function(array,...arrs){
     var res = []
     for (var arr of arrs){
       res = res.concat(arr)
@@ -162,7 +173,7 @@ var pimingxin = {
     }
     return result
   },
-  join(array, separator=','){
+  join:function(array, separator=','){
     var res = ""
     for (var i = 0 ; i < array.length - 1 ; i++){
       res += array[i] + "" + separator
@@ -170,10 +181,10 @@ var pimingxin = {
     res += array[array.length - 1]
     return res
   },
-  last(array){
+  last:function(array){
     return array[array.length-1]
   },
-  lastIndexOf(array, value,fromIndex=array.length -1){
+  lastIndexOf:function(array, value,fromIndex=array.length -1){
     if (isNaN(value)){
       for (let i = fromIndex ; i >= 0 ; i--){
         if (isNaN(array[i])){
@@ -189,7 +200,7 @@ var pimingxin = {
     }
     return -1
   },
-  nth(array, n=0){
+  nth:function(array, n=0){
     if (n >= 0){
       for (let i = 0 ; i < array.length ; i++){
         return array[n]
@@ -202,10 +213,10 @@ var pimingxin = {
     }
     return undefined
   },
-  pull(array,...values){
+  pull:function(array,...values){
     return array.filter(it => !values.includes(it))
   },
-  reverse(array){
+  reverse:function(array){
     var res = []
     for (var a = array.length - 1 ; a >= 0 ; a--){
       res.push(array[a])
@@ -216,13 +227,13 @@ var pimingxin = {
     }
     return array
   },
-  isNaN(value){
+  isNaN:function(value){
     if (value.toString() == 'NaN'){
       return true
     }
     return false
   },
-  range(number,end,pive){//load
+  range:function(number,end,pive){//load
     var res = []
     if (number >= 0){
       for (var i = 0 ; i < Number(number); i++){
@@ -235,7 +246,7 @@ var pimingxin = {
     }
     return res
   },
-  clamp(number, lower = upper, upper){
+  clamp:function(number, lower = upper, upper){
     if (number >= upper){
       return upper
     }else if (number < lower){
@@ -244,7 +255,7 @@ var pimingxin = {
       return number
     }
   },
-  inRange(number, start=0, end){
+  inRange:function(number, start=0, end){
     if (end == undefined){
       end = start
       start = 0
@@ -260,11 +271,58 @@ var pimingxin = {
     }
     return false
   },
-  map(){
-    
+  map:function(c,f){
+    var res = []
+    if (typeof c === 'object'){
+      for (let v of c){
+        res.push(f(v))
+      }
+    }
+    return res
   },
-  capitalize(str){
+  capitalize:function(str){
     var [first,...rest] = str
 
+  },
+  isMatch:function(obj,src){
+    if (obj === src){
+      return true
+    }
+    for (key in obj){
+      if (typeof obj[key] === 'object' && src[key] !== null){
+        if (!isMatch(obj[key],src[key])){
+          return false
+        }
+      }
+      if (obj[key] !== src[key]){
+        return false
+      }
+    }
+    return true
+  },
+  isMatchWith:function(obj, src, cus){
+    for (var key in obj){
+      if (cus(obj[key]) !== cus(src[key])){
+        return false
+      }
+    }
+    return true
+  },
+  repeat:function(str,n=1){
+    if (n === 0){
+      return ''
+    }
+    var newStr = ''
+    for (let i = 0 ; i < n ; i++){
+      newStr += str
+    }
+    return newStr
+  },
+  debounce:function(){
+
+  },
+  throttle:function(){
+    
   }
+  
 }

@@ -8,9 +8,21 @@
 </head>
 <body>
   <div id="app">
+    <input type="text" :value="showchina()">
+    <select v-model="cP">
+      <option v-for="p in china_city_area_zip" :value="p">{{p.name}}</option>
+    </select>
+    <select v-model="cC">
+      <option v-for="c in cP.child" :value="c">{{c.name}}</option>
+    </select>
+    <select v-model="cA">
+      <option v-for="a in cC.child" :value="a">{{a.name}}</option>
+    </select>
+    
+    <hr>
     <select  v-model="chinaname">
       <option disabled value="">请选择</option>
-      <option v-for="cn in china" :value="cn.id">{{ cn.name }}</option>
+      <option v-for="cn in china_city_area_zip" :value="cn.id">{{ cn.name }}</option>
     </select>
     <select v-model="cityname">
       <option disabled value="">请选择</option>
@@ -19,20 +31,25 @@
     <select v-model="areaname">
       <option disabled value="">请选择</option>
       <option v-for="ar in area" :value="ar.id">{{ ar.name }}</option>
+      
     </select>
   </div>
   <script>
     new Vue({
       el:'#app',
       data:{
-        china : china_city_area_zip,
+        china_city_area_zip : china_city_area_zip,
         city : [],
         area : [],
         chinaname : '',
         cityname : '',
-        areaname : ''
+        areaname : '',
+        cP:'',
+        cC:'',
+        cA:''
       },
       watch:{
+        //如果地区的名字发送改变的时候 将改变的值应用到data里 再将下一次要循环的数据给拿到
         chinaname(val){
           this.cityname = ''
           this.areaname = ''
@@ -44,8 +61,21 @@
           this.areaname = ''
           this.cityname = val
           this.area = (this.city.filter(it => it.id == val))[0].child
+        },
+        cP(val){
+          this.cA = ''
+          this.cC = ''
         }
-      }
+      },
+      methods: {
+        showchina(){
+          if (this.cP && this.cC && this.cA){
+            return this.cP.name + this.cC.name + this.cA.name
+          }else{
+            return ''
+          }
+        }
+      },
     })
 
 

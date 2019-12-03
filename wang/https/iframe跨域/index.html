@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">GET</button>
+  <iframe src="http://www.b.com:8080/proxy.html" frameborder="0"></iframe>
+
+  <script>
+    var win = document.querySelector('iframe').contentWindow
+
+    btn.onclick = function() {
+
+      win.postMessage({
+        url: 'http://www.b.com:8080/a.json'
+      }, 'http://www.b.com:8080/')
+
+    }
+    
+    window.addEventListener('message', e => {
+      console.log(e.data)
+    })
+
+  </script>
+</body>
+</html>

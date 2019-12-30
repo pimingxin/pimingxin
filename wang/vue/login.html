@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>login</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    <form action="" @submit.prevent="login">
+      <input type="text" v-model="mobile">
+      <input type="text" v-model="password">
+      <button type="submit" :disabled="!isValid">Login</button>
+    </form>
+  </div>
+  <script>
+    let app = new Vue ({
+      el:'#app',
+      data() {
+        return {
+          mobile:'',
+          password:''
+        }
+      },
+      computed: {
+        isValid(){
+          return String(this.mobile).match(/^1\d{10}$/) && String(this.password).length >= 6
+        }
+      },
+      methods: {
+        login(){
+          alert(this.mobile)
+        }
+      },
+    })
+  
+  </script>
+</body>
+</html>

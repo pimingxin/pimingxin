@@ -80,7 +80,7 @@
       methods: {
         newTodo(e){
           this.$emit('new-input', e.target.value.trim())
-          e.target.value = ' '
+          e.target.value = ''
         }
       },
 

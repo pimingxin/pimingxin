@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./vue.js"></script>
+  <title>To do </title>
+</head>
+<body>
+  <div id="app">
+    <todo-app></todo-app>
+  </div>
+  <script>
+    Vue.component('todo-app',{
+      template:`
+        <div>
+          <todo-input @input="addTodo" :todos="todos"></todo-input>
+          <todo-list @toggle-state="toggleTodoState" @delete="deleteTodo" :todos="todos"></todo-list>
+          <todo-footer :todos="todos"></todo-footer>
+        </div>
+      `,
+      data() {
+        return {
+          todos:[
+            {content:'eat',done:false},
+            {content:'sleep',done:true}
+          ]
+        }
+      },
+      methods: {
+        deleteTodo(todo){
+          this.todos = this.todos.filter(it => it !== todo)
+        },
+        toggleTodoState(todo){
+          todo.done = !todo.done
+        },
+        addTodo(val){
+          this.todos.push({
+            content:val,
+            done:false
+          })
+        }
+      },
+    })
+
+    Vue.component('todo-input',{
+      props:['todos'],
+      template:`
+        <div>
+          <input type="checkbox">
+          <input @keyup.enter="$emit('input',$event.target.value.trim()); $event.target.value = ''" type="text">
+        </div>
+      `,
+    })
+
+    Vue.component('todo-list',{
+      props:['todos'],
+      template:`
+        <ul>
+          <todo-item 
+          v-for="(todo,idx) in todos"
+          :key="idx"
+          :todo="todo"
+          @delete="$emit('delete',todo)"
+          @toggle-state="$emit('toggle-state',todo)"
+          ></todo-item>
+        </ul>
+      `
+    })
+
+    Vue.component('todo-item',{
+      props:['todo'],
+      template:`
+        <li>
+          <input type="checkbox" :checked="todo.done" @click="$emit('toggle-state')">
+          <span>{{todo.content}}</span>
+          <button @click="$emit('delete')">X</button>
+        </li>
+      `
+    })
+    Vue.component('todo-footer',{
+      props:['todos'],
+      template:`
+      <div>
+        <span>{{todos.filter(it => it.done === false).length}} items</span>
+      </div>
+      `
+    })
+
+    var app = new Vue({
+      el:'#app',
+    })
+  </script>
+</body>
+</html>

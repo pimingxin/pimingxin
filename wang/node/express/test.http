@@ -1,0 +1,16 @@
+@url=http://localhost:3002
+@json = Content-Type: application/json
+###
+get {{url}}
+
+###
+post {{url}}
+
+###
+post {{url}}/register
+{{json}}
+
+{
+  "username":"user1",
+  "password":"123"
+}

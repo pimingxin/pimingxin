@@ -6,15 +6,39 @@
 </head>
 <body>
   <script src="./vue.js"></script>
+
+  <div id="app">
+    <json :value="data"></json>
+  </div>
+
   <script>
     Vue.component('json' , {
-      prosp:['value'],
+      props:['value'],
       template:`
-        
+        <div v-if="Array.isArray(value)">
+
+        </div>
+        <div v-else-if="typeof value == 'object' ">
+          <span style="margin-left : 1em" v-for="(val,key,idx) in value">{{key}}:{{val === null ? 'null' : val}}</span>
+        </div>
       `,
       data(){
-
+        return {
+          show:true,
+          length: this.value && Object.keys(this.value).length
+        }
       }
+    })
+    let app = new Vue({
+      el:'#app',
+      data() {
+        return {
+          data:{
+            a:1,
+            b:2
+          }
+        }
+      },
     })
   </script>
 </body>
